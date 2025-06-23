@@ -4,14 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Password</title>
-    <script type="module" src="/main.ts"></script>
-    <script type="module" src="../core/lib/vue.global.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="main.ts"></script>
+    <script src="https://unpkg.com/vue@3.5.17/dist/vue.global.prod.js"></script>
   </head>
   <body>
-    <main
-      class="flex min-h-screen flex-col items-center justify-start p-6 sm:p-12 md:p-24 bg-[var(--background)]">
-      <h1 class="text-center">Admin Password</h1>
-    </main>
+    <div id="app">
+      <h1>Admin Password</h1>
+      <p>Create a custom admin password for Perchance's Comment's plugin.</p>
+
+      <input type="text" v-model="password" @input="generateHash()" name="password" placeholder="Enter password" />
+
+      <p v-if="hashed">Hashed: <code class="select-all">{{ hashed }}</code></p>
+    </div>
+
+    <script>
+      async function hash(password) {
+        const text = "perchance-comments-plugin|" + password;
+        const data = new TextEncoder().encode(text);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      Vue.createApp({
+        data() {
+          return {
+            password: "",
+            hashed: "",
+          };
+        },
+        methods: {
+          async generateHash() {
+            if (!this.password) {
+              this.hashed = "";
+              return;
+            }
+            this.hashed = await hash(this.password);
+          },
+        },
+      }).mount("#app");
+    </script>
   </body>
 </html>

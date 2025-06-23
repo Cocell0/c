@@ -1,0 +1,563 @@
+:root {
+  user-select: none;
+  font-family:
+    "Work Sans",
+    Roboto,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  font-size: 1.125rem;
+  color: var(--text);
+  interpolate-size: allow-keywords;
+
+  --font-mono: "Roboto Mono", monospace;
+
+  --outline-animation: outline 0.5s cubic-bezier(0.2, 0, 0, 1) 1 forwards;
+  --layout-transition:
+    width 0.2s, height 0.2s, left 0.2s, right 0.2s, top 0.2s, bottom 0.2s;
+
+  --z-backdrop: 500;
+  --z-dropdown: 1000;
+  --z-overlay: 2000;
+  --z-modal: 3000;
+  --z-tooltip: 4000;
+  --z-popup: 5000;
+  --z-highest: 99999;
+
+  --space-SX: 0.25rem;
+  --space-S: 0.45rem;
+  --space-B: 0.75rem;
+  --space-M: 1.25rem;
+  --space-L: 2.5rem;
+
+  --space-full: 999999px;
+
+  --seconds-S: 1s;
+  --seconds-M: 1.2s;
+  --seconds-L: 2.6s;
+  --shadow-S: 0 0 8px;
+
+  --min-dimension: 2.444444444444444rem;
+  --min-icon-dimension: 1.666666666666667rem;
+
+  --media-phone: 768px;
+
+  --width-small: 312px;
+  --width-ample: 448px;
+  --width-medium: 640px;
+  --width-large: 960px;
+  --width-xlarge: 1216px;
+
+  --shadow-subtle: 0 0 20px hsl(0, 0%, 0%, 0.07);
+  --cb-soft: cubic-bezier(0.2, 0.9, 0.65, 0.65);
+  --cb-fast: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root {
+  color-scheme: light dark;
+
+  --base-hue: 26;
+
+  --primary: light-dark(
+    hsl(var(--base-hue), 50%, 45%),
+    hsl(var(--base-hue), 72%, 64%)
+  );
+  --primary-text: light-dark(
+    hsl(var(--base-hue), 50%, 96%),
+    hsl(var(--base-hue), 36%, 7%)
+  );
+  --primary-hover: light-dark(
+    hsl(var(--base-hue), 50%, 48%),
+    hsl(var(--base-hue), 100%, 74%)
+  );
+  --primary-active: light-dark(
+    hsl(var(--base-hue), 50%, 34%),
+    hsl(var(--base-hue), 80%, 60%)
+  );
+  --primary-disabled: light-dark(
+    hsl(var(--base-hue), 50%, 45%, 0.2),
+    hsl(var(--base-hue), 50%, 78%, 0.2)
+  );
+
+  --outline: light-dark(
+    hsl(var(--base-hue), 50%, 45%),
+    hsl(var(--base-hue), 36%, 64%)
+  );
+
+  --text: light-dark(
+    hsl(var(--base-hue), 18%, 16%),
+    hsl(var(--base-hue), 100%, 90%)
+  );
+  --text-disabled: light-dark(
+    hsl(var(--base-hue), 80%, 8%, 0.3),
+    hsl(var(--base-hue), 100%, 90%, 0.3)
+  );
+  --placeholder: light-dark(
+    hsl(var(--base-hue), 0%, 10%, 0.7),
+    hsl(var(--base-hue), 100%, 92%, 0.5)
+  );
+
+  --selection-background: light-dark(
+    hsl(var(--base-hue), 38%, 45%),
+    hsl(var(--base-hue), 38%, 78%)
+  );
+  --selection-text: var(--primary-text);
+
+  --background: light-dark(
+    hsl(var(--base-hue), 46%, 94%),
+    hsl(var(--base-hue), 46%, 2%)
+  );
+  --surface: light-dark(
+    hsl(var(--base-hue), 32%, 90%),
+    hsl(var(--base-hue), 24%, 6%)
+  );
+  --surface-shadow: light-dark(
+    hsl(var(--base-hue), 50%, 32%, 0.5),
+    hsl(var(--base-hue), 50%, 24%, 0.5)
+  );
+
+  --scrollbar-surface: light-dark(
+    hsl(var(--base-hue), 38%, 80%),
+    hsl(var(--base-hue), 15%, 18%)
+  );
+  --scrollbar-surface-hover: light-dark(
+    hsl(var(--base-hue), 50%, 64%),
+    hsl(var(--base-hue), 15%, 22%)
+  );
+  --scrollbar-surface-active: light-dark(
+    hsl(var(--base-hue), 50%, 60%),
+    hsl(var(--base-hue), 15%, 28%)
+  );
+
+  --divider: light-dark(
+    hsl(var(--base-hue), 20%, 64%),
+    hsl(var(--base-hue), 20%, 18%)
+  );
+
+  --divider-opaque: light-dark(
+    hsl(var(--base-hue), 20%, 68%, 0.5),
+    hsl(var(--base-hue), 20%, 22%, 0.5)
+  );
+
+  --field-surface: light-dark(
+    hsl(var(--base-hue), 50%, 80%),
+    hsl(var(--base-hue), 50%, 10%)
+  );
+  --field-surface-hover: light-dark(
+    hsl(var(--base-hue), 50%, 76%),
+    hsl(var(--base-hue), 45%, 18%)
+  );
+  --field-surface-active: light-dark(
+    hsl(var(--base-hue), 50%, 72%),
+    hsl(var(--base-hue), 50%, 22%)
+  );
+  --field-surface-shadow: light-dark(
+    hsl(var(--base-hue), 50%, 52%, 0.5),
+    hsl(var(--base-hue), 50%, 16%, 0.5)
+  );
+  --field-surface-disabled: light-dark(
+    hsl(var(--base-hue), 50%, 90%),
+    hsl(var(--base-hue), 50%, 10%)
+  );
+  --field-surface-warning: light-dark(
+    hsl(var(--base-hue), 100%, 80%),
+    hsl(var(--base-hue), 36%, 20%)
+  );
+
+  --hover: light-dark(
+    hsl(var(--base-hue), 42%, 80%),
+    hsl(var(--base-hue), 20%, 12%)
+  );
+  --active: light-dark(
+    hsl(var(--base-hue), 42%, 68%),
+    hsl(var(--base-hue), 20%, 16%)
+  );
+}
+
+/* @property --base-hue {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+:root {
+  animation: hue-shift 6s linear infinite;
+}
+
+@keyframes hue-shift {
+  from {
+    --base-hue: 26;
+  }
+  to {
+    --base-hue: 360;
+  }
+} */
+
+@media only screen and (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-surface);
+  border-radius: 10px;
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-surface-hover);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-surface-active);
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+:root,
+html,
+body {
+  margin: 0;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  text-align: left;
+}
+
+body {
+  background: var(--background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  color: inherit;
+  font-size: inherit;
+}
+
+::selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0.8rem;
+  user-select: text;
+}
+
+h1 {
+  font-size: 2.6rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+small {
+  font-size: 0.833rem;
+}
+
+.very-small {
+  font-size: 0.64rem;
+}
+
+:root:has(body#output-container) {
+  --ptop: calc(var(--space-B) + var(--space-B) - var(--space-SX));
+  /* A value to account for Perchance's UI's toolbar */
+}
+
+button:not([disabled]),
+.button:not([disabled]),
+input:not([disabled]),
+optgroup:not([disabled]),
+select:not([disabled]),
+textarea:not([disabled]) {
+  color: inherit;
+}
+
+label {
+  cursor: pointer;
+}
+
+a,
+button,
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 9999px;
+  padding: 0.4rem;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--field-surface);
+  border-radius: 0;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+.button:disabled {
+  cursor: default;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.6rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-left: 4px solid #ccc;
+  font-style: italic;
+}
+
+code {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.875rem;
+  background-color: var(--field-surface);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  border-top: 2px solid var(--divider);
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+legend {
+  font-weight: bold;
+}
+
+c-accordian {
+  display: flex;
+  flex-direction: column;
+}
+
+c-accordian .head {
+  min-height: 54px;
+}
+
+dialog {
+  user-select: inherit;
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: var(--space-M);
+  background: var(--surface);
+  height: clamp(140px, 446px, 980px);
+  width: clamp(240px, 524px, 760px);
+}
+
+@media only screen and (max-width: 768px) {
+  dialog:not([is="c-overlay"]) {
+    inset: unset;
+    left: 50%;
+    translate: -50%;
+    bottom: 2rem;
+  }
+}
+
+dialog::backdrop {
+  background: hsl(0 0% 0% / 80%);
+  backdrop-filter: blur(8px);
+}
+
+.backdrop {
+  opacity: 0;
+  visibility: hidden;
+  z-index: var(--z-backdrop);
+  background: hsl(0 0% 0% / 70%);
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition-property: option, visibility;
+  transition-duration: 280ms;
+  transition-timing-function: cubic-bezier(0.4, 0.8, 0.5, 1);
+}
+
+.backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fade-close {
+  animation: fade-close var(--seconds-S) var(--cb-soft) forwards;
+}
+
+.fade-open {
+  animation: fade-open var(--seconds-S) var(--cb-soft) forwards;
+}
+
+span[class^="i-"] {
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--min-icon-dimension);
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  width: var(--min-icon-dimension);
+  height: var(--min-icon-dimension);
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes outline {
+  0% {
+    outline-width: 0;
+  }
+
+  50% {
+    outline-width: 8px;
+  }
+
+  100% {
+    outline-width: 3px;
+  }
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-close {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fade-open {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes scale-fade-close {
+  from {
+    opacity: 1;
+    visibility: visible;
+    scale: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+    scale: 0.995;
+  }
+}
+
+@keyframes scale-fade-open {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    scale: 0.975;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
+    scale: 1;
+  }
+}

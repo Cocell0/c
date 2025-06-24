@@ -181,25 +181,6 @@
   );
 }
 
-@property --base-hue {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-
-.rainbow-hue {
-  animation: hue-shift 6s linear infinite;
-}
-
-@keyframes hue-shift {
-  from {
-    --base-hue: 26;
-  }
-  to {
-    --base-hue: 360;
-  }
-}
-
 @media only screen and (min-width: 768px) {
   ::-webkit-scrollbar {
     width: 10px;

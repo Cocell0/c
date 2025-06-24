@@ -6,7 +6,9 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.351",
     "@types/node": "^24.0.3",
+    "@unocss/preset-icons": "^66.2.3",
     "@unocss/preset-wind4": "^66.2.3",
     "sass": "^1.89.2",
     "unocss": "^66.2.3",

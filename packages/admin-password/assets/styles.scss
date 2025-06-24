@@ -1,15 +1,98 @@
-#app {
-  text-align: center;
-  height: 100%;
-  margin: 6rem auto;
+:root {
+  color-scheme: dark light;
+  --base-hue: 26;
+}
+
+body {
+  overflow: auto;
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
   max-width: 768px;
   width: 100%;
 }
 
-p:has(code) {
+#app {
+  margin-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  gap: var(--space-M);
+}
+
+.title {
+  color: light-dark(
+    hsl(var(--base-hue), 60%, 50%),
+    hsl(var(--base-hue), 46%, 50%)
+  );
+}
+
+.container {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-S);
+  padding: 1rem;
+  border-radius: var(--space-M);
+  box-shadow: 0 0 16px
+    light-dark(
+      hsl(var(--base-hue), 76%, 30%, 0.1),
+      hsl(var(--base-hue), 0%, 0%, 0)
+    );
+  background: light-dark(
+    hsl(var(--base-hue), 100%, 98%),
+    hsl(var(--base-hue), 42%, 6%)
+  );
+}
+
+input {
+  width: 100%;
+  padding: var(--space-S);
+  border-radius: var(--space-B) !important;
+  border: none !important;
+}
+
+p:has(> code) {
   padding-inline: 2rem;
 
   code {
-    overflow: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+}
+
+ul {
+  padding-inline: 2rem;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-S);
+    padding: var(--space-S);
+    background: light-dark(
+      hsl(var(--base-hue), 100%, 98%),
+      hsl(var(--base-hue), 42%, 14%)
+    );
+    margin-bottom: var(--space-S);
+    border-radius: var(--space-B);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      margin: 0;
+    }
+
+    code {
+      font-size: inherit;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 }

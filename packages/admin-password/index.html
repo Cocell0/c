@@ -9,12 +9,47 @@
   </head>
   <body>
     <div id="app">
-      <h1>Admin Password</h1>
-      <p>Create a custom admin password for Perchance's Comment's plugin.</p>
+      <!-- <p>
+        Create a custom admin password for Perchance's Comment's plugin. <br> Enter
+        your original password, it will be hashed and ready to be used in the
+        Comment's plugin.
+      </p> -->
 
-      <input type="text" v-model="password" @input="generateHash()" name="password" placeholder="Enter password" />
+      <div class="container">
+        <h1 class="title">
+          <label for="password">Admin Password</label>
+        </h1>
+        <input
+          type="text"
+          v-model="password"
+          id="password"
+          name="perchance-comment-admin-password"
+          placeholder="Enter the password"
+          autofocus />
+        <p v-if="hashed" class="text-left">
+          Hash:
+          <code
+            id="hashed-pass-word"
+            class="select-all w-full block text-center"
+            >{{ hashed }}</code
+          >
+        </p>
+        <button @click="create()">Create</button>
+      </div>
 
-      <p v-if="hashed">Hashed: <code class="select-all">{{ hashed }}</code></p>
+      <div class="container saved-passwords-container">
+        <h2 class="title">Saved Passwords</h2>
+        <ul>
+          <li
+            v-for="(entry, index) in passwords"
+            :key="index"
+            class="text-left saved-password">
+            <h4><code class="select-all">{{ entry.password }}</code></h4>
+            <span class="label">Hash:</span>
+            <code class="select-all">{{ entry.hash }}</code>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <script>
@@ -31,15 +66,24 @@
           return {
             password: "",
             hashed: "",
+            passwords: JSON.parse(localStorage.getItem("passwords") || "[]"),
           };
         },
         methods: {
-          async generateHash() {
+          async create() {
             if (!this.password) {
               this.hashed = "";
               return;
             }
             this.hashed = await hash(this.password);
+
+            this.passwords.push({
+              password: this.password,
+              hash: this.hashed,
+            });
+
+            localStorage.setItem("passwords", JSON.stringify(this.passwords));
+            this.password = "";
           },
         },
       }).mount("#app");

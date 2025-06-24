@@ -63,7 +63,7 @@
 :root {
   color-scheme: light dark;
 
-  --base-hue: 26;
+  --base-hue: 0;
 
   --primary: light-dark(
     hsl(var(--base-hue), 50%, 45%),

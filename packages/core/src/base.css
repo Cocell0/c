@@ -380,7 +380,7 @@ code {
   font-size: 0.875rem;
   background-color: var(--field-surface);
   padding: 0.2rem 0.4rem;
-  border-radius: 3px;
+  border-radius: var(--space-S);
 }
 
 hr {

@@ -479,6 +479,10 @@ span[class^="i-"] {
   -webkit-font-smoothing: antialiased;
 }
 
+:root:not(.dev-mode) #perchance-error-indicator {
+  display: none !important;
+}
+
 @keyframes outline {
   0% {
     outline-width: 0;

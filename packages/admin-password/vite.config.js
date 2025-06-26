@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite'
 import UnoCSS from 'unocss/vite'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import inlineSource from "vite-plugin-inline-source";
+import { inlineVue } from "core";
 
 export default defineConfig({
   plugins: [
     UnoCSS(),
     viteSingleFile(),
-    inlineSource(),
+    inlineVue(),
   ],
 })

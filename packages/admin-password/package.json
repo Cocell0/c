@@ -3,7 +3,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --host",
-    "build": "vite build"
+    "build": "vite build && npx prettier --write dist/"
   },
   "type": "module",
   "devDependencies": {
@@ -16,5 +16,8 @@
     "vite": "^6.3.5",
     "vite-plugin-inline-source": "^3.0.0",
     "vite-plugin-singlefile": "^2.2.0"
+  },
+  "dependencies": {
+    "prettier": "^3.6.1"
   }
 }

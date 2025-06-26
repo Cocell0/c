@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Password</title>
-    <script type="module" src="main.ts"></script>
+    <script type="module" src="main.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
@@ -36,7 +36,10 @@
         <button @click="create()">Create</button>
       </div>
 
-      <div class="container saved-passwords-container">
+      <div
+        class="container saved-passwords-container"
+        :hidden="passwords.length === 0"
+        v-if="passwords.length !== 0">
         <h2 class="title">Saved Passwords</h2>
         <ul>
           <li

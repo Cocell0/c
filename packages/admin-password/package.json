@@ -5,6 +5,7 @@
     "dev": "vite --host",
     "build": "vite build"
   },
+  "type": "module",
   "devDependencies": {
     "@iconify/json": "^2.2.351",
     "@types/node": "^24.0.3",

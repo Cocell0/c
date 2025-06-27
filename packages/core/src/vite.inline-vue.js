@@ -10,7 +10,10 @@ export default function inlineVue() {
       isBuilding = config.command === 'build'
     },
     async transformIndexHtml(html) {
-      const vue = `<!-- Vue UMD ${isBuilding ? 'production' : 'development'} -->\n<script src="${isBuilding ? vueProd : vueDev}"></script>`;
+      const match = html.match(/^[ \t]*<!-- Vue UMD -->.*$/m)
+      const indent = match ? match[0].match(/^[ \t]*/)[0] : ''
+
+      const vue = `<!-- Vue UMD ${isBuilding ? 'production' : 'development'} -->\n${indent}<script src="${isBuilding ? vueProd : vueDev}"></script>`;
 
       return html.replace(/<!-- Vue UMD -->/, vue)
     }

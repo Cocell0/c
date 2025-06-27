@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Password</title>
     <script type="module" src="main.js"></script>
-    <!-- Vue UMD -->
   </head>
   <body>
     <div id="app">
@@ -25,46 +24,47 @@
           name="perchance-comment-admin-password"
           placeholder="Enter the password"
           autofocus />
-        <p v-if="hashed" class="text-left">
-          Hash:
-          <code
+          <p v-if="hashed" class="text-left">
+            Hash:
+            <code
             id="hashed-pass-word"
             class="select-all w-full block text-center"
             >{{ hashed }}</code
-          >
-        </p>
-        <button @click="create()">Create</button>
-      </div>
-
-      <div
+            >
+          </p>
+          <button @click="create()">Create</button>
+        </div>
+        
+        <div
         class="container saved-passwords-container"
         :hidden="passwords.length === 0"
         v-if="passwords.length !== 0">
         <h2 class="title">Saved Passwords</h2>
         <ul>
           <li
-            v-for="(entry, index) in passwords"
-            :key="index"
-            class="text-left saved-password">
-            <h4><code class="select-all">{{ entry.password }}</code></h4>
-            <span class="label">Hash:</span>
-            <code class="select-all">{{ entry.hash }}</code>
-          </li>
-        </ul>
-      </div>
+          v-for="(entry, index) in passwords"
+          :key="index"
+          class="text-left saved-password">
+          <h4><code class="select-all">{{ entry.password }}</code></h4>
+          <span class="label">Hash:</span>
+          <code class="select-all">{{ entry.hash }}</code>
+        </li>
+      </ul>
     </div>
-
-    <script>
-      async function hash(password) {
-        const text = "perchance-comments-plugin|" + password;
-        const data = new TextEncoder().encode(text);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-      }
-
-      Vue.createApp({
-        data() {
+  </div>
+  
+  <!-- Vue UMD -->
+  <script>
+    async function hash(password) {
+      const text = "perchance-comments-plugin|" + password;
+      const data = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+    
+    Vue.createApp({
+      data() {
           return {
             password: "",
             hashed: "",

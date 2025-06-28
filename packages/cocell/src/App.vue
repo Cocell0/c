@@ -1,10 +1,11 @@
 <template>
   <div :hidden="!generatorStats.length" class="generators">
-    <h2>Generators</h2>
+    <h2 class="text-center">Generators</h2>
     <ul>
       <li v-for="(generator, index) in generatorStats" :key="index">
         <a class="button" :href="`http://perchance.org/${generator.name}`">
-          <img class="thumbnail" :src="`https://perchance.org/api/getGeneratorScreenshot?generatorName=${generator.name}`" />
+          <img class="thumbnail"
+            :src="`https://perchance.org/api/getGeneratorScreenshot?generatorName=${generator.name}`" />
           <div class="detail">
             <h4 class="m0">{{ generator.metaData.title || generator.name }}</h4>
           </div>
@@ -12,6 +13,7 @@
       </li>
     </ul>
   </div>
+  <!-- <div class="chat" v-if="typeof window.chat === 'function'" v-html="window.chat()"></div> -->
 </template>
 
 <script setup>

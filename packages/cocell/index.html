@@ -5,6 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coc̀éll</title>
+  <script>
+    if (typeof generators !== 'undefined') window.generators = generators;
+
+    if (typeof chat !== 'undefined') {
+      window.chat = chat;
+    } else {
+      window.chat = ()=> {
+        return 'Chat not defined'
+      }
+    }
+  </script>
 </head>
 
 <body>

@@ -1,0 +1,46 @@
+:root {
+  --base-hue: 26;
+}
+
+body {
+  overflow: auto;
+
+  #app {
+    margin: 2rem;
+  }
+}
+
+.generators {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: var(--space-M);
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+    }
+
+    li {
+      margin: 0;
+      flex: 1;
+
+      a {
+        display: block;
+        padding: var(--space-B);
+        border-radius: var(--space-M);
+
+        img {
+          border-radius: var(--space-B);
+          width: 100%;
+          max-width: minmax(342px, 100%);
+          height: auto;
+          display: block;
+        }
+      }
+    }
+  }
+}

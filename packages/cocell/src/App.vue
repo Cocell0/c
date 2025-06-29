@@ -13,11 +13,14 @@
       </li>
     </ul>
   </div>
-  <!-- <div class="chat" v-if="typeof window.chat === 'function'" v-html="window.chat()"></div> -->
+  <div class="chat" v-html="chatHtml"></div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
+
+const chatHtml = computed(() => (window.chat || (() => 'Chat not defined'))())
 
 const generators = ref([])
 const generatorStats = ref([])

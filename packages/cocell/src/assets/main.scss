@@ -31,10 +31,10 @@ body {
       a {
         display: block;
         padding: var(--space-B);
-        border-radius: var(--space-M);
+        border-radius: var(--space-B);
 
         img {
-          border-radius: var(--space-B);
+          border-radius: var(--space-S);
           width: 100%;
           max-width: minmax(342px, 100%);
           height: auto;

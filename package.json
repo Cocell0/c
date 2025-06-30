@@ -1,6 +1,9 @@
 {
   "name": "c",
   "private": true,
+  "scripts": {
+    "log": "bash -c \"tree -I 'node_modules|dist|.git' > .log && git log --reverse --oneline --name-only >> .log\""
+  },
   "workspaces": [
     "packages/*"
   ]

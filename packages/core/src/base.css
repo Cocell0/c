@@ -490,8 +490,8 @@ span[class^="i-"] {
 }
 
 .perchance-chat-container>* {
-  width: auto !important;
-  height: auto !important;
+  width: 100% !important;
+  height: 100% !important;
   flex: 1;
 }
 

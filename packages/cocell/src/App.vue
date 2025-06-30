@@ -15,7 +15,11 @@ import { ref } from 'vue'
 import { computed } from 'vue'
 import Generator from './components/Generator.vue'
 
-const chat = computed(window.chat)
+const chat = computed(() => window.chat({
+  channel: 'feedback',
+  adminPasswordHash: 'c645c3fe3a1c516937d3bdd532f322cb41d9786a3e86754d5bf0e85c92675f05',
+  adminFlair: 'Admin',
+}))
 
 const generators = ref([])
 

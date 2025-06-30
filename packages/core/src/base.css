@@ -483,6 +483,18 @@ span[class^="i-"] {
   display: none !important;
 }
 
+.perchance-chat-container {
+  display: flex;
+  height: 480px;
+  width: 440px;
+}
+
+.perchance-chat-container>* {
+  width: auto !important;
+  height: auto !important;
+  flex: 1;
+}
+
 @keyframes outline {
   0% {
     outline-width: 0;

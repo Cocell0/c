@@ -2,7 +2,9 @@
   <div :hidden="!generators.length" class="generators">
     <h2 class="text-center">Generators</h2>
     <ul>
-      <Generator v-for="(name, index) in generators" :key="index" :name="name" />
+      <li v-for="(name, index) in generators" :key="index">
+        <Generator :name="name" />
+      </li>
     </ul>
   </div>
 

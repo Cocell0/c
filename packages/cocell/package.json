@@ -2,6 +2,7 @@
   "name": "cocell",
   "version": "0.0.0",
   "private": true,
+  "homepage": "perchance.org/cocell",
   "type": "module",
   "scripts": {
     "dev": "vite",

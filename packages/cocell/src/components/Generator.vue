@@ -1,17 +1,17 @@
 <template>
-  <li v-if="generator">
-    <a class="button" :href="`http://perchance.org/${name}`">
+  <transition-group name="generator">
+    <a class="button" :href="`http://perchance.org/${name}`" v-if="generator">
       <img class="thumbnail" :src="`https://perchance.org/api/getGeneratorScreenshot?generatorName=${name}`" />
       <div class="detail">
-        <h4 class="m0">{{ generator.metaData.title || name }}</h4>
-        <p v-if="generator.metaData.description" class="description">{{ generator.metaData.description }}</p>
+        <h4 class="my-2">{{ generator.metaData.title || name }}</h4>
+        <!-- <p v-if="generator.metaData.description" class="description">{{ generator.metaData.description }}</p> -->
         <!-- <div v-if="generator.metaData.tags && generator.metaData.tags.length" class="tags">
           <span v-for="tag in generator.metaData.tags" :key="tag" class="tag">{{ tag }}</span>
         </div> -->
         <small class="stats">{{ millify(generator.views) }} views • {{ lastEditRelative }}</small>
       </div>
     </a>
-  </li>
+  </transition-group>
 </template>
 
 <script setup>
@@ -65,3 +65,52 @@ onUnmounted(() => {
   if (intervalId) clearInterval(intervalId)
 })
 </script>
+
+<style scoped lang="scss">
+a {
+  flex: 1;
+  display: block;
+  padding: var(--space-B);
+  border-radius: var(--space-B);
+  min-width: 300px;
+  max-width: 300px;
+  border: 1px solid var(--divider-opaque);
+
+  @media (max-width: 1000px) {
+    max-width: 100%;
+  }
+
+  img {
+    border-radius: var(--space-S);
+    width: 100%;
+    height: auto;
+    min-height: 170px;
+    display: block;
+    border: 1px solid var(--divider-opaque);
+  }
+
+  .description {
+    max-height: 100px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .generator-enter-active {
+    transition: opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1), scale 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  .generator-enter-from {
+    opacity: 0;
+    scale: 0.8;
+  }
+
+  .generator-enter-to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+</style>

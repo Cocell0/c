@@ -29,36 +29,7 @@ body {
       display: flex;
       flex: 1;
       width: 100%;
-      justify-content: center;
-
-      a {
-        flex: 1;
-        display: block;
-        padding: var(--space-B);
-        border-radius: var(--space-B);
-        max-width: 300px;
-        border: 1px solid var(--divider-opaque);
-
-        @media (max-width: 1000px) {
-          max-width: 100%;
-        }
-
-        img {
-          border-radius: var(--space-S);
-          width: 100%;
-          height: auto;
-          display: block;
-          border: 1px solid var(--divider-opaque);
-        }
-
-        .description {
-          max-height: 100px;
-          max-width: 100%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
+      justify-content: center;  
     }
   }
 }

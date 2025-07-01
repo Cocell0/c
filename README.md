@@ -17,6 +17,6 @@ The final result is a self-contained HTML file, using [Vite's Singlefile](https:
 
 ## Stack
 
-- **Vue CDN** (not framework)
+- **Vue**
 - **UnoCSS** with **Wind4**, and **Icons** preset
 - **Vite**

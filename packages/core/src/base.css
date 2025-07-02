@@ -295,45 +295,6 @@ small {
   /* A value to account for Perchance's UI's toolbar */
 }
 
-.perchance-error-background {
-  opacity: 0.8 !important;
-}
-
-.perchance-error-content-wrapper {
-  font-family: var(--default-font) !important;
-  color: var(--text) !important;
-  background: var(--surface) !important;
-  border-radius: var(--space-M) !important;
-  overflow: hidden !important;
-}
-
-.perchance-error-content-wrapper p {
-  background: var(--field-surface) !important;
-  color: var(--text) !important;
-}
-
-.perchance-error-content-wrapper button {
-  color: black !important;
-}
-
-.perchance-error-content-wrapper button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.perchance-error-modal-footer {
-  padding: var(--space-B) !important;
-}
-
-.perchance-error-content-wrapper button:focus-visible {
-  outline: solid gray 3px !important;
-  animation: var(--outline-animation) !important;
-}
-.perchance-error-stream {
-  user-select: auto !important;
-}
-
 button:not([disabled]),
 .button:not([disabled]),
 input:not([disabled]),
@@ -512,6 +473,45 @@ span[class^="i-"] {
 
 :root:not(.dev-mode) #perchance-error-indicator {
   display: none !important;
+}
+
+.perchance-error-background {
+  opacity: 0.8 !important;
+}
+
+.perchance-error-content-wrapper {
+  font-family: var(--default-font) !important;
+  color: var(--text) !important;
+  background: var(--surface) !important;
+  border-radius: var(--space-M) !important;
+  overflow: hidden !important;
+}
+
+.perchance-error-content-wrapper p {
+  background: var(--field-surface) !important;
+  color: var(--text) !important;
+}
+
+.perchance-error-content-wrapper button {
+  color: black !important;
+}
+
+.perchance-error-content-wrapper button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.perchance-error-modal-footer {
+  padding: var(--space-B) !important;
+}
+
+.perchance-error-content-wrapper button:focus-visible {
+  outline: solid gray 3px !important;
+  animation: var(--outline-animation) !important;
+}
+.perchance-error-stream {
+  user-select: auto !important;
 }
 
 .perchance-chat-container {

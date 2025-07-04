@@ -4,91 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Password</title>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="src/main.js"></script>
   </head>
   <body>
-    <div id="app">
-      <!-- <p>
-        Create a custom admin password for Perchance's Comment's plugin. <br> Enter
-        your original password, it will be hashed and ready to be used in the
-        Comment's plugin.
-      </p> -->
-      <div class="container">
-        <h1 class="title">
-          <label for="password">Admin Password</label>
-        </h1>
-        <input
-          type="text"
-          v-model="password"
-          id="password"
-          name="perchance-comment-admin-password"
-          placeholder="Enter the password"
-          autofocus />
-          <p v-if="hashed" class="text-left">
-            Hash:
-            <code
-            id="hashed-pass-word"
-            class="select-all w-full block text-center"
-            >{{ hashed }}</code
-            >
-          </p>
-          <button @click="create()">Create</button>
-        </div>
-        
-        <div
-        class="container saved-passwords-container"
-        :hidden="passwords.length === 0"
-        v-if="passwords.length !== 0">
-        <h2 class="title">Saved Passwords</h2>
-        <ul>
-          <li
-          v-for="(entry, index) in passwords"
-          :key="index"
-          class="text-left saved-password">
-          <h4><code class="select-all">{{ entry.password }}</code></h4>
-          <span class="label">Hash:</span>
-          <code class="select-all">{{ entry.hash }}</code>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Vue UMD -->
-  <script>
-    async function hash(password) {
-      const text = "perchance-comments-plugin|" + password;
-      const data = new TextEncoder().encode(text);
-      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-    }
-    
-    Vue.createApp({
-      data() {
-          return {
-            password: "",
-            hashed: "",
-            passwords: JSON.parse(localStorage.getItem("passwords") || "[]"),
-          };
-        },
-        methods: {
-          async create() {
-            if (!this.password) {
-              this.hashed = "";
-              return;
-            }
-            this.hashed = await hash(this.password);
-
-            this.passwords.push({
-              password: this.password,
-              hash: this.hashed,
-            });
-
-            localStorage.setItem("passwords", JSON.stringify(this.passwords));
-            this.password = "";
-          },
-        },
-      }).mount("#app");
-    </script>
+    <div id="app"></div>
   </body>
 </html>

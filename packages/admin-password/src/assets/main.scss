@@ -1,8 +1,3 @@
-:root {
-  color-scheme: dark light;
-  --base-hue: 26;
-}
-
 body {
   overflow: auto;
   padding-inline: 2rem;
@@ -24,10 +19,7 @@ body {
 }
 
 .title {
-  color: light-dark(
-    hsl(var(--base-hue), 60%, 50%),
-    hsl(var(--base-hue), 46%, 50%)
-  );
+  font-weight: bold;
 }
 
 .container {
@@ -37,15 +29,12 @@ body {
   gap: var(--space-S);
   padding: 1rem;
   border-radius: var(--space-M);
-  box-shadow: 0 0 16px
+  box-shadow: 0 0 8px
     light-dark(
-      hsl(var(--base-hue), 76%, 30%, 0.1),
-      hsl(var(--base-hue), 0%, 0%, 0)
+      hsl(var(--base-hue), var(--base-saturation), 0%, 0.4),
+      hsl(var(--base-hue), var(--base-saturation), 0%, 0)
     );
-  background: light-dark(
-    hsl(var(--base-hue), 100%, 98%),
-    hsl(var(--base-hue), 42%, 6%)
-  );
+  background: var(--surface);
 }
 
 input {
@@ -74,10 +63,7 @@ ul {
     flex-direction: column;
     gap: var(--space-S);
     padding: var(--space-S);
-    background: light-dark(
-      hsl(var(--base-hue), 100%, 98%),
-      hsl(var(--base-hue), 42%, 14%)
-    );
+    background: var(--surface-emphasis);
     margin-bottom: var(--space-S);
     border-radius: var(--space-B);
     width: 100%;

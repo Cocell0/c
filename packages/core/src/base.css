@@ -606,6 +606,6 @@ span[class^="i-"] {
 
 * {
   transition-property: background, color !important;
-  transition-duration: 0.4s !important;
+  transition-duration: 0.2s !important;
   transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
 }

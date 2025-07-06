@@ -1,6 +1,5 @@
 <template>
-  <button @click="toggle"
-    :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+  <button @click="toggle" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'" style="padding: var(---space-S);">
     <span v-if="isDark" class="i-material-symbols-sunny-rounded"></span>
     <span v-else class="i-material-symbols-dark-mode-rounded"></span>
   </button>
@@ -87,15 +86,37 @@ const toggle = e => {
 </script>
 
 <style>
+:root {
+  transition-property: filter, background, color !important;
+  transition-duration: 0.25s !important;
+  transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
+}
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-old(root) { z-index: 9999; }
-::view-transition-new(root) { z-index: 9998; }
+::view-transition-old(root) {
+  z-index: 9999;
+  filter: blur(4px);
+}
 
-[dark]::view-transition-old(root) { z-index: 9998; }
-[dark]::view-transition-new(root) { z-index: 9999; }
+::view-transition-new(root) {
+  z-index: 9998;
+}
+
+[dark]::view-transition-old(root) {
+  z-index: 9998;
+  filter: blur(4px);
+}
+
+[dark]::view-transition-new(root) {
+  z-index: 9999;
+}
+
+[dark]::view-transition-old(root)::after {
+  z-index: 9998;
+  filter: blur(4px);
+}
 </style>

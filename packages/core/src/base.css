@@ -56,120 +56,125 @@
   color-scheme: light dark;
 
   --base-hue: 0;
+  --base-saturation: 25%;
 
   --primary: light-dark(
-    hsl(var(--base-hue), 50%, 45%),
-    hsl(var(--base-hue), 72%, 64%)
+    hsl(var(--base-hue), var(--base-saturation), 45%),
+    hsl(var(--base-hue), var(--base-saturation), 64%)
   );
   --primary-text: light-dark(
-    hsl(var(--base-hue), 50%, 96%),
-    hsl(var(--base-hue), 36%, 7%)
+    hsl(var(--base-hue), var(--base-saturation), 96%),
+    hsl(var(--base-hue), var(--base-saturation), 7%)
   );
   --primary-hover: light-dark(
-    hsl(var(--base-hue), 50%, 48%),
-    hsl(var(--base-hue), 100%, 74%)
+    hsl(var(--base-hue), var(--base-saturation), 48%),
+    hsl(var(--base-hue), var(--base-saturation), 74%)
   );
   --primary-active: light-dark(
-    hsl(var(--base-hue), 50%, 34%),
-    hsl(var(--base-hue), 80%, 60%)
+    hsl(var(--base-hue), var(--base-saturation), 34%),
+    hsl(var(--base-hue), var(--base-saturation), 60%)
   );
   --primary-disabled: light-dark(
-    hsl(var(--base-hue), 50%, 45%, 0.2),
-    hsl(var(--base-hue), 50%, 78%, 0.2)
+    hsl(var(--base-hue), var(--base-saturation), 45%, 0.2),
+    hsl(var(--base-hue), var(--base-saturation), 78%, 0.2)
   );
 
   --outline: light-dark(
-    hsl(var(--base-hue), 50%, 45%),
-    hsl(var(--base-hue), 36%, 64%)
+    hsl(var(--base-hue), var(--base-saturation), 45%),
+    hsl(var(--base-hue), var(--base-saturation), 64%)
   );
 
   --text: light-dark(
-    hsl(var(--base-hue), 18%, 16%),
-    hsl(var(--base-hue), 100%, 90%)
+    hsl(var(--base-hue), var(--base-saturation), 16%),
+    hsl(var(--base-hue), var(--base-saturation), 90%)
   );
   --text-disabled: light-dark(
-    hsl(var(--base-hue), 80%, 8%, 0.3),
-    hsl(var(--base-hue), 100%, 90%, 0.3)
+    hsl(var(--base-hue), var(--base-saturation), 8%, 0.3),
+    hsl(var(--base-hue), var(--base-saturation), 90%, 0.3)
   );
   --placeholder: light-dark(
-    hsl(var(--base-hue), 0%, 10%, 0.7),
-    hsl(var(--base-hue), 100%, 92%, 0.5)
+    hsl(var(--base-hue), var(--base-saturation), 10%, 0.7),
+    hsl(var(--base-hue), var(--base-saturation), 92%, 0.5)
   );
 
   --selection-background: light-dark(
-    hsl(var(--base-hue), 38%, 45%),
-    hsl(var(--base-hue), 38%, 78%)
+    hsl(var(--base-hue), var(--base-saturation), 45%),
+    hsl(var(--base-hue), var(--base-saturation), 78%)
   );
   --selection-text: var(--primary-text);
 
   --background: light-dark(
-    hsl(var(--base-hue), 46%, 94%),
-    hsl(var(--base-hue), 46%, 2%)
+    hsl(var(--base-hue), var(--base-saturation), 100%),
+    hsl(var(--base-hue), var(--base-saturation), 2%)
   );
   --surface: light-dark(
-    hsl(var(--base-hue), 32%, 90%),
-    hsl(var(--base-hue), 24%, 6%)
+    hsl(var(--base-hue), var(--base-saturation), 96%),
+    hsl(var(--base-hue), var(--base-saturation), 6%)
+  );
+  --surface-emphasis: light-dark(
+    hsl(var(--base-hue), var(--base-saturation), 90%),
+      hsl(var(--base-hue), var(--base-saturation), 14%)
   );
   --surface-shadow: light-dark(
-    hsl(var(--base-hue), 50%, 32%, 0.5),
-    hsl(var(--base-hue), 50%, 24%, 0.5)
+    hsl(var(--base-hue), var(--base-saturation), 32%, 0.5),
+    hsl(var(--base-hue), var(--base-saturation), 24%, 0.5)
   );
 
   --scrollbar-surface: light-dark(
-    hsl(var(--base-hue), 38%, 80%),
-    hsl(var(--base-hue), 15%, 18%)
+    hsl(var(--base-hue), var(--base-saturation), 80%),
+    hsl(var(--base-hue), var(--base-saturation), 18%)
   );
   --scrollbar-surface-hover: light-dark(
-    hsl(var(--base-hue), 50%, 64%),
-    hsl(var(--base-hue), 15%, 22%)
+    hsl(var(--base-hue), var(--base-saturation), 64%),
+    hsl(var(--base-hue), var(--base-saturation), 22%)
   );
   --scrollbar-surface-active: light-dark(
-    hsl(var(--base-hue), 50%, 60%),
-    hsl(var(--base-hue), 15%, 28%)
+    hsl(var(--base-hue), var(--base-saturation), 60%),
+    hsl(var(--base-hue), var(--base-saturation), 28%)
   );
 
   --divider: light-dark(
-    hsl(var(--base-hue), 20%, 64%),
-    hsl(var(--base-hue), 20%, 18%)
+    hsl(var(--base-hue), var(--base-saturation), 64%),
+    hsl(var(--base-hue), var(--base-saturation), 18%)
   );
 
   --divider-opaque: light-dark(
-    hsl(var(--base-hue), 20%, 68%, 0.5),
-    hsl(var(--base-hue), 20%, 22%, 0.5)
+    hsl(var(--base-hue), var(--base-saturation), 68%, 0.5),
+    hsl(var(--base-hue), var(--base-saturation), 22%, 0.5)
   );
 
   --field-surface: light-dark(
-    hsl(var(--base-hue), 50%, 80%),
-    hsl(var(--base-hue), 50%, 10%)
+    hsl(var(--base-hue), var(--base-saturation), 80%),
+    hsl(var(--base-hue), var(--base-saturation), 10%)
   );
   --field-surface-hover: light-dark(
-    hsl(var(--base-hue), 50%, 76%),
-    hsl(var(--base-hue), 45%, 18%)
+    hsl(var(--base-hue), var(--base-saturation), 76%),
+    hsl(var(--base-hue), var(--base-saturation), 18%)
   );
   --field-surface-active: light-dark(
-    hsl(var(--base-hue), 50%, 72%),
-    hsl(var(--base-hue), 50%, 22%)
+    hsl(var(--base-hue), var(--base-saturation), 72%),
+    hsl(var(--base-hue), var(--base-saturation), 22%)
   );
   --field-surface-shadow: light-dark(
-    hsl(var(--base-hue), 50%, 52%, 0.5),
-    hsl(var(--base-hue), 50%, 16%, 0.5)
+    hsl(var(--base-hue), var(--base-saturation), 52%, 0.5),
+    hsl(var(--base-hue), var(--base-saturation), 16%, 0.5)
   );
   --field-surface-disabled: light-dark(
-    hsl(var(--base-hue), 50%, 90%),
-    hsl(var(--base-hue), 50%, 10%)
+    hsl(var(--base-hue), var(--base-saturation), 90%),
+    hsl(var(--base-hue), var(--base-saturation), 10%)
   );
   --field-surface-warning: light-dark(
-    hsl(var(--base-hue), 100%, 80%),
-    hsl(var(--base-hue), 36%, 20%)
+    hsl(var(--base-hue), var(--base-saturation), 80%),
+    hsl(var(--base-hue), var(--base-saturation), 20%)
   );
 
   --hover: light-dark(
-    hsl(var(--base-hue), 42%, 80%),
-    hsl(var(--base-hue), 20%, 12%)
+    hsl(var(--base-hue), var(--base-saturation), 80%),
+    hsl(var(--base-hue), var(--base-saturation), 12%)
   );
   --active: light-dark(
-    hsl(var(--base-hue), 42%, 68%),
-    hsl(var(--base-hue), 20%, 16%)
+    hsl(var(--base-hue), var(--base-saturation), 68%),
+    hsl(var(--base-hue), var(--base-saturation), 16%)
   );
 }
 

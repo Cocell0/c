@@ -1,3 +1,7 @@
+:root {
+  --base-saturation: 10%;
+}
+
 body {
   overflow: auto;
   padding-inline: 2rem;
@@ -78,7 +82,17 @@ ul {
       font-size: inherit;
       white-space: nowrap;
       text-overflow: ellipsis;
+      display: block;
       overflow: hidden;
+      overflow: clip;
     }
   }
+}
+
+.dark-mode-button {
+  position: fixed;
+  top: var(--space-B);
+  right: var(--space-B);
+  z-index: 1000;
+  padding: var(--space-S);
 }

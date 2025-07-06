@@ -55,7 +55,7 @@
 :root {
   color-scheme: light dark;
 
-  --base-hue: 0;
+  --base-hue: 26;
   --base-saturation: 25%;
 
   --primary: light-dark(
@@ -602,4 +602,10 @@ span[class^="i-"] {
     visibility: visible;
     scale: 1;
   }
+}
+
+* {
+  transition-property: background, color !important;
+  transition-duration: 0.4s !important;
+  transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
 }

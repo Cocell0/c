@@ -5,7 +5,7 @@
   "homepage": "perchance.org/cocell",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 1 --host",
     "build": "vite build && prettier --write dist/",
     "preview": "vite preview",
     "format": "prettier --write src/"

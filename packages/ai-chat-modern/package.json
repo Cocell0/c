@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --port 2 --host",
     "build": "vite build && npx prettier --write dist/",
     "preview": "vite preview"
   },

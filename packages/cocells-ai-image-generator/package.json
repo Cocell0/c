@@ -1,5 +1,6 @@
 {
   "name": "cocells-ai-image-generator",
+  "homepage": "cocells-ai-image-generator",
   "version": "0.0.0",
   "private": true,
   "type": "module",

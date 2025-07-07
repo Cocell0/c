@@ -51,7 +51,7 @@ const updateTheme = (withTransition = true) => {
 }
 
 const toggle = e => {
-  if (!document.startViewTransition) {
+  if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     isDark.value = !isDark.value
     updateTheme(false)
     return
@@ -87,36 +87,65 @@ const toggle = e => {
 
 <style>
 :root {
-  transition-property: filter, background, color !important;
-  transition-duration: 0.25s !important;
-  transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
+  will-change: color, background, filter, animation, clip-path, transform;
 }
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
   mix-blend-mode: normal;
+}
+
+@keyframes blur-in {
+  from {
+    filter: blur(0);
+  }
+  to {
+    filter: blur(var(--blur-S));
+  }
+}
+
+@keyframes blur-out {
+  from {
+    filter: blur(var(--blur-S));
+  }
+  to {
+    filter: blur(0);
+  }
 }
 
 ::view-transition-old(root) {
   z-index: 9999;
-  filter: blur(4px);
+  animation: blur-in 0.25s both;
+  filter: blur(var(--blur-S));
 }
 
 ::view-transition-new(root) {
   z-index: 9998;
+  animation: blur-out 0.25s both;
+  filter: blur(0);
 }
 
 [dark]::view-transition-old(root) {
   z-index: 9998;
-  filter: blur(4px);
+  animation: blur-in 0.25s both;
+  filter: blur(var(--blur-S));
 }
 
 [dark]::view-transition-new(root) {
   z-index: 9999;
+  animation: blur-out 0.25s both;
+  filter: blur(0);
 }
 
-[dark]::view-transition-old(root)::after {
-  z-index: 9998;
-  filter: blur(4px);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    filter: none !important;
+  }
 }
 </style>

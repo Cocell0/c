@@ -1,4 +1,5 @@
 <template>
+  <DarkMode style="display: flex; margin: auto;"></DarkMode>
   <header class="text-center my-4">
     <h1>Hub</h1>
     <p>A hub to display all my public projects, and some other quirky stuff.</p>
@@ -32,6 +33,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import Generator from './components/Generator.vue'
+import DarkMode from 'core/src/vue/components/DarkMode.vue'
 
 const time = ref(Date.now())
 let timer = null

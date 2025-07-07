@@ -65,7 +65,7 @@
   color-scheme: light dark;
 
   --base-hue: 26;
-  --base-saturation: 25%;
+  --base-saturation: 10%;
 
   --primary: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 45%),
@@ -107,8 +107,8 @@
   );
 
   --selection-background: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 45%),
-    hsl(var(--base-hue), var(--base-saturation), 78%)
+    hsl(var(--base-hue), var(--base-saturation), 12%),
+    hsl(var(--base-hue), var(--base-saturation), 88%)
   );
   --selection-text: var(--primary-text);
 

@@ -23,11 +23,13 @@
   --z-popup: 5000;
   --z-highest: 99999;
 
-  --space-SX: 0.25rem;
-  --space-S: 0.45rem;
-  --space-B: 0.75rem;
-  --space-M: 1.25rem;
-  --space-L: 2.5rem;
+  --base-space: 0.2rem;
+
+  --space-SX: calc(var(--base-space) * 1.2);
+  --space-S: calc(var(--base-space) * 1.6);
+  --space-B: calc(var(--base-space) * 3.2);
+  --space-M: calc(var(--base-space) * 3.8);
+  --space-L: calc(var(--base-space) * 14);
 
   --space-full: 999999px;
 
@@ -53,9 +55,10 @@
 }
 
 :root:not([data-config-disable-blur]) {
-  --blur-S: 0.2rem;
-  --blur-B: 0.4rem;
-  --blur-M: 0.8rem;
+  --base-blur: 0.2rem;
+  --blur-S: var(--base-blur);
+  --blur-B: calc(var(--base-blur) * 2);
+  --blur-M: calc(var(--base-blur) * 4);
 }
 
 :root {

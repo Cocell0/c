@@ -4,22 +4,29 @@
 
 body {
   overflow: auto;
-  padding-inline: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  max-width: 768px;
-  width: 100%;
 }
 
 #app {
-  margin-block: 2rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  padding-bottom: calc(var(--base-space) * 10);
   height: 100%;
   width: 100%;
+}
+
+.dark-mode-button {
+  margin: calc(var(--base-space) * 10) auto;
+  display: flex;
+}
+
+.app-inset-wrapper {
+  text-align: center;
+  padding-inline: calc(var(--base-space) * 10);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-M);
+  justify-content: center;
+  max-width: 768px;
+  width: 100%;
+  margin: auto;
 }
 
 .title {
@@ -31,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--space-S);
-  padding: 1rem;
+  padding: calc(var(--base-space) * 5);
   border-radius: var(--space-M);
   box-shadow: 0 0 8px
     light-dark(
@@ -49,7 +56,7 @@ input {
 }
 
 p:has(> code) {
-  padding-inline: 2rem;
+  padding-inline: calc(var(--base-space) * 20);
 
   code {
     overflow: hidden;
@@ -60,7 +67,7 @@ p:has(> code) {
 }
 
 ul {
-  padding-inline: 2rem;
+  padding-inline: calc(var(--base-space) * 10);
 
   li {
     display: flex;
@@ -87,12 +94,4 @@ ul {
       overflow: clip;
     }
   }
-}
-
-.dark-mode-button {
-  position: fixed;
-  top: var(--space-B);
-  right: var(--space-B);
-  z-index: 1000;
-  padding: var(--space-S);
 }

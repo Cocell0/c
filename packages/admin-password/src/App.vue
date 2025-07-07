@@ -1,26 +1,29 @@
 <template>
-  <DarkMode class="dark-mode-button" @click="useThemeToggle"></DarkMode>
-  <div class="container">
-    <h1 class="title">
-      <label for="password">Admin Password</label>
-    </h1>
-    <input type="text" v-model="password" id="password" name="perchance-comment-admin-password"
-      placeholder="Enter the password" autocomplete="off" data-credentials-off />
-    <p v-if="hashed" class="text-left">
-      Hash:
-      <code id="hashed-pass-word" class="select-all w-full block text-center">{{ hashed }}</code>
-    </p>
-    <button @click="create">Create</button>
-  </div>
-  <div class="container saved-passwords-container" v-if="passwords.length !== 0">
-    <h2 class="title">Saved Passwords</h2>
-    <ul>
-      <li v-for="(entry, index) in passwords" :key="index" class="text-left saved-password">
-        <h4><code class="select-all">{{ entry.password }}</code></h4>
-        <span class="label">Hash:</span>
-        <code class="select-all">{{ entry.hash }}</code>
-      </li>
-    </ul>
+  <DarkMode class="dark-mode-button"></DarkMode>
+  <div class="app-inset-wrapper">
+    <div class="container">
+      <h1 class="title">
+        <label for="password">Admin Password</label>
+      </h1>
+      <input type="text" v-model="password" id="password" name="perchance-comment-admin-password"
+        placeholder="Enter the password" autocomplete="off" data-credentials-off />
+      <p v-if="hashed" class="text-left">
+        Hash:
+        <code id="hashed-pass-word" class="select-all w-full block text-center">{{ hashed }}</code>
+      </p>
+      <button @click="create">Create</button>
+    </div>
+    <div class="container saved-passwords-container" v-if="passwords.length !== 0">
+      <h2 class="title">Saved Passwords</h2>
+      <ul>
+        <li v-for="(entry, index) in passwords" :key="index" class="text-left saved-password">
+          <h4><code class="select-all">{{ entry.password }}</code></h4>
+          <span class="label">Hash:</span>
+          <code class="select-all">{{ entry.hash }}</code>
+        </li>
+      </ul>
+    </div>
+    <br>
   </div>
 </template>
 

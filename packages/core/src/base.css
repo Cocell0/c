@@ -52,6 +52,12 @@
   --cb-fast: cubic-bezier(0.2, 0, 0, 1);
 }
 
+:root:not([data-config-disable-blur]) {
+  --blur-S: 0.2rem;
+  --blur-B: 0.4rem;
+  --blur-M: 0.8rem;
+}
+
 :root {
   color-scheme: light dark;
 
@@ -113,7 +119,7 @@
   );
   --surface-emphasis: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 90%),
-      hsl(var(--base-hue), var(--base-saturation), 14%)
+    hsl(var(--base-hue), var(--base-saturation), 14%)
   );
   --surface-shadow: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 32%, 0.5),
@@ -427,7 +433,7 @@ dialog {
 
 dialog::backdrop {
   background: hsl(0 0% 0% / 80%);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--blur-B);
 }
 
 .backdrop {
@@ -435,7 +441,7 @@ dialog::backdrop {
   visibility: hidden;
   z-index: var(--z-backdrop);
   background: hsl(0 0% 0% / 70%);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--blur-B);
   position: fixed;
   top: 0;
   left: 0;

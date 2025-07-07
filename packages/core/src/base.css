@@ -61,6 +61,12 @@
   --blur-M: calc(var(--base-blur) * 4);
 }
 
+@media (max-width: 640px) {
+  :root {
+    --base-space: 0.15rem;
+  }
+}
+
 :root {
   color-scheme: light dark;
 
@@ -618,7 +624,7 @@ span[class^="i-"] {
   *::before,
   *::after,
   *::placeholder {
-    transition-property: background, color !important;
+    transition-property: background,  color, outline, opacity, scale, transform, filter, padding, gap, margin, width, height !important;
     transition-duration: 0.2s !important;
     transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
   }

@@ -1,6 +1,6 @@
 <template>
   <transition-group name="generator">
-    <a class="button" :href="`http://perchance.org/${name}`" v-if="generator">
+    <a class="button" :href="`http://perchance.org/${name}`" v-if="generator" draggable="true">
       <img class="thumbnail" :src="`https://perchance.org/api/getGeneratorScreenshot?generatorName=${name}`" />
       <div class="detail">
         <h4 class="my-2">{{ generator.metaData.title || name }}</h4>

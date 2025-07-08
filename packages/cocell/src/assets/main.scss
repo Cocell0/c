@@ -14,18 +14,25 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
     gap: var(--space-M);
 
-    @media (max-width: 1000px) {
+    @media (max-width: 696px) {
       flex-direction: column;
-    }
 
-    li {
-      margin: 0;
-      display: flex;
-      flex: 1;
-      width: 100%;
-      justify-content: center;  
+      li {
+        flex: 1;
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
     }
   }
 }

@@ -78,9 +78,9 @@ if (window.generators) {
 if (generators.value.length === 0) {
   generators.value = [
     'ai-chat-modern',
-    'ai-prompt',
     'cocells-ai-image-generator',
-    'admin-password'
+    'ai-prompt',
+    'admin-password',
   ]
 }
 </script>

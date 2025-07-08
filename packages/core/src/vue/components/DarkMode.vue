@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggle" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'" style="padding: var(---space-S);">
+  <button @click="toggle" class="button--icon" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
     <span v-if="isDark" class="i-material-symbols-sunny-rounded"></span>
     <span v-else class="i-material-symbols-dark-mode-rounded"></span>
   </button>

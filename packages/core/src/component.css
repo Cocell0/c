@@ -57,11 +57,13 @@ input:focus-visible {
 }
 
 .button--icon {
-  height: var(--min-dimension, 44px);
+  padding: 0;
+  min-width: var(--min-dimension, 44px);
+  min-height: var(--min-dimension, 44px);
   width: var(--min-dimension, 44px);
-  max-height: var(--min-dimension, 44px);
+  height: var(--min-dimension, 44px);
   max-width: var(--min-dimension, 44px);
-  padding: 6px;
+  max-height: var(--min-dimension, 44px);
 }
 
 .button--secondary::after {
@@ -118,14 +120,6 @@ button:active:not(:disabled),
 
 .button--rounded-M {
   border-radius: var(--space-M);
-}
-
-.button--icon {
-  padding: 0;
-  min-width: var(--min-dimension, 44px);
-  min-height: var(--min-dimension, 44px);
-  max-width: var(--min-dimension, 44px);
-  max-height: var(--min-dimension, 44px);
 }
 
 button,

@@ -91,49 +91,24 @@ const toggle = e => {
 }
 ::view-transition-old(root),
 ::view-transition-new(root) {
+  animation: none;
   mix-blend-mode: normal;
-}
-
-@keyframes blur-in {
-  from {
-    filter: blur(0);
-  }
-  to {
-    filter: blur(var(--blur-S));
-  }
-}
-
-@keyframes blur-out {
-  from {
-    filter: blur(var(--blur-S));
-  }
-  to {
-    filter: blur(0);
-  }
 }
 
 ::view-transition-old(root) {
   z-index: 9999;
-  animation: blur-in 0.25s both;
-  filter: blur(var(--blur-S));
 }
 
 ::view-transition-new(root) {
   z-index: 9998;
-  animation: blur-out 0.25s both;
-  filter: blur(0);
 }
 
 [dark]::view-transition-old(root) {
   z-index: 9998;
-  animation: blur-in 0.25s both;
-  filter: blur(var(--blur-S));
 }
 
 [dark]::view-transition-new(root) {
   z-index: 9999;
-  animation: blur-out 0.25s both;
-  filter: blur(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

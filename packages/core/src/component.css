@@ -74,7 +74,7 @@ input:focus-visible {
 }
 
 .button--primary:not(:disabled) {
-  background: var(--primary);
+  background-color: var(--primary);
   color: var(--primary-text, inherit);
   outline-offset: 3px;
 }
@@ -87,25 +87,25 @@ input:focus-visible {
   button:hover:not(:disabled),
   .button:hover:not(:disabled),
   .button--hover:not(:disabled) {
-    background: var(--hover);
+    background-color: var(--hover);
   }
 
   .button--primary:hover:not(:disabled) {
-    background: var(--primary-hover);
+    background-color: var(--primary-hover);
   }
 }
 
 button:active:not(:disabled),
 .button:active:not(:disabled) {
-  background: var(--active);
+  background-color: var(--active);
 }
 
 .button--active:not(:disabled) {
-  background: var(--active);
+  background-color: var(--active);
 }
 
 .button--primary:active:not(:disabled) {
-  background: var(--primary-active);
+  background-color: var(--primary-active);
 }
 
 .button--secondary:disabled::after {
@@ -130,13 +130,13 @@ button:active:not(:disabled),
 
 button,
 .button:disabled {
-  background: transparent;
+  background-color: transparent;
   box-shadow: none;
   color: var(--text-disabled, inherit);
 }
 
 .button--primary:disabled {
-  background: var(--primary-disabled);
+  background-color: var(--primary-disabled);
 }
 
 input,
@@ -186,7 +186,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: calc(var(--min-dimension, 44px) - var(--space-B));
   border: none;
   border-radius: 50%;
-  background: var(--primary);
+  background-color: var(--primary);
   cursor: pointer;
 }
 
@@ -197,7 +197,7 @@ input[type="range"]::-moz-range-thumb {
   height: calc(var(--min-dimension, 44px) - var(--space-B));
   border: none;
   border-radius: 50%;
-  background: var(--primary);
+  background-color: var(--primary);
   cursor: pointer;
 }
 

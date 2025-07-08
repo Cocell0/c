@@ -208,20 +208,20 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-surface-hover);
+  background-color: var(--scrollbar-surface-hover);
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: var(--scrollbar-surface-active);
+  background-color: var(--scrollbar-surface-active);
   cursor: grabbing;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-corner {
-  background: transparent;
+  background-color: transparent;
 }
 
 :root,
@@ -236,7 +236,7 @@ body {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
 }
 
 *,
@@ -420,7 +420,7 @@ dialog {
   padding: 0;
   border: none;
   border-radius: var(--space-M);
-  background: var(--surface);
+  background-color: var(--surface);
   height: clamp(140px, 446px, 980px);
   width: clamp(240px, 524px, 760px);
 }
@@ -435,7 +435,7 @@ dialog {
 }
 
 dialog::backdrop {
-  background: hsl(0 0% 0% / 80%);
+  background-color: hsl(0 0% 0% / 80%);
   backdrop-filter: var(--blur-B);
 }
 
@@ -443,7 +443,7 @@ dialog::backdrop {
   opacity: 0;
   visibility: hidden;
   z-index: var(--z-backdrop);
-  background: hsl(0 0% 0% / 70%);
+  background-color: hsl(0 0% 0% / 70%);
   backdrop-filter: var(--blur-B);
   position: fixed;
   top: 0;
@@ -496,13 +496,13 @@ span[class^="i-"] {
 .perchance-error-content-wrapper {
   font-family: var(--default-font) !important;
   color: var(--text) !important;
-  background: var(--surface) !important;
+  background-color: var(--surface) !important;
   border-radius: var(--space-M) !important;
   overflow: hidden !important;
 }
 
 .perchance-error-content-wrapper p {
-  background: var(--field-surface) !important;
+  background-color: var(--field-surface) !important;
   color: var(--text) !important;
 }
 

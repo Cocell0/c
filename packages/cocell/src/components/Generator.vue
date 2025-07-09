@@ -72,10 +72,6 @@ onUnmounted(() => {
   border-radius: var(--space-B);
   border: 1px solid var(--divider-opaque);
 
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-
   img {
     border-radius: var(--space-S);
     width: 100%;
@@ -85,6 +81,14 @@ onUnmounted(() => {
     border: 1px solid var(--divider-opaque);
     width: 280px;
     height: auto;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 
   .detail {

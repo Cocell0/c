@@ -68,7 +68,7 @@
 :root {
   color-scheme: light dark;
 
-  --base-hue: 26;
+  --base-hue: 220;
   --base-saturation: 10%;
 
   --primary: light-dark(
@@ -118,7 +118,7 @@
 
   --background: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 100%),
-    hsl(var(--base-hue), var(--base-saturation), 2%)
+    hsl(var(--base-hue), var(--base-saturation), 10%)
   );
   --surface: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 96%),
@@ -183,11 +183,11 @@
 
   --hover: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 80%),
-    hsl(var(--base-hue), var(--base-saturation), 12%)
+    hsl(var(--base-hue), var(--base-saturation), 18%)
   );
   --active: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 68%),
-    hsl(var(--base-hue), var(--base-saturation), 16%)
+    hsl(var(--base-hue), var(--base-saturation), 24%)
   );
 }
 

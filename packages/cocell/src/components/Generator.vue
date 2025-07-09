@@ -70,7 +70,7 @@ onUnmounted(() => {
   text-align: left;
   padding: var(--space-B);
   border-radius: var(--space-B);
-  border: 1px solid var(--divider-opaque);
+  background-color: var(--surface-emphasis);
 
   img {
     border-radius: var(--space-S);

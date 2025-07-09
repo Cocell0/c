@@ -158,7 +158,7 @@
 
   --field-surface: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 80%),
-    hsl(var(--base-hue), var(--base-saturation), 10%)
+    hsl(var(--base-hue), var(--base-saturation), 15%)
   );
   --field-surface-hover: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 76%),

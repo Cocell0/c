@@ -3,7 +3,7 @@
   "homepage": "admin-password",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite --port 1 --host",
+    "dev": "vite --host",
     "build": "vite build && npx prettier --write dist/"
   },
   "type": "module",

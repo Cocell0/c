@@ -121,7 +121,7 @@
     hsl(var(--base-hue), var(--base-saturation), 10%)
   );
   --surface: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 96%),
+    hsl(var(--base-hue), var(--base-saturation), 95%),
     hsl(var(--base-hue), var(--base-saturation), 6%)
   );
   --surface-emphasis: light-dark(
@@ -638,6 +638,6 @@ span[class^="i-"] {
       font-variant, font-stretch, font-feature-settings,
       font-variation-settings, filter, backdrop-filter, box-shadow, opacity !important;
     transition-duration: 0.2s !important;
-    transition-timing-function: cubic-bezier(0.46, 0.46, 0, 1.15) !important;
+    transition-timing-function: cubic-bezier(0.5, 0.5, 0, 1) !important;
   }
 }

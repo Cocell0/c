@@ -544,17 +544,19 @@ span[class^="i-"] {
   flex: 1;
 }
 
-@keyframes outline {
-  0% {
-    outline-width: 0;
-  }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes outline {
+    0% {
+      outline-width: 0;
+    }
 
-  50% {
-    outline-width: 8px;
-  }
+    50% {
+      outline-width: 8px;
+    }
 
-  100% {
-    outline-width: 3px;
+    100% {
+      outline-width: 3px;
+    }
   }
 }
 

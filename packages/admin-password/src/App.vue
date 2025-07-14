@@ -13,7 +13,7 @@
       </p>
       <button @click="create">Create</button>
     </div>
-    <div class="container saved-passwords-container" v-if="passwords.length !== 0">
+    <div class="container" v-if="passwords.length !== 0">
       <h2 class="title">Saved Passwords</h2>
       <ul>
         <li v-for="(entry, index) in passwords" :key="index" class="text-left saved-password">
@@ -23,12 +23,16 @@
         </li>
       </ul>
     </div>
+    <div class="container">
+      <h2 class="title">Feedback</h2>
+      <div class="perchance-chat-container" style="width: 100%;" v-html="chat"></div>
+    </div>
     <br>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import DarkMode from 'core/src/vue/components/DarkMode.vue'
 
 async function hash(password) {
@@ -39,6 +43,11 @@ async function hash(password) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
+const chat = computed(() => window.chat({
+  channel: 'feedback',
+  adminPasswordHash: 'c645c3fe3a1c516937d3bdd532f322cb41d9786a3e86754d5bf0e85c92675f05',
+  adminFlair: 'Admin',
+}))
 
 const password = ref('')
 const hashed = ref('')

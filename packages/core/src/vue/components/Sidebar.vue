@@ -24,6 +24,7 @@ const isOpen = computed(() => props.open)
   overflow: hidden;
   background: var(--surface);
   border-radius: var(--space-B);
+  visibility: hidden;
 
   .content {
     width: var(--width-small);
@@ -43,7 +44,7 @@ const isOpen = computed(() => props.open)
     z-index: var(--z-overlay);
   }
 
-  .right {
+  .sidebar--right {
     left: auto;
     right: 0;
   }
@@ -51,5 +52,6 @@ const isOpen = computed(() => props.open)
 
 .sidebar.sidebar--open {
   width: var(--width-small);
+  visibility: visible;
 }
 </style>

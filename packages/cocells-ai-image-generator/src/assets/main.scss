@@ -11,18 +11,6 @@
   .sidebar.sidebar--right {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-
-    @media (max-width: 768px) {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 0;
-    }
-
-    .sidebar--right.sidebar--open {
-      height: 100%;
-    }
   }
 
   > .backdrop--show {

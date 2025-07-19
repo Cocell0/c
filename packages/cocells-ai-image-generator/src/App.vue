@@ -24,7 +24,7 @@
 
 <script setup>
 import Sidebar from 'core/src/vue/components/Sidebar.vue';
-import MainContent from 'cocells-ai-image-generator/src/assets/components/MainContent.vue';
+import MainContent from './components/MainContent.vue';
 import { ref, onMounted, computed } from 'vue';
 
 const state = ref({

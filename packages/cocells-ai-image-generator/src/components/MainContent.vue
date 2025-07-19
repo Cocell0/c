@@ -4,6 +4,7 @@
       <label for="prompt" class="w-full block text-center">Prompt</label>
       <div class="prompt-container">
         <textarea name="prompt" id="prompt" ref="promptBox" v-model="prompt"
+          @keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); createImage(); }"
           placeholder="Describe your image"></textarea>
         <!--
         A virtual text area to perform accurate measurement of the scroll height needed for the original text area
@@ -22,11 +23,15 @@
         </button>
       </div>
     </div>
+    <div class="image-container" v-if="state.generationStarted">
+      <Image v-for="(img) in images" :key="img.id" :prompt="img.prompt" />
+    </div>
   </main>
 </template>
 
 <script setup>
 import { ref, onMounted, defineEmits } from 'vue'
+import Image from './Image.vue'
 
 const emit = defineEmits(['toggle-configuration-bar']);
 
@@ -41,6 +46,7 @@ const state = ref({
 const promptBox = ref(null)
 const virtualPromptBox = ref(null)
 const prompt = ref('')
+const images = ref([])
 
 onMounted(() => {
   promptBox.value.addEventListener('input', () => {
@@ -64,6 +70,10 @@ function focusPromptBox(event) {
 function createImage() {
   if (prompt.value.trim() !== '') {
     state.value.generationStarted = true;
+    images.value.push({
+      id: crypto.randomUUID(),
+      prompt: prompt.value,
+    });
   }
 }
 </script>

@@ -1,13 +1,16 @@
 <template>
   <main>
     <div class="prompt-area" @click="focusPromptBox">
+      <label for="prompt" class="w-full block text-center">Prompt</label>
       <div class="prompt-container">
-        <textarea name="prompt" id="prompt" ref="promptBox"></textarea>
-        <!-- 
+        <textarea name="prompt" id="prompt" ref="promptBox" placeholder="Describe your image"></textarea>
+        <!--
         A virtual text area to perform accurate measurement of the scroll height needed for the original text area
         This is done because the original text area has transitions which can cause incorrect scroll height calculations due to interpolation
           -->
-        <textarea name="virtual-prompt" class="virtual-prompt" ref="virtualPromptBox" readonly></textarea>
+        <label for="virtual-prompt">Virtual prompt</label>
+        <textarea name="virtual-prompt" id="virtual-prompt" ref="virtualPromptBox"
+          aria-label="This is not meant for user interaction" readonly tabindex="-1" inert></textarea>
       </div>
       <div class="option-container">
         <button class="button--icon" aria-label="Open configurations" @click="toggleConfigurationbar">
@@ -43,4 +46,12 @@ onMounted(() => {
     promptBox.value.style.height = `${virtualPromptBox.value.scrollHeight}px`
   })
 })
+
+function focusPromptBox(event) {
+  if (event.target.classList.contains('prompt-area') ||
+    event.target.classList.contains('prompt-container') ||
+    event.target.classList.contains('option-container')) {
+    if (promptBox.value) promptBox.value.focus()
+  }
+}
 </script>

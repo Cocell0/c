@@ -2,15 +2,17 @@
   height: 100%;
   display: flex;
 
-  .sidebar.sidebar--left {
+  .navigation-bar {
     padding-top: calc(var(--base-space) * 20);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
   }
 
-  .sidebar.sidebar--right {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+  .configuration-bar {
+    .close-button {
+      position: absolute;
+      top: var(--space-B);
+      right: var(--space-B);
+      z-index: calc(var(--z-overlay) + 1);
+    }
   }
 
   > .backdrop--show {
@@ -29,6 +31,7 @@
 
 main {
   padding-top: calc(var(--base-space) * 20);
+  padding-inline: calc(var(--base-space) * 4);
   width: 100%;
   flex: 1;
   position: relative;
@@ -46,13 +49,23 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: calc(var(--base-space) * 4);
+    border-radius: calc(var(--base-space) * 5);
     background-color: var(--surface-emphasis);
-    width: 100%;
     max-width: 628px;
+    width: calc(100% - var(--base-space) * 6);
     height: fit-content;
-    overflow: hidden;
     cursor: text;
+
+    .prompt-container {
+      overflow: hidden;
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+    }
 
     > * {
       flex: 1;
@@ -69,7 +82,7 @@ main {
       overflow-y: auto;
     }
 
-    .virtual-prompt {
+    #virtual-prompt {
       transition: none !important;
       position: absolute;
       top: 0;

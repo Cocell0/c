@@ -1,28 +1,23 @@
 <template>
-  <div class="panel">
-    <div class="drawer">
-      <button @click="toggleNavigationBar" class="button--icon" :class="{ 'opacity-0': hideMenuButton }"
-        :inert="hideMenuButton" :aria-label="state.openNavigationBar ? 'Close sidebar' : 'Open sidebar'">
-        <span
-          :class="{ 'i-material-symbols-menu-open-rounded': state.openNavigationBar, 'i-material-symbols-menu-rounded': !state.openNavigationBar }"></span>
-      </button>
-    </div>
-
-    <Sidebar ref="navigationSidebar" @close="toggleNavigationBar" role="navigation" :open="state.openNavigationBar" class="navigation-bar"></Sidebar>
+  <div class="drawer" role="toolbar">
+    <DarkMode />
+    <button @click="toggleConfigurationBar" class="button--icon"
+      :aria-label="state.openConfigurationBar ? 'Close configuration' : 'Open configuration'">
+      <span
+        :class="{ 'i-material-symbols-close-rounded': state.openConfigurationBar, 'i-material-symbols-settings-rounded': !state.openConfigurationBar }"></span>
+    </button>
   </div>
   <MainContent @toggle-configuration-bar="toggleConfigurationBar"></MainContent>
   <div class="panel">
-    <Sidebar ref="configurationSidebar" @close="toggleConfigurationBar" :open="state.openConfigurationBar" class="configuration-bar relative" position="right">
-      <button class="button--icon close-button" aria-label="Close configuration" @click="toggleConfigurationBar">
-        <span class="i-material-symbols-close-rounded"></span>
-      </button>
-      <h2 class="mt-2.5rem">Right Sidebar</h2>
-      <p>This is the right sidebar content.</p>
+    <Sidebar ref="configurationSidebar" @close="toggleConfigurationBar" :open="state.openConfigurationBar"
+      class="configuration-bar relative" position="right">
+      <h3 class="my-2.5rem text-center">Configuration</h3>
     </Sidebar>
   </div>
 </template>
 
 <script setup>
+import DarkMode from 'core/src/vue/components/DarkMode.vue';
 import Sidebar from 'core/src/vue/components/Sidebar.vue';
 import MainContent from './components/MainContent.vue';
 import { ref, onMounted, computed } from 'vue';

@@ -23,15 +23,18 @@
 
 .drawer {
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: var(--space-B);
+  top: var(--space-B);
+  right: var(--space-B);
+  padding: var(--space-S);
+  background-color: var(--surface);
+  border-radius: var(--space-B);
   z-index: calc(var(--z-overlay) + 1);
+  display: flex;
+  gap: var(--space-S);
+
 }
 
 main {
-  padding-top: calc(var(--base-space) * 20);
-  padding-inline: calc(var(--base-space) * 4);
   width: 100%;
   flex: 1;
   position: relative;
@@ -40,6 +43,7 @@ main {
 
   .prompt-area {
     position: absolute;
+    z-index: calc(var(--z-overlay) + 1);
     bottom: 50%;
     left: 50%;
     transform: translateY(50%) translateX(-50%);
@@ -98,6 +102,19 @@ main {
       padding: var(--space-B);
       gap: var(--space-S);
     }
+  }
+
+  .generated-image-container {
+    padding: var(--space-M);
+    padding-bottom: calc(var(--space-B) * 16);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-B);
+    justify-content: center;
+    align-items: center;
   }
 }
 

@@ -567,6 +567,23 @@ span[class^="i-"] {
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes fade-close {
   from {
     opacity: 1;
@@ -578,7 +595,6 @@ span[class^="i-"] {
     visibility: hidden;
   }
 }
-
 @keyframes fade-open {
   from {
     opacity: 0;
@@ -604,7 +620,6 @@ span[class^="i-"] {
     scale: 0.995;
   }
 }
-
 @keyframes scale-fade-open {
   from {
     opacity: 0;

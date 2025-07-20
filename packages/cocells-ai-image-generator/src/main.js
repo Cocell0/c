@@ -1,4 +1,5 @@
 import 'virtual:uno.css'
+import 'core/src/font.css'
 import 'core/src/base.css'
 import 'core/src/component.css'
 import './assets/main.scss'

@@ -15,15 +15,12 @@
           aria-label="This is not meant for user interaction" readonly tabindex="-1" inert></textarea>
       </div>
       <div class="option-container">
-        <button class="button--icon" aria-label="Open configurations" @click="toggleConfigurationbar">
-          <span class="i-material-symbols-tune-rounded"></span>
-        </button>
         <button class="button--icon" aria-label="Create image" @click="createImage" :disabled="prompt.trim() === ''">
           <span class="i-material-symbols-add-rounded"></span>
         </button>
       </div>
     </div>
-    <div class="image-container" v-if="state.generationStarted">
+    <div class="generated-image-container" role="region" aria-label="Generated images" v-if="state.generationStarted">
       <Image v-for="(img) in images" :key="img.id" :prompt="img.prompt" />
     </div>
   </main>
@@ -32,12 +29,6 @@
 <script setup>
 import { ref, onMounted, defineEmits } from 'vue'
 import Image from './Image.vue'
-
-const emit = defineEmits(['toggle-configuration-bar']);
-
-const toggleConfigurationbar = () => {
-  emit('toggle-configuration-bar')
-};
 
 const state = ref({
   generationStarted: false,

@@ -22,7 +22,7 @@ const props = defineProps({
 (async () => {
   const startTime = Date.now();
   const timer = setInterval(() => {
-    time.value = ((Date.now() - startTime) / 1000).toFixed(1) + 's';
+    time.value = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
   }, 100)
 
   const result = await window.image({ prompt: props.prompt, width: 512, height: 768 });
@@ -31,7 +31,7 @@ const props = defineProps({
     clearInterval(timer)
   })
   clearInterval(timer)
-  time.value = ((Date.now() - startTime) / 1000).toFixed(1) + 's';
+  time.value = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
   image.value = result || '';
 })();
 </script>

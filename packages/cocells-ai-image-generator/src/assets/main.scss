@@ -56,7 +56,6 @@ main {
     .prompt-container {
       overflow: hidden;
       display: flex;
-
     }
 
     label {
@@ -98,6 +97,7 @@ main {
   .prompt-area:has(#prompt:focus) {
     #prompt {
       margin-bottom: var(--option-container-height);
+      height: calc(var(--min-dimension) * 6);
     }
   }
 

@@ -10,8 +10,10 @@
   <title>AI Image Generator</title>
   <script>
     if (typeof image === 'undefined') {
-      window.image = () => {
-        return 'image'
+      window.image = async (request) => {
+        const delay = Math.floor(Math.random() * 26 + 4) * 1000;
+        await new Promise(resolve => setTimeout(resolve, delay)); // Return a random delay between 4 and 30 seconds
+        return `https://placehold.co/512/EEE/31343C/png?font=Open%20Sans&text=${encodeURIComponent(request.prompt)}`;
       };
     } else {
       window.image = image;

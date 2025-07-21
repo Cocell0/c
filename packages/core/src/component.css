@@ -8,6 +8,19 @@ a {
   min-height: var(--min-dimension, 44px);
 }
 
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: inherit;
+  border-radius: var(--space-B);
+  margin: 0;
+  padding: var(--space-B);
+  resize: vertical;
+}
+
 input,
 select {
   font-family: inherit;

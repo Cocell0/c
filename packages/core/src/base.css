@@ -645,15 +645,16 @@ span[class^="i-"] {
       box-shadow, border, left, right, top, bottom, font-size, font-weight,
       letter-spacing, word-spacing, line-height, min-width, max-width,
       min-height, max-height, z-index, visibility, display, background-color,
-      background-image, background-size, background-position, background-repeat, border-color,
-      border-width, border-style, border-top, border-right, border-bottom,
-      border-left, border-top-left-radius, border-top-right-radius,
-      border-bottom-right-radius, border-bottom-left-radius, outline-color,
-      outline-width, outline-style, text-shadow, text-decoration,
-      text-decoration-color, text-decoration-style, text-decoration-thickness,
-      text-underline-offset, text-transform, font-family, font-style,
-      font-variant, font-stretch, font-feature-settings,
-      font-variation-settings, filter, backdrop-filter, box-shadow, opacity !important;
+      background-image, background-size, background-position, background-repeat,
+      border-color, border-width, border-style, border-top, border-right,
+      border-bottom, border-left, border-top-left-radius,
+      border-top-right-radius, border-bottom-right-radius,
+      border-bottom-left-radius, outline-color, outline-width, outline-style,
+      text-shadow, text-decoration, text-decoration-color,
+      text-decoration-style, text-decoration-thickness, text-underline-offset,
+      text-transform, font-family, font-style, font-variant, font-stretch,
+      font-feature-settings, font-variation-settings, filter, backdrop-filter,
+      box-shadow, opacity !important;
     transition-duration: 0.2s !important;
     transition-timing-function: cubic-bezier(0.5, 0.5, 0, 1) !important;
   }

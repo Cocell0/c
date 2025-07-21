@@ -1,9 +1,7 @@
 <template>
   <div class="image-container">
     <img :src="image" :alt="`${prompt}`" />
-    <div class="image-info">
-      <p class="time">{{ time ? `Generated in ${time}` : '' }}</p>
-    </div>
+    <p class="time"><small>{{ time ? `${time}` : '' }} seconds</small></p>
   </div>
 </template>
 
@@ -22,7 +20,7 @@ const props = defineProps({
 (async () => {
   const startTime = Date.now();
   const timer = setInterval(() => {
-    time.value = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
+    time.value = ((Date.now() - startTime) / 1000).toFixed(2);
   }, 100)
 
   const result = await window.image({ prompt: props.prompt, width: 512, height: 768 });
@@ -31,7 +29,7 @@ const props = defineProps({
     clearInterval(timer)
   })
   clearInterval(timer)
-  time.value = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
+  time.value = ((Date.now() - startTime) / 1000).toFixed(2);
   image.value = result || '';
 })();
 </script>
@@ -49,15 +47,20 @@ const props = defineProps({
     object-fit: cover;
   }
 
-  .image-info {
+  .time {
     position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    padding: var(--space-S);
-    color: white;
-    background: linear-gradient(to top, hsl(0, 0%, 0%, 0.7), transparent);
-    text-align: left;
+    bottom: var(--space-B);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-SX);
+    margin: 0;
+    background: light-dark(
+      hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),
+      hsl(var(--base-hue), var(--base-saturation), 14%, 0.6)
+    );
+    backdrop-filter: blur(var(--blur-S));
+    border-radius: var(--space-B);
+    text-align: center;
   }
 }
 </style>

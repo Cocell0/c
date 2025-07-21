@@ -52,7 +52,7 @@ const props = defineProps({
     bottom: var(--space-B);
     left: 50%;
     transform: translateX(-50%);
-    padding: var(--space-SX);
+    padding: var(--space-SX) var(--space-B);
     margin: 0;
     background: light-dark(
       hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),

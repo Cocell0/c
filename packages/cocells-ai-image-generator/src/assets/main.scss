@@ -30,15 +30,17 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
+  --option-container-height: calc(
+    var(--space-B) + var(--min-dimension) + var(--space-B)
+  );
 
   .prompt-area {
     position: absolute;
-    bottom: 50%;
+    bottom: var(--space-B);
     left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
-    transform: translateY(50%) translateX(-50%);
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,9 +51,12 @@ main {
     width: calc(100% - var(--base-space) * 6);
     height: fit-content;
     cursor: text;
+    overflow: hidden;
 
     .prompt-container {
       overflow: hidden;
+      display: flex;
+
     }
 
     label {
@@ -66,31 +71,33 @@ main {
       width: 100%;
     }
 
-    #prompt,
-    .virtual-prompt {
+    #prompt {
       background-color: transparent;
       width: 100%;
+      height: var(--option-container-height);
       max-height: calc(var(--min-dimension) * 6);
       resize: none;
       overflow-x: hidden;
       overflow-y: auto;
     }
 
-    #virtual-prompt {
-      transition: none !important;
-      position: absolute;
-      top: 0;
-      left: 0;
-      visibility: hidden;
-      // background-color: red; // Background color for debugging
-    }
-
     > .option-container {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      padding: var(--space-B);
       gap: var(--space-S);
+
+      > * {
+        position: absolute;
+        bottom: var(--space-B);
+        right: var(--space-B);
+      }
+    }
+  }
+
+  .prompt-area:has(#prompt:focus) {
+    #prompt {
+      margin-bottom: var(--option-container-height);
     }
   }
 
@@ -105,12 +112,5 @@ main {
     gap: var(--space-B);
     justify-content: center;
     align-items: center;
-  }
-}
-
-main.generation-started {
-  .prompt-area {
-    bottom: var(--space-B);
-    transform: translateY(0) translateX(-50%);
   }
 }

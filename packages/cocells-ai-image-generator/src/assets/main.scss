@@ -2,10 +2,6 @@
   height: 100%;
   display: flex;
 
-  .navigation-bar {
-    padding-top: calc(var(--base-space) * 20);
-  }
-
   .configuration-bar {
     .close-button {
       position: absolute;
@@ -14,11 +10,6 @@
       z-index: calc(var(--z-overlay) + 1);
     }
   }
-
-  > .backdrop--show {
-    opacity: 1;
-    visibility: visible;
-  }
 }
 
 .drawer {
@@ -26,12 +17,11 @@
   top: var(--space-B);
   right: var(--space-B);
   padding: var(--space-S);
-  background-color: var(--surface);
-  border-radius: var(--space-B);
+  background-color: var(--surface-emphasis);
+  border-radius: var(--space-M);
   z-index: calc(var(--z-overlay) + 1);
   display: flex;
   gap: var(--space-S);
-
 }
 
 main {
@@ -43,9 +33,9 @@ main {
 
   .prompt-area {
     position: absolute;
-    z-index: calc(var(--z-overlay) + 1);
     bottom: 50%;
     left: 50%;
+    z-index: 1;
     transform: translateY(50%) translateX(-50%);
     width: 100%;
     height: 100%;

@@ -12,13 +12,14 @@
     <Sidebar ref="configurationSidebar" @close="toggleConfigurationBar" :open="state.openConfigurationBar"
       class="configuration-bar relative" position="right">
       <h3 class="my-2.5rem text-center">Configuration</h3>
-      <a href="#/images">Images</a>
+      <AnchorLink href="/images" class="button">Images</AnchorLink>
     </Sidebar>
   </div>
 </template>
 
 <script setup>
 import DarkMode from 'core/src/vue/components/DarkMode.vue';
+import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
 import Sidebar from 'core/src/vue/components/Sidebar.vue';
 import MainContent from '../../components/MainContent.vue';
 import { ref, onMounted, computed } from 'vue';

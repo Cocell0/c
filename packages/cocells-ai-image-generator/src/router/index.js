@@ -14,6 +14,11 @@ const routes = [
   {
     path: '/images/create',
     component: Create,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: Create,
+    redirect: '/images/create',
   }
 ]
 

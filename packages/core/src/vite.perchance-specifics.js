@@ -16,7 +16,7 @@ export default function perchanceSpecifics() {
       const { fileURLToPath } = await import('url')
       const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-      const filePath = path.resolve(__dirname, '__mount-plugins.js')
+      const filePath = path.resolve(__dirname, 'perchance-specifics.js')
       const scriptContent = await fs.readFile(filePath, 'utf-8')
 
       return html.replace(/<\/head>/i, `<script>${scriptContent}</script></head>`)

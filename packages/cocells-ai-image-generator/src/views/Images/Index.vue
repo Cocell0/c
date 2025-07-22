@@ -1,9 +1,13 @@
 <template>
   <div>
     <p>View for generated images</p>
-    <a href="#/images/create" class="button">Create New Image</a>
+    <AnchorLink href="/images/create" class="button">Create new images</AnchorLink>
   </div>
 </template>
+
+<script setup>
+import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
+</script>
 
 <style scoped>
 div {

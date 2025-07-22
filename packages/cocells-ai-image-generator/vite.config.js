@@ -1,3 +1,4 @@
+import { name } from './package.json';
 import { defineConfig } from 'vite'
 import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
@@ -9,6 +10,6 @@ export default defineConfig({
     UnoCSS(),
     vue(),
     viteSingleFile(),
-    perchanceSpecifics(),
+    perchanceSpecifics(name),
   ],
 })

@@ -37,16 +37,19 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-.fade-enter-from,
-.fade-leave-to {
-  scale: 1.4;
-  opacity: 0;
-}
+@media (prefers-reduced-motion: no-preference) {
 
-.fade-enter-to,
-.fade-leave-from {
-  scale: 1;
-  opacity: 1;
+  .fade-enter-from,
+  .fade-leave-to {
+    scale: 1.4;
+    opacity: 0;
+  }
+
+  .fade-enter-to,
+  .fade-leave-from {
+    scale: 1;
+    opacity: 1;
+  }
 }
 
 .image-container {

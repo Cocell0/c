@@ -17,7 +17,7 @@
 
 <script setup>
 defineOptions({ inheritAttrs: false })
-import { computed, defineEmits, useAttrs, ref, onMounted, onUnmounted } from 'vue'
+import { computed, useAttrs, ref, onMounted, onUnmounted } from 'vue'
 const attrs = useAttrs();
 
 const props = defineProps({

@@ -19,6 +19,7 @@ textarea {
   margin: 0;
   padding: var(--space-B);
   resize: vertical;
+  outline: none !important;
 }
 
 input,

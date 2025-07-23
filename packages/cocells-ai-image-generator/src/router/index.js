@@ -1,24 +1,24 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Images from '../views/Images/Index.vue'
-import Create from '../views/Images/Create.vue'
+import Images from '@/views/Images.vue'
+import Create from '@/views/Create.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/images/create'
+    redirect: '/create'
   },
   {
     path: '/images',
     component: Images,
   },
   {
-    path: '/images/create',
+    path: '/create',
     component: Create,
   },
   {
     path: '/:pathMatch(.*)*',
     component: Create,
-    redirect: '/images/create',
+    redirect: '/create',
   }
 ]
 

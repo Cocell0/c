@@ -57,8 +57,10 @@ const props = defineProps({
   overflow: hidden;
   background-color: var(--surface);
   border-radius: var(--space-M);
+  min-width: 280px;
+  min-height: 280px;
   width: 280px;
-  height: 280px;
+  height: auto;
 
   img {
     width: 100%;
@@ -83,6 +85,11 @@ const props = defineProps({
   &.generated .badge {
     bottom: var(--space-B);
     transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
   }
 }
 </style>

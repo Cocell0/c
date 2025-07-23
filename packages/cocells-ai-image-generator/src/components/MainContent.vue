@@ -1,20 +1,22 @@
 <template>
   <main :class="{ 'generation-started': state.generationStarted }">
-    <div class="prompt-area" @click="focusPromptBox">
-      <label for="prompt" class="w-full block text-center">Prompt</label>
-      <div class="prompt-container">
-        <textarea name="prompt" id="prompt" ref="promptBox" v-model="prompt"
-          @keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); createImage(); }"
-          placeholder="Describe your image"></textarea>
-      </div>
-      <div class="option-container">
-        <button class="button--icon" aria-label="Create image" @click="createImage" :disabled="prompt.trim() === ''">
-          <span class="i-material-symbols-add-rounded"></span>
-        </button>
-      </div>
+    <div class="generated-image-container" role="region" aria-label="Generated images">
+      <Image v-for="(image) in images" :key="image.id" :prompt="image.prompt" />
     </div>
-    <div class="generated-image-container" role="region" aria-label="Generated images" v-if="state.generationStarted">
-      <Image v-for="(img) in images" :key="img.id" :prompt="img.prompt" />
+    <div class="prompt-area-wrapper">
+      <div class="prompt-area" @click="focusPromptBox">
+        <label for="prompt" class="w-full block text-center">Prompt</label>
+        <div class="prompt-container">
+          <textarea name="prompt" id="prompt" ref="promptBox" v-model="prompt"
+            @keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); createImage(); }"
+            placeholder="Describe your image"></textarea>
+        </div>
+        <div class="option-container">
+          <button class="button--icon" aria-label="Create image" @click="createImage" :disabled="prompt.trim() === ''">
+            <span class="i-material-symbols-add-rounded"></span>
+          </button>
+        </div>
+      </div>
     </div>
   </main>
 </template>

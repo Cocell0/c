@@ -7,7 +7,7 @@
         :class="{ 'i-material-symbols-close-rounded': state.openConfigurationBar, 'i-material-symbols-settings-rounded': !state.openConfigurationBar }"></span>
     </button>
   </div>
-  <MainContent @toggle-configuration-bar="toggleConfigurationBar"></MainContent>
+  <MainContent @toggle-configuration-bar="toggleConfigurationBar" />
   <div class="panel">
     <Sidebar ref="configurationSidebar" @close="toggleConfigurationBar" :open="state.openConfigurationBar"
       class="configuration-bar relative" position="right">
@@ -21,7 +21,7 @@
 import DarkMode from 'core/src/vue/components/DarkMode.vue';
 import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
 import Sidebar from 'core/src/vue/components/Sidebar.vue';
-import MainContent from '../../components/MainContent.vue';
+import MainContent from '@/components/MainContent.vue';
 import { ref, onMounted, computed } from 'vue';
 
 const state = ref({

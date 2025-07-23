@@ -1,7 +1,9 @@
 <template>
-  <div class="image-container">
-    <img :src="image" :alt="`${prompt}`" />
-    <p class="time"><small>{{ time ? `${time}` : '' }} seconds</small></p>
+  <div class="image-container" :class="{ generated: image }">
+    <transition name="fade">
+      <img v-if="image" :src="image" :alt="`${prompt}`" />
+    </transition>
+    <p class="badge"><small>{{ time ? `${time}` : '' }} seconds</small></p>
   </div>
 </template>
 
@@ -35,32 +37,49 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
+.fade-enter-from,
+.fade-leave-to {
+  scale: 1.4;
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  scale: 1;
+  opacity: 1;
+}
+
 .image-container {
   position: relative;
   overflow: hidden;
   background-color: var(--surface);
   border-radius: var(--space-M);
+  width: 280px;
+  height: 280px;
 
   img {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
   }
 
-  .time {
+  .badge {
     position: absolute;
-    bottom: var(--space-B);
+    bottom: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(50%);
     padding: var(--space-SX) var(--space-B);
     margin: 0;
-    background: light-dark(
-      hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),
-      hsl(var(--base-hue), var(--base-saturation), 14%, 0.6)
-    );
+    background: light-dark(hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),
+        hsl(var(--base-hue), var(--base-saturation), 14%, 0.6));
     backdrop-filter: blur(var(--blur-S));
     border-radius: var(--space-B);
     text-align: center;
+  }
+
+  &.generated .badge {
+    bottom: var(--space-B);
+    transform: translateX(-50%) translateY(0);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="image-container" :class="{ generated: image }">
-    <transition name="fade">
+    <transition name="image">
       <img v-if="image" :src="image" :alt="`${prompt}`" />
     </transition>
     <p class="badge"><small>{{ time ? `${time}` : '' }} seconds</small></p>
@@ -19,18 +19,18 @@ const props = defineProps({
   }
 });
 
+const startTime = Date.now();
+const timer = setInterval(() => {
+  time.value = ((Date.now() - startTime) / 1000).toFixed(2);
+}, 100)
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
+
 (async () => {
-  const startTime = Date.now();
-  const timer = setInterval(() => {
-    time.value = ((Date.now() - startTime) / 1000).toFixed(2);
-  }, 100)
-
   const result = await window.image({ prompt: props.prompt, width: 512, height: 768 });
-
-  onUnmounted(() => {
-    clearInterval(timer)
-  })
-  clearInterval(timer)
+  clearInterval(timer);
   time.value = ((Date.now() - startTime) / 1000).toFixed(2);
   image.value = result || '';
 })();
@@ -39,14 +39,14 @@ const props = defineProps({
 <style scoped lang="scss">
 @media (prefers-reduced-motion: no-preference) {
 
-  .fade-enter-from,
-  .fade-leave-to {
-    scale: 1.4;
+  .image-enter-from,
+  .image-leave-to {
+    scale: 0.8;
     opacity: 0;
   }
 
-  .fade-enter-to,
-  .fade-leave-from {
+  .image-enter-to,
+  .image-leave-from {
     scale: 1;
     opacity: 1;
   }
@@ -57,9 +57,9 @@ const props = defineProps({
   overflow: hidden;
   background-color: var(--surface);
   border-radius: var(--space-M);
-  min-width: 280px;
-  min-height: 280px;
-  width: 280px;
+  min-width: 256px;
+  min-height: 256px;
+  width: 256px;
   height: auto;
 
   img {
@@ -69,6 +69,7 @@ const props = defineProps({
   }
 
   .badge {
+    white-space: nowrap;
     position: absolute;
     bottom: 50%;
     left: 50%;

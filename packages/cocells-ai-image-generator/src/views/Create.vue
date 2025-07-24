@@ -8,6 +8,11 @@
       </div>
       <div class="prompt-area-wrapper">
         <div class="prompt-area">
+          <div class="option-container">
+            <button class="button--icon" aria-label="Open settings">
+              <span class="i-material-symbols-settings"></span>
+            </button>
+          </div>
           <div class="prompt-container">
             <label for="prompt" class="w-full block text-center">Prompt</label>
             <textarea name="prompt" id="prompt" ref="promptBox" v-model="prompt"
@@ -28,6 +33,7 @@
 
 <script setup>
 import DarkMode from 'core/src/vue/components/DarkMode.vue';
+import Modal from 'core/src/vue/components/Modal.vue';
 import { useUiStore } from '@/store/useUiStore';
 import { useConfigurationStore } from '@/store/useConfigurationStore';
 import { ref, TransitionGroup } from 'vue'

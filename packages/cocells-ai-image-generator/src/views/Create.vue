@@ -1,37 +1,55 @@
 <template>
   <div class="router-wrapper">
-    <div role="toolbar">
-      <DarkMode />
-      <button @click="toggleConfigurationBar" class="button--icon"
-        :aria-label="uiStore.isConfigurationBarOpen ? 'Close configuration' : 'Open configuration'">
-        <span
-          :class="{ 'i-material-symbols-close-rounded': uiStore.isConfigurationBarOpen, 'i-material-symbols-settings-rounded': !uiStore.isConfigurationBarOpen }"></span>
-      </button>
-    </div>
-    <div class="app-content">
-      <MainContent />
-      <div class="panel">
-        <Sidebar @close="uiStore.isConfigurationBarOpen = false" :open="uiStore.isConfigurationBarOpen"
-          class="configuration-bar relative" position="right">
-          <h3 class="my-2.5rem text-center">Configuration</h3>
-          <AnchorLink href="/images" class="button">Images</AnchorLink>
-          <label for="size">Size:</label>
-          <select name="size" id="size">
-            <option v-for="size in configurationStore.size" :key="size.name" :value="size.name">{{ size.name }}</option>
-          </select>
-        </Sidebar>
+    <main :class="{ 'generation-started': state.generationStarted }">
+      <div class="generated-image-container" role="region" aria-label="Generated images">
+        <TransitionGroup name="image">
+          <Image v-for="(image) in images" :key="image.id" :prompt="image.prompt" />
+        </TransitionGroup>
       </div>
-    </div>
+      <div class="prompt-area-wrapper">
+        <div class="prompt-area">
+          <div class="prompt-container">
+            <label for="prompt" class="w-full block text-center">Prompt</label>
+            <textarea name="prompt" id="prompt" ref="promptBox" v-model="prompt"
+              @keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); createImage(); }"
+              placeholder="Describe your image..."></textarea>
+          </div>
+          <div class="option-container">
+            <button class="button--icon" aria-label="Create image" @click="createImage"
+              :disabled="prompt.trim() === ''">
+              <span class="i-material-symbols-add-rounded"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script setup>
 import DarkMode from 'core/src/vue/components/DarkMode.vue';
-import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
-import Sidebar from 'core/src/vue/components/Sidebar.vue';
-import MainContent from '@/components/MainContent.vue';
 import { useUiStore } from '@/store/useUiStore';
 import { useConfigurationStore } from '@/store/useConfigurationStore';
+import { ref, TransitionGroup } from 'vue'
+import Image from '@/components/Image.vue'
+
+const state = ref({
+  generationStarted: false,
+});
+
+const promptBox = ref(null)
+const prompt = ref('')
+const images = ref([])
+
+function createImage() {
+  if (prompt.value.trim() !== '') {
+    state.value.generationStarted = true;
+    images.value.push({
+      id: crypto.randomUUID(),
+      prompt: prompt.value,
+    });
+  }
+}
 
 const uiStore = useUiStore();
 const configurationStore = useConfigurationStore();
@@ -40,3 +58,20 @@ function toggleConfigurationBar() {
   uiStore.isConfigurationBarOpen = !uiStore.isConfigurationBarOpen;
 }
 </script>
+
+<style lang="scss">
+@media (prefers-reduced-motion: no-preference) {
+
+  .image-enter-from,
+  .image-leave-to {
+    scale: 1.4;
+    opacity: 0;
+  }
+
+  .image-enter-to,
+  .image-leave-from {
+    scale: 1;
+    opacity: 1;
+  }
+}
+</style>

@@ -1,15 +1,6 @@
 #app {
   height: 100%;
   display: flex;
-
-  .configuration-bar {
-    .close-button {
-      position: absolute;
-      top: var(--space-B);
-      right: var(--space-B);
-      z-index: calc(var(--z-overlay) + 1);
-    }
-  }
 }
 
 .router-wrapper {
@@ -18,20 +9,9 @@
   display: flex;
   flex-direction: column;
 
-  > * {
-    flex: 1;
-  }
-
-  div[role="toolbar"] {
-    padding: var(--space-B);
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-S);
-    flex: 0;
-  }
-
   .app-content {
     display: flex;
+    overflow: hidden;
   }
 }
 
@@ -44,6 +24,7 @@ main {
   --option-container-height: calc(
     var(--space-B) + var(--min-dimension) + var(--space-B)
   );
+  overflow-y: auto;
 
   .generated-image-container {
     padding: var(--space-L);
@@ -62,17 +43,15 @@ main {
     display: flex;
     justify-content: center;
     padding: var(--space-B);
+
     .prompt-area {
       position: relative;
       width: 100%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       border-radius: calc(var(--base-space) * 5);
       background-color: var(--surface-emphasis);
-      max-width: 628px;
-      width: calc(100% - var(--base-space) * 6);
+      max-width: 768px;
+      width: 100%;
       height: fit-content;
       cursor: text;
       overflow: hidden;
@@ -80,6 +59,8 @@ main {
       .prompt-container {
         overflow: hidden;
         display: flex;
+        flex: 1;
+        width: 100%;
       }
 
       label {
@@ -88,12 +69,7 @@ main {
         left: 0;
         visibility: hidden;
       }
-
-      > * {
-        flex: 1;
-        width: 100%;
-      }
-
+      
       #prompt {
         background-color: transparent;
         width: 100%;
@@ -106,15 +82,9 @@ main {
 
       > .option-container {
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
         gap: var(--space-S);
-
-        > * {
-          position: absolute;
-          bottom: var(--space-B);
-          right: var(--space-B);
-        }
+        padding: var(--space-B);
       }
     }
 

@@ -71,6 +71,7 @@ onUnmounted(() => {
   .badge {
     white-space: nowrap;
     position: absolute;
+    min-width: 125px;
     bottom: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(50%);

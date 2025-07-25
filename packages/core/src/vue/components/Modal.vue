@@ -125,7 +125,7 @@ onMounted(() => {
         overflow: clip;
       }
 
-      &+ {
+      &+* {
         padding: var(--space-B);
       }
     }

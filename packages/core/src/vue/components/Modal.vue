@@ -1,7 +1,21 @@
 <template>
-  <dialog ref="dialogElement">
-    <button @click="closeModal" aria-label="Close modal">×</button>
-    <slot />
+  <dialog ref="modal" @click="closeOnBackdrop" class="modal">
+    <div class="head">
+      <div class="title-container">
+        <h3>{{ props.title }}</h3>
+      </div>
+      <div class="close-button-container">
+        <button @click="closeModal" :aria-label="`Close ${props.title}`" class="button--icon">
+          <span class="i-material-symbols-close"></span>
+        </button>
+      </div>
+    </div>
+    <div class="body">
+      <slot />
+    </div>
+    <div class="action" v-if="$slots.action">
+      <slot name="action" />
+    </div>
   </dialog>
 </template>
 
@@ -9,29 +23,125 @@
 import { ref, watch, onMounted } from 'vue'
 
 const props = defineProps({
-  modelValue: Boolean
+  open: {
+    type: Boolean,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:open'])
 
-const dialogElement = ref(null)
+const modal = ref(null)
 
-const openModal = () => {
-  if (!dialogElement.value.open) dialogElement.value.showModal()
+function openModal() {
+  if (!modal.value.open) modal.value.showModal()
 }
 
-const closeModal = () => {
-  if (dialogElement.value.open) dialogElement.value.close()
-  emit('update:modelValue', false)
+function closeModal() {
+  if (modal.value.open) modal.value.close()
+  emit('update:open', false)
 }
 
-watch(() => props.modelValue, (value) => {
+function closeOnBackdrop(event) {
+  console.log(event.target)
+  if (event.target === modal.value) closeModal()
+}
+
+watch(() => props.open, (value) => {
   if (value) openModal()
   else closeModal()
 })
 
 onMounted(() => {
-  dialogElement.value.addEventListener('close', () => {
-    emit('update:modelValue', false)
+  modal.value.addEventListener('close', () => {
+    emit('update:open', false)
   })
 })
 </script>
+
+<style lang="scss" scoped>
+.modal {
+  user-select: inherit;
+  border: none;
+  border-radius: var(--space-M);
+  background-color: var(--surface);
+  height: 100%;
+  min-height: 140px;
+  max-height: 80vh;
+  max-height: 80dvh;
+  width: 100%;
+  min-width: 240px;
+  max-width: 54vw;
+  max-width: 54dvw;
+  position: relative;
+  inset: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  flex-direction: column;
+  opacity: 1;
+
+  @media (max-width: 768px) {
+    & {
+      max-width: 94vw;
+      max-width: 94dvw;
+    }
+  }
+
+  &:open {
+    display: flex;
+  }
+
+  &::backdrop {
+    background-color: hsl(0 0% 0% / 70%);
+    backdrop-filter: blur(var(--blur-S));
+  }
+
+  >* {
+    background-color: var(--surface);
+    padding: var(--space-B);
+  }
+
+  >*:not(:last-child) {
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .head {
+    display: flex;
+
+    .title-container {
+      padding-left: calc(var(--space-B) * 2 + var(--min-dimension));
+      flex: 1;
+      overflow: hidden;
+
+      h3 {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: clip;
+      }
+
+      &+ {
+        padding: var(--space-B);
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+  }
+
+  .action {
+    display: flex;
+    gap: var(--space-S);
+
+    >* {
+      flex: 1;
+    }
+  }
+}
+</style>

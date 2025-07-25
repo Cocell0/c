@@ -9,7 +9,8 @@
       <div class="prompt-area-wrapper">
         <div class="prompt-area">
           <div class="option-container">
-            <button class="button--icon" aria-label="Open settings">
+            <button class="button--icon" aria-label="Open settings"
+              @click="uiStore.isConfigurationOpen = !uiStore.isConfigurationOpen">
               <span class="i-material-symbols-settings"></span>
             </button>
           </div>
@@ -27,6 +28,9 @@
           </div>
         </div>
       </div>
+      <Modal v-model:open="uiStore.isConfigurationOpen" title="Configuration">
+        Configurations
+      </Modal>
     </main>
   </div>
 </template>
@@ -61,7 +65,7 @@ const uiStore = useUiStore();
 const configurationStore = useConfigurationStore();
 
 function toggleConfigurationBar() {
-  uiStore.isConfigurationBarOpen = !uiStore.isConfigurationBarOpen;
+  uiStore.isConfigurationOpen = !uiStore.isConfigurationOpen;
 }
 </script>
 

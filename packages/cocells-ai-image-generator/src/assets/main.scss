@@ -87,9 +87,8 @@ main {
       }
     }
 
-    .prompt-area:has(#prompt:focus) {
+    .prompt-area:has(#prompt:focus-visible) {
       #prompt {
-        margin-bottom: var(--option-container-height);
         height: calc(var(--min-dimension) * 3);
       }
     }

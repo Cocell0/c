@@ -147,8 +147,8 @@
   );
 
   --divider: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 64%),
-    hsl(var(--base-hue), var(--base-saturation), 18%)
+    hsl(var(--base-hue), var(--base-saturation), 54%),
+    hsl(var(--base-hue), var(--base-saturation), 36%)
   );
 
   --divider-opaque: light-dark(
@@ -416,31 +416,6 @@ c-accordian {
 
 c-accordian .head {
   min-height: 54px;
-}
-
-dialog {
-  user-select: inherit;
-  position: relative;
-  padding: 0;
-  border: none;
-  border-radius: var(--space-M);
-  background-color: var(--surface);
-  height: clamp(140px, 446px, 980px);
-  width: clamp(240px, 524px, 760px);
-}
-
-@media only screen and (max-width: 768px) {
-  dialog:not([is="c-overlay"]) {
-    inset: unset;
-    left: 50%;
-    translate: -50%;
-    bottom: 2rem;
-  }
-}
-
-dialog::backdrop {
-  background-color: hsl(0 0% 0% / 80%);
-  backdrop-filter: var(--blur-B);
 }
 
 .backdrop {

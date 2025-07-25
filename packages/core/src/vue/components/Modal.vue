@@ -111,6 +111,7 @@ onMounted(() => {
 
   .head {
     display: flex;
+    padding: var(--space-B);
 
     .title-container {
       padding-left: calc(var(--space-B) * 2 + var(--min-dimension));
@@ -123,10 +124,6 @@ onMounted(() => {
         width: 100%;
         text-overflow: ellipsis;
         overflow: clip;
-      }
-
-      &+* {
-        padding: var(--space-B);
       }
     }
   }

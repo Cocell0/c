@@ -46,8 +46,8 @@ function closeModal() {
 }
 
 function closeOnBackdrop(event) {
-  console.log(event.target)
-  if (event.target === modal.value) closeModal()
+  const isBackdrop = event.target === modal.value && !modal.value.querySelector(':hover')
+  if (isBackdrop) closeModal()
 }
 
 watch(() => props.open, (value) => {

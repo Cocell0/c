@@ -1,7 +1,6 @@
 import 'virtual:uno.css'
 import 'core/src/font.css'
-import 'core/src/base.css'
-import 'core/src/component.css'
+import 'c-style'
 import './assets/main.scss'
 import 'core/src/paramount.css'
 

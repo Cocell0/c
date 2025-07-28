@@ -56,7 +56,7 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   background-color: var(--surface);
-  border-radius: var(--space-M);
+  border-radius: var(--spacing-D);
   min-width: 256px;
   min-height: 256px;
   width: 256px;
@@ -75,17 +75,17 @@ onUnmounted(() => {
     bottom: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(50%);
-    padding: var(--space-SX) var(--space-B);
+    padding: var(--spacing-A) var(--spacing-C);
     margin: 0;
     background: light-dark(hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),
         hsl(var(--base-hue), var(--base-saturation), 14%, 0.6));
     backdrop-filter: blur(var(--blur-S));
-    border-radius: var(--space-B);
+    border-radius: var(--spacing-C);
     text-align: center;
   }
 
   &.generated .badge {
-    bottom: var(--space-B);
+    bottom: var(--spacing-C);
     transform: translateX(-50%) translateY(0);
   }
 

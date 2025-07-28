@@ -3,22 +3,22 @@ body {
 }
 
 #app {
-  padding-bottom: calc(var(--base-space) * 10);
+  padding-bottom: calc(var(--spacing-base) * 10);
   height: 100%;
   width: 100%;
 }
 
 .dark-mode-button {
-  margin: calc(var(--base-space) * 10) auto;
+  margin: calc(var(--spacing-base) * 10) auto;
   display: flex;
 }
 
 .app-inset-wrapper {
   text-align: center;
-  padding-inline: calc(var(--base-space) * 10);
+  padding-inline: calc(var(--spacing-base) * 10);
   display: flex;
   flex-direction: column;
-  gap: var(--space-M);
+  gap: var(--spacing-D);
   justify-content: center;
   max-width: 768px;
   width: 100%;
@@ -33,9 +33,9 @@ body {
   width: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-S);
-  padding: calc(var(--base-space) * 5);
-  border-radius: var(--space-M);
+  gap: var(--spacing-B);
+  padding: calc(var(--spacing-base) * 5);
+  border-radius: var(--spacing-D);
   box-shadow: 0 0 8px
     light-dark(
       hsl(var(--base-hue), var(--base-saturation), 0%, 0.4),
@@ -46,13 +46,13 @@ body {
 
 input {
   width: 100%;
-  padding: var(--space-S);
-  border-radius: var(--space-B) !important;
+  padding: var(--spacing-B);
+  border-radius: var(--spacing-C) !important;
   border: none !important;
 }
 
 p:has(> code) {
-  padding-inline: calc(var(--base-space) * 20);
+  padding-inline: calc(var(--spacing-base) * 20);
 
   code {
     overflow: hidden;
@@ -63,16 +63,16 @@ p:has(> code) {
 }
 
 ul {
-  padding-inline: calc(var(--base-space) * 10);
+  padding-inline: calc(var(--spacing-base) * 10);
 
   li {
     display: flex;
     flex-direction: column;
-    gap: var(--space-S);
-    padding: var(--space-S);
+    gap: var(--spacing-B);
+    padding: var(--spacing-B);
     background: var(--surface-emphasis);
-    margin-bottom: var(--space-S);
-    border-radius: var(--space-B);
+    margin-bottom: var(--spacing-B);
+    border-radius: var(--spacing-C);
     width: 100%;
     display: flex;
     flex-direction: column;

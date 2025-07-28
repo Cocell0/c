@@ -66,7 +66,7 @@ onMounted(() => {
 .modal {
   user-select: inherit;
   border: none;
-  border-radius: var(--space-M);
+  border-radius: var(--spacing-D);
   background-color: var(--surface);
   height: 100%;
   min-height: 140px;
@@ -102,7 +102,7 @@ onMounted(() => {
 
   >* {
     background-color: var(--surface);
-    padding: var(--space-B);
+    padding: var(--spacing-C);
   }
 
   >*:not(:last-child) {
@@ -111,10 +111,10 @@ onMounted(() => {
 
   .head {
     display: flex;
-    padding: var(--space-B);
+    padding: var(--spacing-C);
 
     .title-container {
-      padding-left: calc(var(--space-B) * 2 + var(--min-dimension));
+      padding-left: calc(var(--spacing-C) * 2 + var(--min-dimension));
       flex: 1;
       overflow: hidden;
 
@@ -134,7 +134,7 @@ onMounted(() => {
 
   .action {
     display: flex;
-    gap: var(--space-S);
+    gap: var(--spacing-B);
 
     >* {
       flex: 1;

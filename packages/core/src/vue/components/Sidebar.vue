@@ -66,7 +66,7 @@ onUnmounted(() => window.removeEventListener('resize', () => {
 
   .content {
     width: var(--width-small);
-    padding: var(--space-B);
+    padding: var(--spacing-C);
     overflow-y: auto;
     height: 100%;
     overflow-x: hidden;

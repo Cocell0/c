@@ -1,0 +1,10 @@
+{
+  "name": "c-style",
+  "version": "1.0.0",
+  "exports": {
+    "default": "./src/style.scss"
+  },
+  "license": "AGPL-3.0-only",
+  "author": "Coc̀éll",
+  "type": "module"
+}

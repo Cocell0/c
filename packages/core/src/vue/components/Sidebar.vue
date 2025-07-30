@@ -61,7 +61,7 @@ onUnmounted(() => window.removeEventListener('resize', () => {
   width: 0;
   height: 100%;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--color-surface);
   visibility: hidden;
 
   .content {

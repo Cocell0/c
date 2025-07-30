@@ -7,7 +7,7 @@
         </TransitionGroup>
       </div>
       <div class="prompt-area-wrapper">
-        <div class="prompt-area">
+        <div class="c-surface-emphasis prompt-area">
           <div class="option-container">
             <button class="button--icon" aria-label="Open settings"
               @click="uiStore.isConfigurationOpen = !uiStore.isConfigurationOpen">

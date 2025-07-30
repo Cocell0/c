@@ -1,5 +1,5 @@
 <template>
-  <div class="image-container" :class="{ generated: image }">
+  <div class="image-container c-surface" :class="{ generated: image }">
     <transition name="image">
       <img v-if="image" :src="image" :alt="`${prompt}`" />
     </transition>
@@ -55,7 +55,6 @@ onUnmounted(() => {
 .image-container {
   position: relative;
   overflow: hidden;
-  background-color: var(--surface);
   border-radius: var(--spacing-D);
   min-width: 256px;
   min-height: 256px;
@@ -77,8 +76,8 @@ onUnmounted(() => {
     transform: translateX(-50%) translateY(50%);
     padding: var(--spacing-A) var(--spacing-C);
     margin: 0;
-    background: light-dark(hsl(var(--base-hue), var(--base-saturation), 80%, 0.5),
-        hsl(var(--base-hue), var(--base-saturation), 14%, 0.6));
+    background: light-dark(oklch(80% var(--base-chroma) var(--base-hue) / 0.5),
+        oklch(14% var(--base-chroma) var(--base-hue) / 0.6));
     backdrop-filter: blur(var(--blur-S));
     border-radius: var(--spacing-C);
     text-align: center;

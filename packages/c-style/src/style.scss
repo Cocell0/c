@@ -1,6 +1,14 @@
+@function light-dark-oklch($light-luminance, $dark-luminance) {
+  @return light-dark(
+    oklch($light-luminance var(--base-chroma) var(--base-hue)),
+    oklch($dark-luminance var(--base-chroma) var(--base-hue))
+  );
+}
+
 :root {
   --base-hue: 0;
   --base-saturation: 0%;
+  --base-chroma: 0;
 
   --primary: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 45%),
@@ -87,43 +95,22 @@
     hsl(var(--base-hue), var(--base-saturation), 22%, 0.5)
   );
 
-  --field-surface: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 90%),
-    hsl(var(--base-hue), var(--base-saturation), 14%)
-  );
-  --field-surface-hover: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 76%),
-    hsl(var(--base-hue), var(--base-saturation), 18%)
-  );
-  --field-surface-active: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 72%),
-    hsl(var(--base-hue), var(--base-saturation), 22%)
-  );
-  --field-surface-shadow: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 52%, 0.5),
-    hsl(var(--base-hue), var(--base-saturation), 16%, 0.5)
-  );
-  --field-surface-disabled: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 90%),
-    hsl(var(--base-hue), var(--base-saturation), 10%)
-  );
-  --field-surface-warning: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 80%),
-    hsl(var(--base-hue), var(--base-saturation), 20%)
-  );
-
-  --hover: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 80%),
-    hsl(var(--base-hue), var(--base-saturation), 18%)
-  );
-  --active: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 68%),
-    hsl(var(--base-hue), var(--base-saturation), 24%)
-  );
+  // ---
+  --color-focus-outline: #{light-dark-oklch(60%, 75%)};
+  --color-control-hover: #{light-dark-oklch(90%, 14%)};
+  --color-control-hover: #{light-dark-oklch(80%, 32%)};
+  --color-control-active: #{light-dark-oklch(74%, 36%)};
+  --color-control-disabled: #{light-dark-oklch(90%, 30%)};
+  --color-text: #{light-dark-oklch(28%, 90%)};
+  --color-background: #{light-dark-oklch(100%, 20%)};
+  --color-selection-background: #{light-dark-oklch(25%, 85%)};
+  --color-selection-text: #{light-dark-oklch(100%, 16%)};
+  --color-surface: #{light-dark-oklch(95%, 18%)};
+  --color-surface-emphasis: #{light-dark-oklch(92%, 26%)};
 
   // ---
 
-  --font:
+  --font-body:
     "Work Sans", Roboto, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
@@ -178,9 +165,9 @@
 :root {
   user-select: none;
   color-scheme: light dark;
-  font-family: var(--font);
+  font-family: var(--font-body);
   font-size: 1.125rem;
-  color: var(--text);
+  color: var(--color-text);
   interpolate-size: allow-keywords;
   letter-spacing: 0;
   word-spacing: 0;
@@ -199,7 +186,7 @@
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
-  } 
+  }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -239,7 +226,7 @@ body {
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--color-background);
 }
 
 *,
@@ -251,8 +238,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--selection-background);
-  color: var(--selection-text);
+  background-color: var(--color-selection-background);
+  color: var(--color-selection-text);
 }
 
 h1,
@@ -340,7 +327,7 @@ textarea {
 input,
 textarea,
 select {
-  background-color: var(--field-surface);
+  background-color: var(--color-control-surface);
   border-radius: 0;
   outline: none;
 }
@@ -387,7 +374,7 @@ blockquote {
 code {
   font-family: "Roboto Mono", monospace;
   font-size: 0.875rem;
-  background-color: var(--field-surface);
+  background-color: var(--color-control-surface);
   padding: 0.2rem 0.4rem;
   border-radius: var(--spacing-B);
 }
@@ -472,16 +459,16 @@ span[class^="i-"] {
 }
 
 .perchance-error-content-wrapper {
-  font-family: var(--font) !important;
-  color: var(--text) !important;
-  background-color: var(--surface) !important;
+  font-family: var(--font-body) !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-surface) !important;
   border-radius: var(--spacing-D) !important;
   overflow: hidden !important;
 }
 
 .perchance-error-content-wrapper p {
-  background-color: var(--field-surface) !important;
-  color: var(--text) !important;
+  background-color: var(--color-control-surface) !important;
+  color: var(--color-text) !important;
 }
 
 .perchance-error-content-wrapper button {
@@ -702,7 +689,7 @@ button:focus-visible,
 select:focus-visible,
 select option:focus-visible,
 input:focus-visible {
-  outline: solid var(--outline);
+  outline: solid var(--color-focus-outline);
   animation: var(--outline-animation);
 }
 
@@ -739,7 +726,7 @@ input:focus-visible {
   button:hover:not(:disabled),
   .button:hover:not(:disabled),
   .button--hover:not(:disabled) {
-    background-color: var(--hover);
+    background-color: var(--color-control-hover);
   }
 
   .button--primary:hover:not(:disabled) {
@@ -749,11 +736,11 @@ input:focus-visible {
 
 button:active:not(:disabled),
 .button:active:not(:disabled) {
-  background-color: var(--active);
+  background-color: var(--color-control-active);
 }
 
 .button--active:not(:disabled) {
-  background-color: var(--active);
+  background-color: var(--color-control-active);
 }
 
 .button--primary:active:not(:disabled) {
@@ -787,7 +774,7 @@ input,
 input[type="range"] {
   caret-color: var(--primary);
   outline-color: var(--primary);
-  background-color: var(--field-surface);
+  background-color: var(--color-control-surface);
   border-radius: var(--spacing-full);
 }
 
@@ -846,7 +833,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 select {
-  background-color: var(--field-surface);
+  background-color: var(--color-control-surface);
   border: none;
   padding: 0.5rem;
   cursor: pointer;
@@ -863,11 +850,10 @@ select,
 
 ::picker(select) {
   margin-block: var(--spacing-B);
-  background-color: var(--field-surface);
+  background-color: var(--color-control-surface);
   border-radius: var(--spacing-C);
   padding: var(--spacing-B);
   cursor: default;
-  box-shadow: 0 0 8px var(--field-surface-shadow);
   scrollbar-color: var(--primary);
   scrollbar-width: none;
 }
@@ -881,7 +867,7 @@ select option {
   border: none;
   padding: var(--spacing-B);
   border-radius: var(--spacing-B);
-  /* background-color: var(--surface); */
+  /* background-color: var(--color-surface); */
   cursor: pointer;
   min-width: var(--min-dimension, 44px);
   min-height: var(--min-dimension, 44px);
@@ -896,7 +882,7 @@ select option:not(:last-child) {
 }
 
 select::picker-icon {
-  color: var(--text);
+  color: var(--color-text);
   transition: rotate 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -913,10 +899,10 @@ select option:hover:not(:disabled) {
 @media (hover: hover) {
   input:hover:not(:disabled),
   select:hover:not(:disabled) {
-    background-color: var(--field-surface-hover);
+    background-color: var(--color-control-hover);
   }
   select option:hover:not(:disabled) {
-    background-color: var(--hover);
+    background-color: var(--color-control-hover);
   }
 }
 
@@ -936,27 +922,33 @@ input:not([type]):focus {
 }
 
 select:active:not(:disabled) {
-  background-color: var(--field-surface-active);
+  background-color: var(--color-control-active);
 }
 
 select option:active:not(:disabled) {
-  background-color: var(--active);
+  background-color: var(--color-control-active);
 }
 
 select option:checked:not(:disabled) {
-  background-color: var(--active);
+  background-color: var(--color-control-active);
 }
 
 select:disabled {
-  background-color: var(--field-surface-disabled);
+  background-color: var(--color-control-disabled);
   color: var(--text-disabled);
 }
 
 input:disabled {
-  background-color: var(--field-surface-disabled);
+  background-color: var(--color-control-disabled);
   color: var(--text-disabled);
 }
 input:disabled::placeholder,
 select:disabled::picker-icon {
   color: var(--text-disabled);
+}
+
+// C̀ components
+
+.c-surface-emphasis {
+  background-color: var(--color-surface-emphasis);
 }

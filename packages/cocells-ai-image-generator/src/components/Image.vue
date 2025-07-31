@@ -76,8 +76,8 @@ onUnmounted(() => {
     transform: translateX(-50%) translateY(50%);
     padding: var(--spacing-A) var(--spacing-C);
     margin: 0;
-    background: light-dark(oklch(80% var(--base-chroma) var(--base-hue) / 0.5),
-        oklch(14% var(--base-chroma) var(--base-hue) / 0.6));
+    background: light-dark(oklch(84% var(--base-chroma) var(--base-hue) / 0.5),
+        oklch(22% var(--base-chroma) var(--base-hue) / 0.6));
     backdrop-filter: blur(var(--blur-S));
     border-radius: var(--spacing-C);
     text-align: center;

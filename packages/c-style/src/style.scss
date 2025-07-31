@@ -1,14 +1,53 @@
-@function light-dark-oklch($light-luminance, $dark-luminance) {
-  @return light-dark(
-    oklch($light-luminance var(--base-chroma) var(--base-hue)),
-    oklch($dark-luminance var(--base-chroma) var(--base-hue))
-  );
+@use "sass:meta";
+
+@function light-dark-oklch($argument-1, $argument-2: null, $alpha: null) {
+  @if meta.type-of($argument-1) == "map" {
+    $light: map-get($argument-1, light);
+    $dark: map-get($argument-1, dark);
+
+    $light-l: map-get($light, l);
+    $light-c: if(
+      map-has-key($light, c),
+      map-get($light, c),
+      var(--base-chroma)
+    );
+    $light-h: if(map-has-key($light, h), map-get($light, h), var(--base-hue));
+    $light-a: if(
+      $alpha != null,
+      $alpha,
+      if(map-has-key($light, a), map-get($light, a), 1)
+    );
+
+    $dark-l: map-get($dark, l);
+    $dark-c: if(map-has-key($dark, c), map-get($dark, c), var(--base-chroma));
+    $dark-h: if(map-has-key($dark, h), map-get($dark, h), var(--base-hue));
+    $dark-a: if(
+      $alpha != null,
+      $alpha,
+      if(map-has-key($dark, a), map-get($dark, a), 1)
+    );
+
+    $light-color: oklch($light-l $light-c $light-h / $light-a);
+    $dark-color: oklch($dark-l $dark-c $dark-h / $dark-a);
+
+    @return light-dark($light-color, $dark-color);
+  } @else if $argument-2 != null {
+    $light-color: oklch(
+      $argument-1 var(--base-chroma) var(--base-hue) / if($alpha != null, $alpha, 1)
+    );
+    $dark-color: oklch(
+      $argument-2 var(--base-chroma) var(--base-hue) / if($alpha != null, $alpha, 1)
+    );
+    @return light-dark($light-color, $dark-color);
+  } @else {
+    @error "Invalid arguments for light-dark-oklch";
+  }
 }
 
 :root {
-  --base-hue: 0;
+  --base-hue: 36;
   --base-saturation: 0%;
-  --base-chroma: 0;
+  --base-chroma: 0.02;
 
   --primary: light-dark(
     hsl(var(--base-hue), var(--base-saturation), 45%),
@@ -85,27 +124,28 @@
     hsl(var(--base-hue), var(--base-saturation), 28%)
   );
 
-  --divider: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 54%),
-    hsl(var(--base-hue), var(--base-saturation), 36%)
-  );
-
-  --divider-opaque: light-dark(
-    hsl(var(--base-hue), var(--base-saturation), 68%, 0.5),
-    hsl(var(--base-hue), var(--base-saturation), 22%, 0.5)
-  );
-
   // ---
+  --color-background: #{light-dark-oklch(100%, 20%)};
+  --color-text: #{light-dark-oklch(28%, 90%)};
+
   --color-focus-outline: #{light-dark-oklch(60%, 75%)};
+
   --color-control-hover: #{light-dark-oklch(90%, 14%)};
   --color-control-hover: #{light-dark-oklch(80%, 32%)};
   --color-control-active: #{light-dark-oklch(74%, 36%)};
   --color-control-disabled: #{light-dark-oklch(90%, 30%)};
-  --color-text: #{light-dark-oklch(28%, 90%)};
-  --color-background: #{light-dark-oklch(100%, 20%)};
+
+  --color-scrollbar-surface: #{light-dark-oklch(80%, 28%)};
+  --color-scrollbar-surface-hover: #{light-dark-oklch(64%, 34%)};
+  --color-scrollbar-surface-active: #{light-dark-oklch(60%, 36%)};
+
   --color-selection-background: #{light-dark-oklch(25%, 85%)};
   --color-selection-text: #{light-dark-oklch(100%, 16%)};
-  --color-surface: #{light-dark-oklch(95%, 18%)};
+
+  --color-border-divider: #{light-dark-oklch(64%, 36%)};
+  --color-border-divider-opaque: #{light-dark-oklch(64%, 34%, 0.5)};
+
+  --color-surface: #{light-dark-oklch(95%, 15%)};
   --color-surface-emphasis: #{light-dark-oklch(92%, 26%)};
 
   // ---
@@ -190,19 +230,19 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-surface);
+  background-color: var(--color-scrollbar-surface);
   border-radius: 10px;
   cursor: grab;
 }
 
 @media (hover: hover) {
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-surface-hover);
+    background-color: var(--color-scrollbar-surface-hover);
   }
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: var(--scrollbar-surface-active);
+  background-color: var(--color-scrollbar-surface-active);
   cursor: grabbing;
 }
 
@@ -382,7 +422,7 @@ code {
 hr {
   width: 100%;
   border: 0;
-  border-top: 2px solid var(--divider);
+  border-top: 2px solid var(--color-border-divider);
 }
 
 fieldset {
@@ -949,6 +989,9 @@ select:disabled::picker-icon {
 
 // C̀ components
 
+.c-surface {
+  background-color: var(--color-surface);
+}
 .c-surface-emphasis {
   background-color: var(--color-surface-emphasis);
 }

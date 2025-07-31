@@ -106,7 +106,7 @@ onMounted(() => {
   }
 
   >*:not(:last-child) {
-    border-bottom: 1px solid var(--divider);
+    border-bottom: 1px solid var(--color-border-divider-opaque);
   }
 
   .head {

@@ -442,11 +442,11 @@ span[class^="i-"] {
     transition-behavior: allow-discrete;
 
     &[open] {
+      animation: fade-in 0.2s forwards;
+
       @starting-style {
         opacity: 0;
       }
-
-      animation: fade-in 0.2s forwards;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>View for generated images</p>
-    <AnchorLink href="/images/create" class="button">Create new images</AnchorLink>
+    <AnchorLink href="/images/create">Create new images</AnchorLink>
   </div>
 </template>
 

@@ -128,14 +128,14 @@
 
   // ---
 
-  --base-blur: 0.2rem;
-  --blur-S: var(--base-blur);
-  --blur-B: calc(var(--base-blur) * 2);
-  --blur-M: calc(var(--base-blur) * 4);
+  --blur-base: 0.2rem;
+  --blur-A: var(--blur-base);
+  --blur-B: calc(var(--blur-base) * 2);
+  --blur-C: calc(var(--blur-base) * 4);
 }
 
 :root[data-config-disable-blur] {
-  --base-blur: 0;
+  --blur-base: 0;
 }
 
 :root {

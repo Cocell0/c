@@ -97,7 +97,7 @@ onMounted(() => {
 
   &::backdrop {
     background-color: hsl(0 0% 0% / 70%);
-    backdrop-filter: blur(var(--blur-S));
+    backdrop-filter: blur(var(--blur-A));
   }
 
   >* {

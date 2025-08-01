@@ -79,7 +79,7 @@
   --color-selection-background: #{light-dark-oklch(25%, 85%)};
   --color-selection-text: #{light-dark-oklch(100%, 16%)};
 
-  --color-border-divider: #{light-dark-oklch(64%, 36%)};
+  --color-border-divider: #{light-dark-oklch(54%, 68%)};
   --color-border-divider-opaque: #{light-dark-oklch(64%, 34%, 0.5)};
 
   --color-surface: #{light-dark-oklch(95%, 15%)};
@@ -124,8 +124,7 @@
   --width-medium: 640px;
 
   --shadow-subtle: 0 0 20px hsl(0, 0%, 0%, 0.07);
-  --cb-soft: cubic-bezier(0.2, 0.9, 0.65, 0.65);
-  --cb-fast: cubic-bezier(0.2, 0, 0, 1);
+  --cb-smooth: cubic-bezier(0.5, 0.5, 0, 1);
 
   // ---
 
@@ -330,6 +329,7 @@ input:disabled,
 select:disabled,
 .button:disabled {
   cursor: default;
+  color: var(--color-text-disabled);
 }
 
 table {
@@ -410,11 +410,11 @@ c-accordian .head {
 }
 
 .fade-close {
-  animation: fade-close var(--seconds-S) var(--cb-soft) forwards;
+  animation: fade-close var(--seconds-S) var(--cb-smooth) forwards;
 }
 
 .fade-open {
-  animation: fade-open var(--seconds-S) var(--cb-soft) forwards;
+  animation: fade-open var(--seconds-S) var(--cb-smooth) forwards;
 }
 
 span[class^="i-"] {
@@ -432,6 +432,23 @@ span[class^="i-"] {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog {
+    position: fixed !important;
+    opacity: 0;
+    animation: fade-out 0.2s forwards;
+    transition-behavior: allow-discrete;
+
+    &[open] {
+      @starting-style {
+        opacity: 0;
+      }
+
+      animation: fade-in 0.2s forwards;
+    }
+  }
 }
 
 :root:not(.dev-mode) #perchance-error-indicator {
@@ -600,7 +617,7 @@ span[class^="i-"] {
       font-feature-settings, font-variation-settings, filter, backdrop-filter,
       box-shadow, opacity !important;
     transition-duration: 0.2s !important;
-    transition-timing-function: cubic-bezier(0.5, 0.5, 0, 1) !important;
+    transition-timing-function: var(--cb-smooth) !important;
   }
 }
 
@@ -713,7 +730,6 @@ button,
 .button:disabled {
   background-color: transparent;
   box-shadow: none;
-  color: var(--text-disabled, inherit);
 }
 
 input {

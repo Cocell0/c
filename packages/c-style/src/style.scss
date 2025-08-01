@@ -62,7 +62,7 @@
   --color-background: #{light-dark-oklch(100%, 20%)};
   --color-text: #{light-dark-oklch(28%, 90%)};
   --color-text-link: #{light-dark-oklch(28%, 90%)};
-  --color-text-disable: #{light-dark-oklch(28%, 90%, 0.5)};
+  --color-text-disabled: #{light-dark-oklch(28%, 90%, 0.5)};
   --color-text-placeholder: #{light-dark-oklch(28%, 90%, 0.5)};
 
   --color-focus-outline: #{light-dark-oklch(60%, 75%)};
@@ -842,16 +842,16 @@ select option:checked:not(:disabled) {
 
 select:disabled {
   background-color: var(--color-control-disable);
-  color: var(--color-text-disable);
+  color: var(--color-text-disabled);
 }
 
 input:disabled {
   background-color: var(--color-control-disable);
-  color: var(--color-text-disable);
+  color: var(--color-text-disabled);
 }
 input:disabled::placeholder,
 select:disabled::picker-icon {
-  color: var(--color-text-disable);
+  color: var(--color-text-disabled);
 }
 
 // C̀ components

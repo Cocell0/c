@@ -23,7 +23,7 @@
           <div class="option-container">
             <button class="button--icon" aria-label="Create image" @click="createImage"
               :disabled="prompt.trim() === ''">
-              <span class="i-material-symbols-add-rounded"></span>
+              <span class="i-material-symbols-arrow-upward-rounded"></span>
             </button>
           </div>
         </div>

@@ -664,16 +664,20 @@ select {
 
 button,
 .button {
+  --rounding: calc(var(--spacing-base) * 4.5);
+  --l-hover-light: 80%;
+  --l-hover-dark: 32%;
+  --l-active-light: 74%;
+  --l-active-dark: 36%;
   color: var(--button-text, inherit);
   display: inline-flex;
   min-width: var(--min-dimension, 44px);
   min-height: var(--min-dimension, 44px);
-  border-radius: var(--spacing-C);
+  border-radius: var(--rounding);
   justify-content: center;
   position: relative;
   align-items: center;
   cursor: pointer;
-  transition: box-shadow 0.34s ease-in-out;
   padding: 0.4rem 0.8rem;
   gap: 8px;
   outline: none;
@@ -709,21 +713,19 @@ input:focus-visible {
   button:hover:not(:disabled),
   .button:hover:not(:disabled),
   .button--hover:not(:disabled) {
-    background-color: var(--color-control-hover);
-  }
-
-  .button--primary:hover:not(:disabled) {
-    background-color: var(--primary-hover);
+    background-color: #{light-dark-oklch(
+        var(--l-hover-light),
+        var(--l-hover-dark)
+      )};
   }
 }
 
 button:active:not(:disabled),
 .button:active:not(:disabled) {
-  background-color: var(--color-control-active);
-}
-
-.button--active:not(:disabled) {
-  background-color: var(--color-control-active);
+  background-color: #{light-dark-oklch(
+      var(--l-active-light),
+      var(--l-active-dark)
+    )};
 }
 
 button,

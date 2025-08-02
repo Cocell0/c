@@ -68,7 +68,7 @@ onMounted(() => {
   user-select: inherit;
   border: none;
   border-radius: var(--rounding);
-  background-color: var(--color-surface);
+  background-color: var(--color-background);
   height: 100%;
   min-height: 140px;
   max-height: 80vh;
@@ -103,7 +103,7 @@ onMounted(() => {
   }
 
   >* {
-    background-color: var(--color-surface);
+    background-color: var(--color-background);
     padding: var(--spacing-C);
   }
 

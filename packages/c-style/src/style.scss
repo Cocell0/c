@@ -57,7 +57,7 @@
 :root {
   --base-hue: 36;
   --base-saturation: 0%;
-  --base-chroma: 0.02;
+  --base-chroma: 0.01;
 
   --color-background: #{light-dark-oklch(100%, 20%)};
   --color-text: #{light-dark-oklch(28%, 90%)};

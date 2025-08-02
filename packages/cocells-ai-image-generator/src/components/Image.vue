@@ -55,7 +55,7 @@ onUnmounted(() => {
 .image-container {
   position: relative;
   overflow: hidden;
-  border-radius: var(--spacing-D);
+  border-radius: calc(var(--spacing-D) * 2);
   min-width: 256px;
   min-height: 256px;
   width: 256px;

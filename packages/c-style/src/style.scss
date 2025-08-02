@@ -682,15 +682,15 @@ button,
   gap: 8px;
   outline: none;
   text-decoration: none;
-}
 
-button::before,
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* This is to ensure buttons are clickable at the edges even
+    if their corners are hidden due to the border-radius */
+  }
 }
-
 button:focus-visible,
 .button:focus-visible,
 select:focus-visible,
@@ -698,7 +698,6 @@ select option:focus-visible,
 input:focus-visible {
   @include outline-animation();
 }
-
 .button--icon {
   padding: 0;
   min-width: var(--min-dimension, 44px);
@@ -731,7 +730,6 @@ button:active:not(:disabled),
 button,
 .button:disabled {
   background-color: transparent;
-  box-shadow: none;
 }
 
 input {

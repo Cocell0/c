@@ -64,9 +64,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .modal {
+  --rounding: calc(var(--spacing-base) * 6.5);
   user-select: inherit;
   border: none;
-  border-radius: var(--spacing-D);
+  border-radius: var(--rounding);
   background-color: var(--color-surface);
   height: 100%;
   min-height: 140px;
@@ -83,6 +84,7 @@ onMounted(() => {
   transform: translateX(-50%) translateY(-50%) scale(1);
   flex-direction: column;
   opacity: 1;
+  outline: none;
 
   @media (max-width: 768px) {
     & {

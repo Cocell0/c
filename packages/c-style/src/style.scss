@@ -275,6 +275,10 @@ small {
   /* A value to account for Perchance's UI's toolbar */
 }
 
+:is(button, .button, select, option, input):focus-visible {
+  @include outline-animation();
+}
+
 button:not([disabled]),
 .button:not([disabled]),
 input:not([disabled]),
@@ -318,10 +322,6 @@ a {
 a {
   color: var(--color-text-link);
   border-radius: var(--spacing-C);
-}
-
-a:focus-visible {
-  @include outline-animation();
 }
 
 button:disabled,
@@ -690,14 +690,14 @@ button,
     /* This is to ensure buttons are clickable at the edges even
     if their corners are hidden due to the border-radius */
   }
+
+  &.button--suggested-action {
+    --hue: 286;
+    --chroma: 0.01;
+    background-color: light-dark-oklch(88%, 32%);
+  }
 }
-button:focus-visible,
-.button:focus-visible,
-select:focus-visible,
-select option:focus-visible,
-input:focus-visible {
-  @include outline-animation();
-}
+
 .button--icon {
   padding: 0;
   min-width: var(--min-dimension, 44px);
@@ -710,8 +710,7 @@ input:focus-visible {
 
 @media (hover: hover) {
   button:hover:not(:disabled),
-  .button:hover:not(:disabled),
-  .button--hover:not(:disabled) {
+  .button:hover:not(:disabled) {
     background-color: #{light-dark-oklch(
         var(--l-hover-light),
         var(--l-hover-dark)

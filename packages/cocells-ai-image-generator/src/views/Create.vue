@@ -21,7 +21,7 @@
               placeholder="Describe your image..."></textarea>
           </div>
           <div class="option-container">
-            <button class="button--icon" aria-label="Create image" @click="createImage"
+            <button class="button--icon button--suggested-action" aria-label="Create image" @click="createImage"
               :disabled="prompt.trim() === ''">
               <span class="i-material-symbols-arrow-upward-rounded"></span>
             </button>

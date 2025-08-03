@@ -62,7 +62,7 @@ onUnmounted(() => {
   height: auto;
 
   img {
-    width: 100%;
+    width: 256px;
     height: auto;
     object-fit: cover;
   }

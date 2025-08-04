@@ -64,7 +64,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .modal {
-  --rounding: calc(var(--spacing-base) * 6.5);
+  --rounding: calc(var(--base__spacing) * 6.5);
   user-select: inherit;
   border: none;
   border-radius: var(--rounding);

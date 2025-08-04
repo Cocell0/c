@@ -9,9 +9,9 @@
     $light-c: if(
       map-has-key($light, c),
       map-get($light, c),
-      var(--base-chroma)
+      var(--base__chroma)
     );
-    $light-h: if(map-has-key($light, h), map-get($light, h), var(--base-hue));
+    $light-h: if(map-has-key($light, h), map-get($light, h), var(--base__hue));
     $light-a: if(
       $alpha != null,
       $alpha,
@@ -19,8 +19,8 @@
     );
 
     $dark-l: map-get($dark, l);
-    $dark-c: if(map-has-key($dark, c), map-get($dark, c), var(--base-chroma));
-    $dark-h: if(map-has-key($dark, h), map-get($dark, h), var(--base-hue));
+    $dark-c: if(map-has-key($dark, c), map-get($dark, c), var(--base__chroma));
+    $dark-h: if(map-has-key($dark, h), map-get($dark, h), var(--base__hue));
     $dark-a: if(
       $alpha != null,
       $alpha,
@@ -34,14 +34,14 @@
   } @else if $argument-2 != null {
     $light-color: oklch(
       $argument-1
-        var(--base-chroma)
-        var(--base-hue) /
+        var(--base__chroma)
+        var(--base__hue) /
         if($alpha != null, $alpha, 1)
     );
     $dark-color: oklch(
       $argument-2
-        var(--base-chroma)
-        var(--base-hue) /
+        var(--base__chroma)
+        var(--base__hue) /
         if($alpha != null, $alpha, 1)
     );
     @return light-dark($light-color, $dark-color);
@@ -55,15 +55,19 @@
 }
 
 :root {
-  --base-hue: 36;
-  --base-saturation: 0%;
-  --base-chroma: 0.01;
+  // Variables follow CEM naming: Category__Element--Modifier
+  // BEM-inspired convention for C̀-style
+
+  --base__hue: 36;
+  --base__saturation: 0%;
+  --base__chroma: 0.01;
+  --base__spacing: 0.2rem;
 
   --color__background: #{light-dark-oklch(100%, 20%)};
   --color__text: #{light-dark-oklch(28%, 90%)};
   --color__text-link: light-dark(
-    oklch(28% 0.15 var(--base-hue)),
-    oklch(90% 0.15 var(--base-hue))
+    oklch(28% 0.15 var(--base__hue)),
+    oklch(90% 0.15 var(--base__hue))
   );
   --color__text-disabled: #{light-dark-oklch(28%, 90%, 0.5)};
   --color__text-placeholder: #{light-dark-oklch(28%, 90%, 0.5)};
@@ -105,13 +109,11 @@
   --z-popup: 5000;
   --z-highest: 99999;
 
-  --spacing-base: 0.2rem;
-
-  --spacing-A: calc(var(--spacing-base) * 1.2);
-  --spacing-B: calc(var(--spacing-base) * 1.6);
-  --spacing-C: calc(var(--spacing-base) * 3.2);
-  --spacing-D: calc(var(--spacing-base) * 3.8);
-  --spacing-E: calc(var(--spacing-base) * 14);
+  --spacing-A: calc(var(--base__spacing) * 1.2);
+  --spacing-B: calc(var(--base__spacing) * 1.6);
+  --spacing-C: calc(var(--base__spacing) * 3.2);
+  --spacing-D: calc(var(--base__spacing) * 3.8);
+  --spacing-E: calc(var(--base__spacing) * 14);
 
   --spacing-full: 999999px;
 
@@ -668,9 +670,9 @@ select {
 
 button,
 .button {
-  --rounding: calc(var(--spacing-base) * 4.5);
-  --hue: var(--base-hue);
-  --chroma: var(--base-chroma);
+  --rounding: calc(var(--base__spacing) * 4.5);
+  --hue: var(--base__hue);
+  --chroma: var(--base__chroma);
   --l__action-suggested--light: 84%;
   --l__action-suggested--dark: 32%;
   --l__hover--light: 76%;

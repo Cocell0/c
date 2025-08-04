@@ -68,7 +68,7 @@ onUnmounted(() => {
   }
 
   .badge {
-    --rounding: calc(calc(var(--spacing-base) * 4.5));
+    --rounding: calc(calc(var(--base__spacing) * 4.5));
     white-space: nowrap;
     position: absolute;
     min-width: 125px;
@@ -77,8 +77,8 @@ onUnmounted(() => {
     transform: translateX(-50%) translateY(50%);
     padding: var(--spacing-A) var(--spacing-C);
     margin: 0;
-    background: light-dark(oklch(84% var(--base-chroma) var(--base-hue) / 0.5),
-        oklch(22% var(--base-chroma) var(--base-hue) / 0.6));
+    background: light-dark(oklch(84% var(--base__chroma) var(--base__hue) / 0.5),
+        oklch(22% var(--base__chroma) var(--base__hue) / 0.6));
     backdrop-filter: blur(var(--blur-A));
     border-radius: var(--rounding);
     text-align: center;

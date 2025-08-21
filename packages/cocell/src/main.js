@@ -2,14 +2,10 @@ import 'virtual:uno.css'
 import 'core/src/font.css'
 import 'c-style'
 import './assets/main.scss'
-
-import { name } from '../package.json';
-import { initialize } from 'core'
-
-initialize(name);
+import 'core/src/paramount.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
-
+const app = createApp(App);
+app.mount('#app')

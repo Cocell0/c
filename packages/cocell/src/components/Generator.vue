@@ -68,12 +68,12 @@ onUnmounted(() => {
   justify-content: start;
   align-items: center;
   text-align: left;
-  padding: var(--spacing-C);
-  border-radius: var(--spacing-C);
+  padding: var(--spacing--C);
+  border-radius: var(--spacing--C);
   background-color: var(--color__surface--emphasis);
 
   img {
-    border-radius: var(--spacing-B);
+    border-radius: var(--spacing--B);
     width: 100%;
     height: auto;
     min-height: 170px;

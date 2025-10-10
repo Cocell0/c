@@ -66,7 +66,7 @@ onUnmounted(() => window.removeEventListener('resize', () => {
 
   .content {
     width: var(--width-small);
-    padding: var(--spacing-C);
+    padding: var(--spacing--C);
     overflow-y: auto;
     height: 100%;
     overflow-x: hidden;
@@ -79,7 +79,7 @@ onUnmounted(() => window.removeEventListener('resize', () => {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: var(--z-overlay);
+    z-index: var(--z__overlay);
   }
 
   .sidebar--right {

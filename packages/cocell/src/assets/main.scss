@@ -15,7 +15,7 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    gap: var(--spacing-D);
+    gap: var(--spacing--D);
 
     @media (max-width: 696px) {
       flex-direction: column;
@@ -43,6 +43,6 @@ body {
   align-items: center;
   background-color: black;
   margin-block: 2rem;
-  border-radius: var(--spacing-C);
+  border-radius: var(--spacing--C);
   overflow: hidden;
 }

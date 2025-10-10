@@ -104,7 +104,7 @@ onMounted(() => {
 
   >* {
     background-color: var(--color__background);
-    padding: var(--spacing-C);
+    padding: var(--spacing--C);
   }
 
   >*:not(:last-child) {
@@ -113,10 +113,10 @@ onMounted(() => {
 
   .head {
     display: flex;
-    padding: var(--spacing-C);
+    padding: var(--spacing--C);
 
     .title-container {
-      padding-left: calc(var(--spacing-C) * 2 + var(--min-dimension));
+      padding-left: calc(var(--spacing--C) * 2 + var(--min-dimension));
       flex: 1;
       overflow: hidden;
 
@@ -136,7 +136,7 @@ onMounted(() => {
 
   .action {
     display: flex;
-    gap: var(--spacing-B);
+    gap: var(--spacing--B);
 
     >* {
       flex: 1;

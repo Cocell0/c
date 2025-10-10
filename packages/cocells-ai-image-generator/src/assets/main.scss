@@ -22,18 +22,18 @@ main {
   display: flex;
   flex-direction: column;
   --option-container-height: calc(
-    var(--spacing-C) + var(--min-dimension) + var(--spacing-C)
+    var(--spacing--C) + var(--min-dimension) + var(--spacing--C)
   );
   overflow-y: auto;
 
   .generated-image-container {
-    padding: var(--spacing-E);
+    padding: var(--spacing--E);
     width: 100%;
     height: 100%;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-C);
+    gap: var(--spacing--C);
     justify-content: center;
     align-items: center;
     flex: 1;
@@ -42,7 +42,7 @@ main {
   .prompt-area-wrapper {
     display: flex;
     justify-content: center;
-    padding: var(--spacing-C);
+    padding: var(--spacing--C);
 
     .prompt-area {
       position: relative;
@@ -81,8 +81,8 @@ main {
       > .option-container {
         display: flex;
         align-items: flex-end;
-        gap: var(--spacing-B);
-        padding: var(--spacing-C);
+        gap: var(--spacing--B);
+        padding: var(--spacing--C);
       }
     }
 

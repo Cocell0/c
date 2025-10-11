@@ -67,7 +67,7 @@ onMounted(() => {
   --rounding: calc(var(--base__spacing) * 6.5);
   user-select: inherit;
   border: none;
-  border-radius: var(--rounding);
+  border-radius: calc(var(--base__rounding) * 1.66);
   background-color: var(--color__background);
   height: 100%;
   min-height: 140px;

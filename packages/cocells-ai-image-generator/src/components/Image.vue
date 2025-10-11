@@ -56,6 +56,7 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   border-radius: calc(var(--spacing--D) * 2);
+  border: 1px solid hsl(0, 0%, 0%, 0.05);
   min-width: 256px;
   min-height: 256px;
   width: 256px;

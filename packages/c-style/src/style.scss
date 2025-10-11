@@ -60,9 +60,8 @@
 
   --base__hue: 36;
   --base__chroma: 0.018;
-  --base__spacing: 0.2rem;
 
-  --color__background: #{light-dark-oklch(100%, 20%)};
+  --color__background: #{light-dark-oklch(96%, 20%)};
   --color__text: #{light-dark-oklch(28%, 90%)};
   --color__text-link: light-dark(
     oklch(28% 0.15 var(--base__hue)),
@@ -90,7 +89,7 @@
   --color__border-divider--opaque: #{light-dark-oklch(64%, 34%, 0.5)};
 
   --color__surface: #{light-dark-oklch(95%, 15%)};
-  --color__surface--emphasis: #{light-dark-oklch(92%, 26%)};
+  --color__surface--emphasis: #{light-dark-oklch(88%, 26%)};
 
   // ---
 
@@ -109,6 +108,7 @@
   --z__popup: 5000;
   --z__highest: 99999;
 
+  --base__spacing: 0.2rem;
   --spacing--A: calc(var(--base__spacing) * 1.2);
   --spacing--B: calc(var(--base__spacing) * 1.6);
   --spacing--C: calc(var(--base__spacing) * 3.2);

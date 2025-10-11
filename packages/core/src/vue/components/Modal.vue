@@ -64,7 +64,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .modal {
-  --rounding: calc(var(--base__spacing) * 6.5);
   user-select: inherit;
   border: none;
   border-radius: calc(var(--base__rounding) * 1.66);
@@ -108,7 +107,7 @@ onMounted(() => {
   }
 
   >*:not(:last-child) {
-    border-bottom: 1px solid var(--color__border-divider);
+    border-bottom: 1px solid light-dark(oklch(54% var(--base__chroma) var(--base__hue)/0.3), oklch(68% var(--base__chroma) var(--base__hue)/0.3));
   }
 
   .head {

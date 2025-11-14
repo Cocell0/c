@@ -8,13 +8,15 @@
 console.clear()
 
 const appName = null;
-window.plugins = {}
-$plugins.$allKeys.forEach(key => {
-  window.plugins[key] = $plugins[key]
-})
+window.plugins = {};
+if (typeof $plugins !== 'undefined') {
+  $plugins.$allKeys.forEach(key => {
+    window.plugins[key] = $plugins[key];
+  });
+}
 
 /**
- * When running on Perchance, it removes the `__generatorLastEditTime` and `__initWithDataFromParentWindow` parameters
+ * When running on Perchance, it removes the `__generatorLastEditTime` and `__initWithDataFromParentWindow` URL parameters
  */
 if (window.location.href.includes('perchance.org/')) {
   const url = new URL(window.location.href);

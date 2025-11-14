@@ -5,7 +5,10 @@
         <h3>{{ props.title }}</h3>
       </div>
       <div class="close-button-container">
-        <button @click="closeModal" :aria-label="`Close ${props.title}`" class="button--icon">
+        <button
+          @click="closeModal"
+          :aria-label="`Close ${props.title}`"
+          class="button--icon">
           <span class="i-material-symbols-close"></span>
         </button>
       </div>
@@ -20,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted } from "vue";
 
 const props = defineProps({
   open: {
@@ -30,36 +33,40 @@ const props = defineProps({
   title: {
     type: String,
     required: true,
-  }
-})
-const emit = defineEmits(['update:open'])
+  },
+});
+const emit = defineEmits(["update:open"]);
 
-const modal = ref(null)
+const modal = ref(null);
 
 function openModal() {
-  if (!modal.value.open) modal.value.showModal()
+  if (!modal.value.open) modal.value.showModal();
 }
 
 function closeModal() {
-  if (modal.value.open) modal.value.close()
-  emit('update:open', false)
+  if (modal.value.open) modal.value.close();
+  emit("update:open", false);
 }
 
 function closeOnBackdrop(event) {
-  const isBackdrop = event.target === modal.value && !modal.value.querySelector(':hover')
-  if (isBackdrop) closeModal()
+  const isBackdrop =
+    event.target === modal.value && !modal.value.querySelector(":hover");
+  if (isBackdrop) closeModal();
 }
 
-watch(() => props.open, (value) => {
-  if (value) openModal()
-  else closeModal()
-})
+watch(
+  () => props.open,
+  (value) => {
+    if (value) openModal();
+    else closeModal();
+  }
+);
 
 onMounted(() => {
-  modal.value.addEventListener('close', () => {
-    emit('update:open', false)
-  })
-})
+  modal.value.addEventListener("close", () => {
+    emit("update:open", false);
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -101,13 +108,17 @@ onMounted(() => {
     backdrop-filter: blur(var(--blur-A));
   }
 
-  >* {
+  > * {
     background-color: var(--color__background);
     padding: var(--spacing--C);
   }
 
-  >*:not(:last-child) {
-    border-bottom: 1px solid light-dark(oklch(54% var(--base__chroma) var(--base__hue)/0.3), oklch(68% var(--base__chroma) var(--base__hue)/0.3));
+  > *:not(:last-child) {
+    border-bottom: 1px solid
+      light-dark(
+        oklch(54% var(--base__chroma) var(--base__hue) / 0.3),
+        oklch(68% var(--base__chroma) var(--base__hue) / 0.3)
+      );
   }
 
   .head {
@@ -137,7 +148,7 @@ onMounted(() => {
     display: flex;
     gap: var(--spacing--B);
 
-    >* {
+    > * {
       flex: 1;
     }
   }

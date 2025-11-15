@@ -8,7 +8,7 @@ This repository is a monolithic workspace designed to contain multiple projects.
 To build a project:
 
 ```bash
-npx vite build
+npm run build
 ```
 
 The build outputs a single HTML file with all scripts and styles inlined.
@@ -18,5 +18,4 @@ The final result is a self-contained HTML file, using [Vite's Singlefile](https:
 ## Stack
 
 - **Vue**
-- **UnoCSS** with **Wind4**, and **Icons** preset
 - **Vite**

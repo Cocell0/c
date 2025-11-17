@@ -9,9 +9,14 @@ const routes = [
     component: Home,
   },
   {
-    name: 'Chat',
     path: '/c',
-    component: Chat,
+    name: 'chat-empty',
+    component: Chat
+  },
+  {
+    path: '/c/:id',
+    name: 'chat',
+    component: Chat
   },
 ]
 

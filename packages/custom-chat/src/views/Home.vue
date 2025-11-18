@@ -1,10 +1,14 @@
 <template>
-  <h2>Home</h2>
-  <p>
-    Go to <AnchorLink href="/c">Chat</AnchorLink>
-    <br>
-    Or go <AnchorLink href="/">Home</AnchorLink>
-  </p>
+  <div style="
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ">
+    <h2>Home</h2>
+    <AnchorLink href="/c" class="button">Chat</AnchorLink>
+  </div>
 </template>
 
 <script setup>

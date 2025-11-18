@@ -1,3 +1,4 @@
+import 'virtual:uno.css'
 import 'core/src/font.css'
 import 'c-style'
 import './assets/main.scss'

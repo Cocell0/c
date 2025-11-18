@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@unocss/preset-icons": "^66.3.2",
     "fuse.js": "^7.1.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.17",

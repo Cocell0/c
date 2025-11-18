@@ -1,7 +1,7 @@
 <template>
   <main>
     <section>
-      <h3>Chats</h3>
+      <h3 style="display: flex; align-items: center; gap: var(--spacing--B);"> <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"></span></AnchorLink> Chats</h3>
       <div class="chat-search">
         <input type="text" placeholder="Search chats" v-model="searchQuery" />
       </div>

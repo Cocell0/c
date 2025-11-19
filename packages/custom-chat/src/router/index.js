@@ -7,16 +7,18 @@ const routes = [
     name: 'Home',
     path: '/',
     component: Home,
+    meta: { title: 'Home' },
   },
   {
     path: '/c',
-    name: 'chat-empty',
-    component: Chat
+    name: 'Chat Empty',
+    component: Chat,
+    meta: { title: 'Chat' },
   },
   {
     path: '/c/:id',
-    name: 'chat',
-    component: Chat
+    name: 'Chat',
+    component: Chat,
   },
 ]
 

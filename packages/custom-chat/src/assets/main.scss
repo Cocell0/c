@@ -1,8 +1,21 @@
 #app {
   height: 100%;
+  display: flex;
 }
 
 main {
+  flex: 1;
+
+  section {
+    padding: var(--spacing--C);
+
+    >h3 {
+      margin: 0 0 var(--spacing--C) 0;
+    }
+  }
+}
+
+main.chat-view {
   height: 100%;
   display: flex;
 
@@ -13,17 +26,26 @@ main {
   >*:first-child {
     border-right: 1px solid var(--color__border-divider--opaque);
   }
-  
-  section {
-    padding: var(--spacing--C);
+
+  section.panel {
     max-width: 386px;
 
     .chat-search {
       display: flex;
       padding-bottom: var(--spacing--C);
+      position: relative;
 
-      * {
+      input {
         flex: 1;
+        padding-left: calc(var(--spacing--C) * 4.5);
+      }
+
+      .icon {
+        margin-left: var(--spacing--C);
+        display: flex;
+        flex: none;
+        position: absolute;
+        height: calc(100% - var(--spacing--C));
       }
     }
   }

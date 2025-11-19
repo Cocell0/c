@@ -53,7 +53,7 @@ const filteredChats = computed(() => {
   }
   const fuse = new Fuse(chats.value, {
     keys: ['name'],
-    threshold: 0.3,
+    threshold: 0.5,
   });
   return fuse.search(searchQuery.value).map(result => result.item);
 });

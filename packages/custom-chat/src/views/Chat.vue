@@ -1,16 +1,18 @@
 <template>
-  <main>
-    <section>
-      <h3 style="display: flex; align-items: center; gap: var(--spacing--B);">
-        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"></span>
+  <main class="chat-view">
+    <section class="panel">
+      <h3 style="display: flex; align-items: center; gap: var(--spacing--B); line-height: normal;">
+        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
         </AnchorLink>
-        <span style="flex: auto;">Chats</span>
+        <AnchorLink href="/c"
+          style="flex: auto; text-decoration: none; color: inherit; padding-left: var(--spacing--A);">Chats</AnchorLink>
         <button class="button--icon">
-          <span class="i-material-symbols:add-2-rounded"></span>
+          <span class="i-material-symbols:add-2-rounded" aria-hidden="true" translate="no" inert></span>
         </button>
       </h3>
       <div class="chat-search">
-        <input type="text" placeholder="Search chats" v-model="searchQuery" />
+        <span class="i-material-symbols:search-rounded icon" aria-hidden="true" translate="no" inert></span>
+        <input type="text" placeholder="Search chats" v-model="searchQuery" name="Query" />
       </div>
       <ul class="chat-tabs" role="tablist" @keydown="onTabsKeydown">
         <li v-for="(chat, index) in filteredChats" :key="chat.id" ref="tabAnchors">

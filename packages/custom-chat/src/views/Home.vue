@@ -1,5 +1,5 @@
 <template>
-  <div style="
+  <main style="
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   ">
     <h2>Home</h2>
     <AnchorLink href="/c" class="button">Chat</AnchorLink>
-  </div>
+  </main>
 </template>
 
 <script setup>

@@ -2,7 +2,8 @@
   <main class="chat-view">
     <section class="panel">
       <h3 style="display: flex; align-items: center; gap: var(--spacing--B); line-height: normal;">
-        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
+        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"
+            aria-hidden="true" translate="no" inert></span>
         </AnchorLink>
         <AnchorLink href="/c"
           style="flex: auto; text-decoration: none; color: inherit; padding-left: var(--spacing--A);">Chats</AnchorLink>
@@ -14,8 +15,8 @@
         <span class="i-material-symbols:search-rounded icon" aria-hidden="true" translate="no" inert></span>
         <input type="text" placeholder="Search chats" v-model="searchQuery" name="Query" />
       </div>
-      <ul class="chat-tabs" role="tablist" @keydown="onTabsKeydown">
-        <li v-for="(chat, index) in filteredChats" :key="chat.id" ref="tabAnchors">
+      <ul class="chat-tabs" role="tablist" @keydown="onKeydown">
+        <li v-for="(chat, index) in filteredChats" :key="chat.id" :ref="el => (tabAnchors[index] = el)">
           <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab">
             {{ chat.name }}
           </AnchorLink>
@@ -34,6 +35,7 @@ import { computed, ref, watch, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import { useChatsStore } from '../store/useChatsStore';
 import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
+import useRovingIndex from 'core/src/vue/composables/useRovingIndex.js';
 import Fuse from 'fuse.js'
 
 const route = useRoute();
@@ -58,56 +60,11 @@ const filteredChats = computed(() => {
   return fuse.search(searchQuery.value).map(result => result.item);
 });
 
-// Keyboard navigation for chat tabs; roving tab index
-const tabAnchors = ref([]);
-const focusedIndex = ref(0);
-
-function updateInitialFocus() {
-  const idx = filteredChats.value.findIndex(chat => chat.id === id.value);
-  focusedIndex.value = idx >= 0 ? idx : (filteredChats.value.length ? 0 : -1);
-}
+const { tabAnchors, focusedIndex, onKeydown, updateInitialFocus } = useRovingIndex(filteredChats, id);
 
 watch([filteredChats, id], async () => {
-  updateInitialFocus();
-  await nextTick();
-  // Ensure the focused item is focusable
-  if (focusedIndex.value >= 0 && tabAnchors.value[focusedIndex.value]) {
-    const el = tabAnchors.value[focusedIndex.value].querySelector('a');
-    if (el) el.setAttribute('tabindex', '0');
+  if (chat.value) {
+    document.title = chat.value.name;
   }
 });
-
-function focusAt(index) {
-  if (!filteredChats.value.length) return;
-  const n = filteredChats.value.length;
-  const newIndex = (index + n) % n;
-  focusedIndex.value = newIndex;
-  nextTick(() => {
-    const li = tabAnchors.value[newIndex];
-    if (li) {
-      const a = li.querySelector('a');
-      if (a) a.focus();
-    }
-  });
-}
-
-function onTabsKeydown(event) {
-  if (!filteredChats.value.length) return;
-  const key = event.key;
-  if (['ArrowDown', 'ArrowRight'].includes(key)) {
-    event.preventDefault();
-    focusAt(focusedIndex.value + 1);
-  } else if (['ArrowUp', 'ArrowLeft'].includes(key)) {
-    event.preventDefault();
-    focusAt(focusedIndex.value - 1);
-  } else if (key === 'Home') {
-    event.preventDefault();
-    focusAt(0);
-  } else if (key === 'End') {
-    event.preventDefault();
-    focusAt(filteredChats.value.length - 1);
-  }
-}
-
-updateInitialFocus();
 </script>

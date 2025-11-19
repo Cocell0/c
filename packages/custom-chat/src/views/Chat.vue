@@ -1,18 +1,24 @@
 <template>
   <main>
     <section>
-      <h3 style="display: flex; align-items: center; gap: var(--spacing--B);"> <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"></span></AnchorLink> Chats</h3>
+      <h3 style="display: flex; align-items: center; gap: var(--spacing--B);">
+        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"></span>
+        </AnchorLink>
+        <span style="flex: auto;">Chats</span>
+        <button class="button--icon">
+          <span class="i-material-symbols:add-2-rounded"></span>
+        </button>
+      </h3>
       <div class="chat-search">
         <input type="text" placeholder="Search chats" v-model="searchQuery" />
       </div>
-      <ul class="chat-tabs">
-      <li>
-        <AnchorLink href="/c" class="button">All chats</AnchorLink>
-      </li>
-      <li v-for="chat in filteredChats" :key="chat.id">
-        <AnchorLink :href="`/c/${chat.id}`" class="button">{{ chat.name }}</AnchorLink>
-      </li>
-    </ul>
+      <ul class="chat-tabs" role="tablist" @keydown="onTabsKeydown">
+        <li v-for="(chat, index) in filteredChats" :key="chat.id" ref="tabAnchors">
+          <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab">
+            {{ chat.name }}
+          </AnchorLink>
+        </li>
+      </ul>
     </section>
     <section v-if="id">
       <h3>{{ chat.name }}</h3>
@@ -22,7 +28,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import { useChatsStore } from '../store/useChatsStore';
 import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
@@ -49,4 +55,57 @@ const filteredChats = computed(() => {
   });
   return fuse.search(searchQuery.value).map(result => result.item);
 });
+
+// Keyboard navigation for chat tabs; roving tab index
+const tabAnchors = ref([]);
+const focusedIndex = ref(0);
+
+function updateInitialFocus() {
+  const idx = filteredChats.value.findIndex(chat => chat.id === id.value);
+  focusedIndex.value = idx >= 0 ? idx : (filteredChats.value.length ? 0 : -1);
+}
+
+watch([filteredChats, id], async () => {
+  updateInitialFocus();
+  await nextTick();
+  // Ensure the focused item is focusable
+  if (focusedIndex.value >= 0 && tabAnchors.value[focusedIndex.value]) {
+    const el = tabAnchors.value[focusedIndex.value].querySelector('a');
+    if (el) el.setAttribute('tabindex', '0');
+  }
+});
+
+function focusAt(index) {
+  if (!filteredChats.value.length) return;
+  const n = filteredChats.value.length;
+  const newIndex = (index + n) % n;
+  focusedIndex.value = newIndex;
+  nextTick(() => {
+    const li = tabAnchors.value[newIndex];
+    if (li) {
+      const a = li.querySelector('a');
+      if (a) a.focus();
+    }
+  });
+}
+
+function onTabsKeydown(event) {
+  if (!filteredChats.value.length) return;
+  const key = event.key;
+  if (['ArrowDown', 'ArrowRight'].includes(key)) {
+    event.preventDefault();
+    focusAt(focusedIndex.value + 1);
+  } else if (['ArrowUp', 'ArrowLeft'].includes(key)) {
+    event.preventDefault();
+    focusAt(focusedIndex.value - 1);
+  } else if (key === 'Home') {
+    event.preventDefault();
+    focusAt(0);
+  } else if (key === 'End') {
+    event.preventDefault();
+    focusAt(filteredChats.value.length - 1);
+  }
+}
+
+updateInitialFocus();
 </script>

@@ -2,8 +2,8 @@
   <main class="chat-view">
     <section class="panel">
       <h3 style="display: flex; align-items: center; gap: var(--spacing--B); line-height: normal;">
-        <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded"
-            aria-hidden="true" translate="no" inert></span>
+        <AnchorLink href="/" class="button button--icon">
+          <span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
         </AnchorLink>
         <AnchorLink href="/c"
           style="flex: auto; text-decoration: none; color: inherit; padding-left: var(--spacing--A);">Chats</AnchorLink>
@@ -23,8 +23,13 @@
         </li>
       </ul>
     </section>
-    <section v-if="id">
-      <h3>{{ chat.name }}</h3>
+    <section class="chat-panel" v-if="id">
+      <h3 style="display: flex; align-items: center; gap: var(--spacing--B); line-height: normal;">
+        <AnchorLink href="/c" class="button button--icon" v-if="screenWidth <= 768">
+          <span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
+        </AnchorLink>
+        <span>{{ chat.name }}</span>
+      </h3>
       <!-- Chat content would go here -->
     </section>
   </main>
@@ -40,9 +45,13 @@ import Fuse from 'fuse.js'
 
 const route = useRoute();
 const id = computed(() => route.params.id);
+const screenWidth = ref(window.innerWidth);
+
+window.addEventListener('resize', () => {
+  screenWidth.value = window.innerWidth;
+});
 
 const chatsStore = useChatsStore();
-console.log(chatsStore.globalChats);
 
 const chats = computed(() => [...chatsStore.globalChats, ...chatsStore.savedChats])
 const chat = computed(() => chats.value.find(chat => chat.id === id.value))
@@ -60,7 +69,7 @@ const filteredChats = computed(() => {
   return fuse.search(searchQuery.value).map(result => result.item);
 });
 
-const { tabAnchors, focusedIndex, onKeydown, updateInitialFocus } = useRovingIndex(filteredChats, id);
+const { tabAnchors, focusedIndex, onKeydown } = useRovingIndex(filteredChats, id);
 
 watch([filteredChats, id], async () => {
   if (chat.value) {

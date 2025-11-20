@@ -50,6 +50,17 @@ main.chat-view {
     }
   }
 
+  section.chat-panel {
+    padding: 0;
+    padding-top: var(--spacing--C);
+    display: flex;
+    flex-direction: column;
+
+    >h3 {
+      padding-left: var(--spacing--C);
+    }
+  }
+
   ul.chat-tabs {
     padding: 0;
     margin: 0;

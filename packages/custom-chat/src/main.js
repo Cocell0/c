@@ -15,7 +15,6 @@ router.afterEach(route => {
 
   if (import.meta.env.PROD) {
     if (window.gtag) gtag('config', 'G-QCJD60XX2F', { page_path: route.fullPath })
-    window.update()
   }
 })
 

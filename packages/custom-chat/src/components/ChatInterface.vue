@@ -2,8 +2,7 @@
   <div class="chat-interface" :aria-label="`Chat: ${config.name}`">
     <div class="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
     <div class="input-area">
-      <textarea class="message-input" rows="1" placeholder="Type your message..."
-        aria-label="Type your message"></textarea>
+      <textarea class="message-input" rows="1" :placeholder="`Message ${config.name}`" :aria-label="`Message ${config.name}`"></textarea>
       <button class="button--icon" aria-label="Send message">
         <span class="i-material-symbols:send-rounded" aria-hidden="true" translate="no" inert></span>
       </button>
@@ -34,5 +33,21 @@ defineProps({
   overflow-y: auto;
   padding: var(--spacing--C);
   background-color: var(--color-background--light);
+}
+
+.input-area {
+  display: flex;
+  padding: var(--spacing--B) var(--spacing--C);
+  border-top: 1px solid var(--color__border-divider--opaque);
+  background-color: var(--color-background--default);
+  width: 100%;
+  align-items: center;
+
+  textarea {
+    flex: 1;
+    resize: none;
+    background: none;
+    border-radius: none;
+  }
 }
 </style>

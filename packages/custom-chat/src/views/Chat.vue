@@ -17,7 +17,7 @@
       </div>
       <ul class="chat-tabs" role="tablist" @keydown="onKeydown">
         <li v-for="(chat, index) in filteredChats" :key="chat.id" :ref="el => (tabAnchors[index] = el)">
-          <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab">
+          <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab" :aria-selected="chat.id === id">
             {{ chat.name }}
           </AnchorLink>
         </li>

@@ -53,7 +53,8 @@ const chat = computed(() => chats.value.find(chat => chat.id === id.value));
 const searchQuery = ref('');
 
 const config = computed(() => ({
-  id: chat.value ? chat.value.id : null
+  id: chat.value ? chat.value.id : null,
+  name: chat.value ? chat.value.name : 'New chat',
 }))
 
 const filteredChats = computed(() => {

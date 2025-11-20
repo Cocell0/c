@@ -10,7 +10,7 @@
       map-has-key($light, c),
       map-get($light, c),
       var(--base__chroma)
-    );
+    );  
     $light-h: if(map-has-key($light, h), map-get($light, h), var(--base__hue));
     $light-a: if(
       $alpha != null,
@@ -52,6 +52,7 @@
 @mixin outline-animation {
   outline: solid var(--color__focus-outline);
   animation: var(--outline-animation);
+  outline-offset: 2px;
 }
 
 :root {

@@ -30,7 +30,7 @@
         </AnchorLink>
         <span>{{ chat.name }}</span>
       </h3>
-      <ChatInterface :config="config"></ChatInterface>
+      <Chat :config="config"></Chat>
     </section>
   </main>
 </template>
@@ -42,7 +42,7 @@ import { useChatsStore } from '../store/useChatsStore';
 import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
 import useRovingIndex from 'core/src/vue/composables/useRovingIndex.js';
 import Fuse from 'fuse.js';
-import ChatInterface from '@/components/ChatInterface.vue';
+import Chat from '@/components/Chat.vue';
 
 const route = useRoute();
 const id = computed(() => route.params.id);

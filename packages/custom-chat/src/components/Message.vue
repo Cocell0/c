@@ -2,8 +2,8 @@
   <div class="message-bubble">
     <div class="avatar"></div>
     <div class="message-container">
-      <span role="paragraph" class="name">{{ name || 'Name' }}</span>
-      <p class="message">{{ message }}</p>
+      <span role="paragraph" class="name">{{ comment.user.nickname || comment.user.name || comment.user.visualId }}</span>
+      <p class="message">{{ comment.message }}</p>
     </div>
   </div>
 </template>
@@ -11,13 +11,9 @@
 import { defineProps } from 'vue';
 
 defineProps({
-  name: {
-    type: String,
+  comment: {
+    type: Object,
     required: false,
-  },
-  message: {
-    type: String,
-    required: true,
   },
 })
 </script>

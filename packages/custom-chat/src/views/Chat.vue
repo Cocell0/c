@@ -2,9 +2,7 @@
   <main class="chat-view">
     <section class="panel" v-if="!(screenWidth <= 768 && id)">
       <h3 style="display: flex; align-items: center; gap: var(--spacing--B); line-height: normal;">
-        <AnchorLink href="/" class="button button--icon">
-          <span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
-        </AnchorLink>
+        <!-- <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span></AnchorLink> -->
         <AnchorLink href="/c"
           style="flex: auto; text-decoration: none; color: inherit; padding-left: var(--spacing--A);">Chats</AnchorLink>
         <button class="button--icon">
@@ -17,7 +15,8 @@
       </div>
       <ul class="chat-tabs" role="tablist" @keydown="onKeydown">
         <li v-for="(chat, index) in filteredChats" :key="chat.id" :ref="el => (tabAnchors[index] = el)">
-          <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab" :aria-selected="chat.id === id">
+          <AnchorLink :href="`/c/${chat.id}`" class="button" :tabindex="focusedIndex === index ? 0 : -1" role="tab"
+            :aria-selected="chat.id === id">
             {{ chat.name }}
           </AnchorLink>
         </li>

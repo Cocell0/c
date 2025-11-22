@@ -2,7 +2,7 @@
   <div class="chat-interface" :aria-label="`Chat: ${config.name}`">
     <div class="comments-plugin-chat" v-html="chat" inert aria-hidden></div>
     <ul class="messages" role="log" aria-live="polite" aria-relevant="additions">
-      <li v-for="(comment, index) in messages" :key="index">
+      <li v-for="(comment, index) in comments" :key="index">
         <Message :comment="comment" />
       </li>
     </ul>
@@ -26,17 +26,17 @@ defineProps({
   },
 })
 const input = ref('');
-const messages = ref([]);
+const comments = ref([]);
 
 const options = {
   channel: 'development',
-  onLoad: (messages) => {
-    messages.value = messages;
-    console.log('onLoad', messages);
+  onLoad: (loadedComments) => {
+    comments.value = loadedComments;
+    console.log('onLoad', loadedComments);
   },
-  onComment: (message) => {
-    messages.value.push(message);
-  },
+  onComment: (newComment) => {
+    comments.value.push(newComment);
+  }
 };
 
 const chat = window.plugins.commentsPlugin(options);

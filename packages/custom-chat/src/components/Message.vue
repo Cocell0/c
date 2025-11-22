@@ -40,6 +40,7 @@ defineProps({
 
     .name {
       user-select: text;
+      font-weight: bold;      
     }
   }
 }

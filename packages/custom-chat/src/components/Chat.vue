@@ -1,42 +1,22 @@
 <template>
   <div class="chat-interface" :aria-label="`Chat: ${config.name}`">
+    <div class="comments-plugin-chat" v-html="chat" inert aria-hidden></div>
     <ul class="messages" role="log" aria-live="polite" aria-relevant="additions">
-      <li>
-        <Message message="Example message 1" />
-      </li>
-      <li>
-        <Message message="Example message 'nother" />
-      </li>
-      <li>
-        <Message message="Abababababa" />
-      </li>
-      <li>
-        <Message message="I like burgers" />
-      </li>
-      <li>
-        <Message message="Cogito ergo sum." />
-      </li>
-      <li>
-        <Message message="What??" />
-      </li>
-      <li>
-        <Message message="Yes." />
-      </li>
-      <li>
-        <Message message="bruhh 💀" />
+      <li v-for="(comment, index) in messages" :key="index">
+        <Message :comment="comment" />
       </li>
     </ul>
     <div class="input-area">
       <textarea class="message-input" rows="1" :placeholder="`Message ${config.name}`"
         :aria-label="`Message ${config.name}`" v-model="input"></textarea>
-      <button class="button--icon" aria-label="Send message" :disabled="!input">
+      <button class="button--icon" aria-label="Send message" :disabled="!input" @click="chat.submit(input)">
         <span class="i-material-symbols:send-rounded" aria-hidden="true" translate="no" inert></span>
       </button>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref } from 'vue';
 import Message from './Message.vue'
 
 defineProps({
@@ -46,6 +26,21 @@ defineProps({
   },
 })
 const input = ref('');
+const messages = ref([]);
+
+const options = {
+  channel: 'development',
+  onLoad: (messages) => {
+    messages.value = messages;
+    console.log('onLoad', messages);
+  },
+  onComment: (message) => {
+    messages.value.push(message);
+  },
+};
+
+const chat = window.plugins.commentsPlugin(options);
+
 </script>
 <style lang="scss" scoped>
 .chat-interface {
@@ -54,6 +49,17 @@ const input = ref('');
   height: 100%;
   width: 100%;
   overflow: hidden;
+
+  .comments-plugin-chat {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
 }
 
 .messages {
@@ -67,6 +73,7 @@ const input = ref('');
     list-style: none;
     display: flex;
     margin-bottom: var(--spacing--C);
+    overflow-x: auto;
 
     .message-bubble {
       flex: 1;

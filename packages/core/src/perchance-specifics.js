@@ -8,7 +8,14 @@
 console.clear()
 
 const appName = null;
-window.plugins = {};
+window.plugins = new Proxy({}, {
+  get(target, prop) {
+    if (prop in target) return target[prop]
+    console.warn(`Plugin "${prop}" is not available`)
+    return () => {}  // return a noop function so calling it won't throw
+  }
+})
+
 if (typeof $plugins !== 'undefined') {
   $plugins.$allKeys.forEach(key => {
     window.plugins[key] = $plugins[key];

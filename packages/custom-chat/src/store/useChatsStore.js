@@ -4,6 +4,10 @@ export const useChatsStore = defineStore("chats", {
   state: () => ({
     globalChats: [
       {
+        name: "Development",
+        id: "development",
+      },
+      {
         name: "General",
         id: "general",
       },

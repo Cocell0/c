@@ -2,7 +2,7 @@
   <div class="message-bubble">
     <div class="avatar"></div>
     <div class="message-container">
-      <span role="paragraph" class="name">{{ comment.user.nickname || comment.user.name || comment.user.visualId() }}</span>
+      <span role="paragraph" class="name">{{ comment.user.nickname || comment.user.name || comment.user.visualId.toUpperCase() }}</span>
       <p class="message">{{ comment.message }}</p>
     </div>
   </div>

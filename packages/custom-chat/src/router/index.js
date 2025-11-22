@@ -8,6 +8,7 @@ const routes = [
     path: '/',
     component: Home,
     meta: { title: 'Home' },
+    redirect: '/c',
   },
   {
     path: '/c',

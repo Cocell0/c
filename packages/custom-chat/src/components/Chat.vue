@@ -1,11 +1,14 @@
 <template>
   <div class="chat-interface" :aria-label="`Chat: ${props.config.name}`" role="region">
     <div class="comments-plugin-chat" v-html="chatHtml" inert aria-hidden></div>
-    <ul ref="messageContainer" class="messages" role="log" aria-live="polite" aria-relevant="additions">
-      <li v-for="(comment, index) in comments" :key="index">
-        <Message :comment="comment" />
-      </li>
-    </ul>
+    <DynamicScroller :items="comments" :min-item-size="50" key-field="id" ref="messageContainer" class="messages"
+      role="log" aria-live="polite" aria-relevant="additions">
+      <template #default="{ item, index, active }">
+        <DynamicScrollerItem :item="item" :index="index" active="active" class="message-wrapper">
+          <Message :comment="item" />
+        </DynamicScrollerItem>
+      </template>
+    </DynamicScroller>
     <div class="input-area">
       <textarea class="message-input" rows="1" :placeholder="`Message ${props.config.name}`"
         :aria-label="`Message ${props.config.name}`" v-model="input"></textarea>
@@ -20,6 +23,7 @@
 
 <script setup>
 import { ref, onMounted, watch, nextTick } from 'vue';
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import Message from './Message.vue';
 
 const props = defineProps({
@@ -35,14 +39,13 @@ const chatHtml = ref('');
 let chat;
 const messageContainer = ref(null);
 
-const createChat = (channelId) => {
-  comments.value = [];
+const createChat = async (channelId) => {
   const options = {
     channel: channelId,
     onLoad: async (loadedComments) => {
       comments.value = loadedComments;
       await nextTick();
-      messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
+      messageContainer.value.scrollToBottom()
     },
     onComment: (newComment) => {
       comments.value.push(newComment);
@@ -60,6 +63,8 @@ onMounted(() => {
 watch(
   () => props.config.id,
   (newId) => {
+    comments.value = [];
+    chatHtml.value = chat;
     createChat(newId);
   }
 );
@@ -97,10 +102,9 @@ const sendMessage = async () => {
   margin: 0;
   background-color: var(--color-background--light);
 
-  li {
-    list-style: none;
+  .message-wrapper {
     display: flex;
-    margin-bottom: var(--spacing--C);
+    padding-bottom: var(--spacing--C);
     overflow-x: auto;
 
     .message-bubble {

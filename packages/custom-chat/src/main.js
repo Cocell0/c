@@ -3,6 +3,8 @@ import 'core/src/font.css'
 import 'c-style'
 import './assets/main.scss'
 import 'core/src/paramount.css'
+import VueVirtualScroller from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -21,4 +23,5 @@ router.afterEach(route => {
 const app = createApp(App);
 app.use(router)
 app.use(createPinia())
+app.use(VueVirtualScroller)
 app.mount('#app')

@@ -1,7 +1,7 @@
 <template>
   <div class="chat-interface" :aria-label="`Chat: ${props.config.name}`" role="region">
     <div class="comments-plugin-chat" v-html="chatHtml" inert aria-hidden></div>
-    <ul class="messages" role="log" aria-live="polite" aria-relevant="additions">
+    <ul ref="messageContainer" class="messages" role="log" aria-live="polite" aria-relevant="additions">
       <li v-for="(comment, index) in comments" :key="index">
         <Message :comment="comment" />
       </li>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, nextTick } from 'vue';
 import Message from './Message.vue';
 
 const props = defineProps({
@@ -33,14 +33,16 @@ const input = ref('');
 const comments = ref([]);
 const chatHtml = ref('');
 let chat;
+const messageContainer = ref(null);
 
 const createChat = (channelId) => {
   comments.value = [];
   const options = {
     channel: channelId,
-    onLoad: (loadedComments) => {
+    onLoad: async (loadedComments) => {
       comments.value = loadedComments;
-      console.log('onLoad', loadedComments);
+      await nextTick();
+      messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
     },
     onComment: (newComment) => {
       comments.value.push(newComment);

@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-interface" :aria-label="`Chat: ${props.config.name}`">
+  <div class="chat-interface" :aria-label="`Chat: ${props.config.name}`" role="region">
     <div class="comments-plugin-chat" v-html="chatHtml" inert aria-hidden></div>
     <ul class="messages" role="log" aria-live="polite" aria-relevant="additions">
       <li v-for="(comment, index) in comments" :key="index">
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import Message from './Message.vue';
 
 const props = defineProps({
@@ -32,26 +32,34 @@ const props = defineProps({
 const input = ref('');
 const comments = ref([]);
 const chatHtml = ref('');
-
 let chat;
 
-const options = {
-  channel: null,
-  onLoad: (loadedComments) => {
-    comments.value = loadedComments;
-    console.log('onLoad', loadedComments);
-  },
-  onComment: (newComment) => {
-    comments.value.push(newComment);
-  }
+const createChat = (channelId) => {
+  const options = {
+    channel: channelId,
+    onLoad: (loadedComments) => {
+      comments.value = loadedComments;
+      console.log('onLoad', loadedComments);
+    },
+    onComment: (newComment) => {
+      comments.value.push(newComment);
+    }
+  };
+
+  chat = window.plugins.commentsPlugin(options);
+  chatHtml.value = chat;
 };
 
 onMounted(() => {
-  options.channel = props.config.id;
-  chat = window.plugins.commentsPlugin(options);
-
-  chatHtml.value = chat;
+  createChat(props.config.id);
 });
+
+watch(
+  () => props.config.id,
+  (newId) => {
+    createChat(newId);
+  }
+);
 
 const sendMessage = async () => {
   if (!chat || !input.value) return;

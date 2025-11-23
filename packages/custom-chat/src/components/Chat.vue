@@ -35,6 +35,7 @@ const chatHtml = ref('');
 let chat;
 
 const createChat = (channelId) => {
+  comments.value = [];
   const options = {
     channel: channelId,
     onLoad: (loadedComments) => {
@@ -63,7 +64,7 @@ watch(
 
 const sendMessage = async () => {
   if (!chat || !input.value) return;
-  await chat.submit(input.value);
+  chat.submit(input.value);
   input.value = '';
 };
 </script>

@@ -54,6 +54,7 @@ const searchQuery = ref('');
 const config = computed(() => ({
   id: chat.value ? chat.value.id : null,
   name: chat.value ? chat.value.name : 'New chat',
+  adminPassword: '54aeb8a29d48e5c37d39fe9a39c2eb5f190f1cd896b3ca3b24e974c066cbd8f8',
 }))
 
 const filteredChats = computed(() => {

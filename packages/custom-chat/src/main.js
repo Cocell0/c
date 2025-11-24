@@ -1,15 +1,15 @@
-import 'virtual:uno.css'
-import 'core/src/font.css'
-import 'c-style'
-import './assets/main.scss'
-import 'core/src/paramount.css'
-import VueVirtualScroller from 'vue-virtual-scroller'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import 'virtual:uno.css';
+import 'core/src/font.css';
+import 'c-style';
+import './assets/main.scss';
+import 'core/src/paramount.css';
+import VueVirtualScroller from 'vue-virtual-scroller';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
+import router from './router';
 
 router.afterEach(route => {
   const title = route.meta?.title;

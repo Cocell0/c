@@ -18,9 +18,12 @@ const createChat = (channelId) => {
   if (import.meta.env.PROD && window.plugins?.commentsPlugin) {
     const options = {
       channel: channelId,
+      adminPasswordHash: props.config.adminPassword || undefined,
+      adminFlair: props.config.adminFlair || undefined,
+      bannedWords: props.config.bannedWords || undefined,
       containerStyle: "background: transparent; width: 100%; height: 100%;",
       messageFeedStyle: "background: transparent; display: flex; flex-direction: column; padding: 0.4rem;",
-      messageBubbleStyle: "padding: 0.6rem;  margin: 0; background: transparent;",
+      messageBubbleStyle: "padding: 0.6rem; background: transparent;",
     };
     chat = window.plugins.commentsPlugin(options);
     chatHTML.value = chat;
@@ -31,6 +34,7 @@ const createChat = (channelId) => {
 
 onMounted(() => {
   createChat(props.config.id);
+  document.title = props.config.name;
 });
 
 watch(

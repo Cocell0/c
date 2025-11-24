@@ -1,30 +1,8 @@
 <template>
-  <div class="chat-interface" :aria-label="`Chat: ${props.config.name}`" role="region">
-    <div class="comments-plugin-chat" v-html="chatHtml" inert aria-hidden></div>
-    <DynamicScroller :items="comments" :min-item-size="50" key-field="id" ref="messageContainer" class="messages"
-      role="log" aria-live="polite" aria-relevant="additions">
-      <template #default="{ item, index, active }">
-        <DynamicScrollerItem :item="item" :index="index" active="active" class="message-wrapper">
-          <Message :comment="item" />
-        </DynamicScrollerItem>
-      </template>
-    </DynamicScroller>
-    <div class="input-area">
-      <textarea class="message-input" rows="1" :placeholder="`Message ${props.config.name}`"
-        :aria-label="`Message ${props.config.name}`" v-model="input"></textarea>
-      <div class="send-button-container">
-        <button class="button--icon" aria-label="Send message" :disabled="!input" @click="sendMessage">
-          <span class="i-material-symbols:send-rounded" aria-hidden="true" translate="no" inert></span>
-        </button>
-      </div>
-    </div>
-  </div>
+  <div class="chat-container" :class="{ 'opacity-0': !chatOpen, 'opacity-1': chatOpen }" v-html="chatHTML"></div>
 </template>
-
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue';
-import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
-import Message from './Message.vue';
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
   config: {
@@ -33,27 +11,27 @@ const props = defineProps({
   }
 });
 
-const input = ref('');
-const comments = ref([]);
-const chatHtml = ref('');
 let chat;
-const messageContainer = ref(null);
+const chatHTML = ref('');
+const chatOpen = ref(false);
 
-const createChat = async (channelId) => {
-  const options = {
-    channel: channelId,
-    onLoad: async (loadedComments) => {
-      comments.value = loadedComments;
-      await nextTick();
-      messageContainer.value.scrollToBottom()
-    },
-    onComment: (newComment) => {
-      comments.value.push(newComment);
-    }
-  };
-
-  chat = window.plugins.commentsPlugin(options);
-  chatHtml.value = chat;
+const createChat = (channelId) => {
+  if (import.meta.env.PROD && window.plugins?.commentsPlugin) {
+    const options = {
+      channel: channelId,
+      containerStyle: "background: transparent; width: 100%; height: 100%;",
+      messageFeedStyle: "background: transparent; display: flex; flex-direction: column; padding: 0.4rem;",
+      messageBubbleStyle: "padding: 0.6rem;  margin: 0; background: transparent;",
+      onLoad: () => {
+        chatOpen.value = true;
+      },
+    };
+    chat = window.plugins.commentsPlugin(options);
+    chatHTML.value = chat;
+  } else {
+    chatHTML.value = `${channelId} [Chat plugin not available]`;
+    chatOpen.value = true;
+  }
 };
 
 onMounted(() => {
@@ -63,78 +41,19 @@ onMounted(() => {
 watch(
   () => props.config.id,
   (newId) => {
-    comments.value = [];
-    chatHtml.value = chat;
+    chatHTML.value = import.meta.env.PROD && chat ? chat : `${newId} [Chat plugin not available]`;
     createChat(newId);
   }
 );
-
-const sendMessage = async () => {
-  if (!chat || !input.value) return;
-  chat.submit(input.value);
-  input.value = '';
-};
 </script>
-<style lang="scss" scoped>
-.chat-interface {
-  display: flex;
-  flex-direction: column;
+<style lang="scss">
+.chat-container {
+  width: 100%;
   height: 100%;
-  width: 100%;
-  overflow: hidden;
 
-  .comments-plugin-chat {
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
-}
-
-.messages {
-  flex: 1;
-  overflow-y: auto;
-  padding-inline: var(--spacing--C);
-  margin: 0;
-  background-color: var(--color-background--light);
-
-  .message-wrapper {
-    display: flex;
-    padding-bottom: var(--spacing--C);
-    overflow-x: auto;
-
-    .message-bubble {
-      flex: 1;
-    }
-  }
-}
-
-.input-area {
-  display: flex;
-  border-top: 1px solid var(--color__border-divider--opaque);
-  background-color: var(--color-background--default);
-  width: 100%;
-  align-items: center;
-
-  >* {
-    height: 100%;
-  }
-
-  textarea {
-    flex: 1;
-    resize: none;
-    background: none;
-    border-radius: 0;
-  }
-
-  .send-button-container {
-    display: flex;
-    align-items: center;
-    padding: var(--spacing--C);
+  .comments-plugin-ctn {
+    width: 100% !important;
+  height: 100% !important;
   }
 }
 </style>

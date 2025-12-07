@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useChatsStore } from '../store/useChatsStore';
 import AnchorLink from 'core/src/vue/components/AnchorLink.vue';
@@ -79,4 +79,8 @@ watch([filteredChats, id], async () => {
 window.addEventListener('resize', () => {
   screenWidth.value = window.innerWidth;
 });
+
+onMounted(() => {
+  chatsStore.initializeDB();
+})
 </script>

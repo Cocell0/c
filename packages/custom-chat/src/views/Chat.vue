@@ -27,7 +27,7 @@
         <AnchorLink href="/c" class="button button--icon" v-if="screenWidth <= 768">
           <span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span>
         </AnchorLink>
-        <span>{{ chat.name }}</span>
+        <span v-if="chat">{{ chat.name }}</span>
       </h3>
       <Chat :config="config"></Chat>
     </section>
@@ -45,10 +45,10 @@ import Chat from '@/components/Chat.vue';
 
 const route = useRoute();
 const id = computed(() => route.params.id);
-const screenWidth = ref(window.innerWidth);
 const chatsStore = useChatsStore();
 const chats = computed(() => [...chatsStore.globalChats, ...chatsStore.savedChats]);
 const chat = computed(() => chats.value.find(chat => chat.id === id.value));
+const screenWidth = ref(window.innerWidth);
 const searchQuery = ref('');
 
 const config = computed(() => ({

@@ -82,5 +82,6 @@ window.addEventListener('resize', () => {
 
 onMounted(() => {
   chatsStore.initializeDB();
+  if (chat.value === undefined && id.value !== undefined) window.location.hash = '#/c'; // This is an ugly lookin' solution that works
 })
 </script>

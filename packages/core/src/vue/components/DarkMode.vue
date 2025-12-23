@@ -18,7 +18,7 @@ themeChannel.onmessage = ({ data }) => {
   }
 }
 
-watch(isDark, v => themeChannel.postMessage(v ? 'dark' : 'light'))
+watch(isDark, value => themeChannel.postMessage(value ? 'dark' : 'light'))
 
 onMounted(() => {
   const saved = localStorage.getItem('theme')
@@ -29,15 +29,15 @@ onMounted(() => {
   }
   updateTheme(false)
 
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     if (!localStorage.getItem('theme')) {
-      isDark.value = e.matches
+      isDark.value = event.matches
       updateTheme(false)
     }
   })
 })
 
-const updateTheme = (withTransition = true) => {
+function updateTheme(withTransition = true) {
   document.documentElement.toggleAttribute('dark', isDark.value)
   document.documentElement.style.colorScheme = isDark.value ? 'dark' : 'light'
   localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
@@ -50,15 +50,15 @@ const updateTheme = (withTransition = true) => {
   }
 }
 
-const toggle = e => {
+function toggle(event) {
   if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     isDark.value = !isDark.value
     updateTheme(false)
     return
   }
 
-  const x = e.clientX || innerWidth / 2
-  const y = e.clientY || innerHeight / 2
+  const x = event.clientX || innerWidth / 2
+  const y = event.clientY || innerHeight / 2
   const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
   const transition = document.startViewTransition(() => {
@@ -113,9 +113,9 @@ const toggle = e => {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.001s !important;
+    animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001s !important;
+    transition-duration: 0s !important;
   }
   ::view-transition-old(root),
   ::view-transition-new(root) {

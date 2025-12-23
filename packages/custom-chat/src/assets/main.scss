@@ -64,9 +64,10 @@ main.chat-view {
   }
 
   ul.chat-tabs {
-    padding: 0;
+    padding: var(--spacing--B);
     margin: 0;
     flex: 1;
+    overflow-y: auto;
 
     li {
       list-style: none;

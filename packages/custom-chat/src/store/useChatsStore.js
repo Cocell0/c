@@ -13,12 +13,12 @@ export const useChatsStore = defineStore("chats", {
   }),
 
   actions: {
-    initializeDB() {
+    async initializeDB() {
       this.db = new Dexie("CustomChatDB");
       this.db.version(1).stores({
         chats: "id,name,lastActive",
       });
-      this.loadSavedChats();
+      await this.loadSavedChats(); // wait for savedChats to load
     },
 
     async loadSavedChats() {
@@ -27,18 +27,17 @@ export const useChatsStore = defineStore("chats", {
 
     async addChat(chat) {
       await this.db.chats.put({ ...chat, lastActive: Date.now() });
-      this.loadSavedChats();
+      await this.loadSavedChats();
     },
 
     async updateChat(chat) {
       await this.db.chats.put({ ...chat, lastActive: Date.now() });
-      this.loadSavedChats();
+      await this.loadSavedChats();
     },
 
     async deleteChat(id) {
       await this.db.chats.delete(id);
-      this.loadSavedChats();
+      await this.loadSavedChats();
     },
   },
 });
-

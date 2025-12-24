@@ -28,13 +28,13 @@ main.chat-view {
   }
 
   section.panel {
+    padding: 0;
     max-width: 386px;
     display: flex;
     flex-direction: column;
 
     .chat-search {
       display: flex;
-      padding-bottom: var(--spacing--C);
       position: relative;
 
       input {
@@ -47,7 +47,7 @@ main.chat-view {
         display: flex;
         flex: none;
         position: absolute;
-        height: calc(100% - var(--spacing--C));
+        height: 100%;
       }
     }
   }

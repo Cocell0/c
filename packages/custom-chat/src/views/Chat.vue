@@ -7,6 +7,8 @@
           align-items: center;
           gap: var(--spacing--B);
           line-height: normal;
+          padding: var(--spacing--C);
+          margin-bottom: 0;
         "
       >
         <!-- <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span></AnchorLink> -->
@@ -22,7 +24,7 @@
         >
         <Add />
       </h3>
-      <div class="chat-search">
+      <div class="chat-search" style="padding-inline: var(--spacing--C)">
         <span
           class="i-material-symbols:search-rounded icon"
           aria-hidden="true"
@@ -36,7 +38,12 @@
           name="Query"
         />
       </div>
-      <ul class="chat-tabs" role="tablist" @keydown="onKeydown">
+      <ul
+        class="chat-tabs"
+        role="tablist"
+        style="padding: var(--spacing--C)"
+        @keydown="onKeydown"
+      >
         <li
           v-for="(chat, index) in filteredChats"
           :key="chat.id"
@@ -53,7 +60,9 @@
           </AnchorLink>
         </li>
       </ul>
-      <div style="padding-top: var(--spacing--C)"><DarkMode /></div>
+      <div style="padding: var(--spacing--C)">
+        <DarkMode />
+      </div>
     </section>
     <section class="chat-panel" v-if="id">
       <h3

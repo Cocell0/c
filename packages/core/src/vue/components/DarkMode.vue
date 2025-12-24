@@ -11,32 +11,6 @@ import { ref, onMounted, watch } from 'vue'
 const themeChannel = new BroadcastChannel('theme')
 const isDark = ref(false)
 
-themeChannel.onmessage = ({ data }) => {
-  if (data === 'dark' || data === 'light') {
-    isDark.value = data === 'dark'
-    updateTheme(false)
-  }
-}
-
-watch(isDark, value => themeChannel.postMessage(value ? 'dark' : 'light'))
-
-onMounted(() => {
-  const saved = localStorage.getItem('theme')
-  if (saved) isDark.value = saved === 'dark'
-  else {
-    isDark.value = matchMedia('(prefers-color-scheme: dark)').matches
-    localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
-  }
-  updateTheme(false)
-
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    if (!localStorage.getItem('theme')) {
-      isDark.value = event.matches
-      updateTheme(false)
-    }
-  })
-})
-
 function updateTheme(withTransition = true) {
   document.documentElement.toggleAttribute('dark', isDark.value)
   document.documentElement.style.colorScheme = isDark.value ? 'dark' : 'light'
@@ -49,7 +23,6 @@ function updateTheme(withTransition = true) {
     })
   }
 }
-
 function toggle(event) {
   if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     isDark.value = !isDark.value
@@ -76,12 +49,37 @@ function toggle(event) {
       {
         duration: 250,
         easing: 'ease-in-out',
+        fill: 'forwards',
         pseudoElement: isDark.value
           ? '::view-transition-new(root)'
           : '::view-transition-old(root)'
       }
     )
   })
+}
+
+watch(isDark, value => themeChannel.postMessage(value ? 'dark' : 'light'))
+onMounted(() => {
+  const saved = localStorage.getItem('theme')
+  if (saved) isDark.value = saved === 'dark'
+  else {
+    isDark.value = matchMedia('(prefers-color-scheme: dark)').matches
+    localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+  }
+  updateTheme(false)
+
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (!localStorage.getItem('theme')) {
+      isDark.value = event.matches
+      updateTheme(false)
+    }
+  })
+})
+themeChannel.onmessage = ({ data }) => {
+  if (data === 'dark' || data === 'light') {
+    isDark.value = data === 'dark'
+    updateTheme(false)
+  }
 }
 </script>
 

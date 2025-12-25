@@ -2,47 +2,51 @@
   <div class="chat-container" v-html="chatHTML"></div>
 </template>
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch } from "vue";
 
 const props = defineProps({
   config: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 
 let chat;
-const chatHTML = ref('');
+const chatHTML = ref("");
 
-const createChat = (channelId) => {
+const createChat = (channel) => {
   if (import.meta.env.PROD && window.plugins?.commentsPlugin) {
     const options = {
-      channel: channelId,
+      channel: channel,
       adminPasswordHash: props.config.adminPassword || undefined,
       adminFlair: props.config.adminFlair || undefined,
       bannedWords: props.config.bannedWords || undefined,
       containerStyle: "background: transparent; width: 100%; height: 100%;",
-      messageFeedStyle: "background: transparent; display: flex; flex-direction: column; padding: 0.4rem;",
+      messageFeedStyle:
+        "background: transparent; display: flex; flex-direction: column; padding: 0.4rem;",
       messageBubbleStyle: "padding: 0.6rem; background: transparent;",
     };
     chat = window.plugins.commentsPlugin(options);
     chatHTML.value = chat;
   } else {
-    chatHTML.value = `${channelId} [Chat plugin not available]`;
+    chatHTML.value = `${channel} [Chat plugin not available]`;
   }
 };
 
 onMounted(() => {
-  createChat(props.config.id);
+  createChat(props.config.channel);
   document.title = props.config.name;
 });
 
 watch(
-  () => props.config.id,
-  (newId) => {
-    chatHTML.value = import.meta.env.PROD && chat ? chat : `${newId} [Chat plugin not available]`;
-    createChat(newId);
-  }
+  () => props.config.channel,
+  (newChannel) => {
+    chatHTML.value =
+      import.meta.env.PROD && chat
+        ? chat
+        : `${newChannel} [Chat plugin not available]`;
+    createChat(newChannel);
+  },
 );
 </script>
 <style lang="scss">

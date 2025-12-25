@@ -25,7 +25,7 @@ export const useChatsStore = defineStore("chats", {
   getters: {
     allChats: (state) =>
       [
-        ...state.systemChats.map((chat) => ({ ...chat, timestamp: 0 })),
+        ...state.systemChats.map((chat) => ({ ...chat })),
         ...state.userChats,
       ].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)),
   },
@@ -34,8 +34,8 @@ export const useChatsStore = defineStore("chats", {
     async initializeDB() {
       this.db = new Dexie("CustomChatDB");
       this.db.version(1).stores({
-        chats: "++id,name,channel,key",
-        lastActive: "++id,key,timestamp",
+        chats: "&key,name,channel",
+        lastActive: "&key,timestamp",
       });
       await this.loadUserChats();
     },

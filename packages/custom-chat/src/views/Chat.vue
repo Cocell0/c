@@ -1,6 +1,6 @@
 <template>
   <main class="chat-view">
-    <section class="panel" v-if="!(screenWidth <= 768 && id)">
+    <section class="panel" v-if="!(screenWidth <= 768 && key)">
       <h3
         style="
           display: flex;
@@ -11,7 +11,6 @@
           margin-bottom: 0;
         "
       >
-        <!-- <AnchorLink href="/" class="button button--icon"><span class="i-material-symbols:arrow-back-rounded" aria-hidden="true" translate="no" inert></span></AnchorLink> -->
         <AnchorLink
           href="/c"
           style="
@@ -24,6 +23,7 @@
         >
         <Add />
       </h3>
+
       <div class="chat-search" style="padding-inline: var(--spacing--C)">
         <span
           class="i-material-symbols:search-rounded icon"
@@ -38,6 +38,7 @@
           name="Query"
         />
       </div>
+
       <ul
         class="chat-tabs"
         role="tablist"
@@ -45,112 +46,89 @@
         @keydown="onKeydown"
       >
         <li
-          v-for="(chat, index) in filteredChats"
-          :key="chat.id"
-          :ref="(el) => (tabAnchors[index] = el)"
+          v-for="(c, index) in filteredChats"
+          :key="c.key"
+          :ref="(el) => setTabAnchor(index, el)"
         >
           <AnchorLink
-            :href="`/c/${chat.id}`"
+            :href="`/c/${c.key}`"
             class="button"
             :tabindex="focusedIndex === index ? 0 : -1"
             role="tab"
-            :aria-selected="chat.id === id"
+            :aria-selected="c.key === key"
           >
-            {{ chat.name }}
+            {{ c.name }}
           </AnchorLink>
         </li>
       </ul>
+
       <div style="padding: var(--spacing--C)">
         <DarkMode />
       </div>
     </section>
-    <section class="chat-panel" v-if="id">
-      <h3
-        style="
-          display: flex;
-          align-items: center;
-          gap: var(--spacing--B);
-          line-height: normal;
-        "
-      >
-        <AnchorLink
-          href="/c"
-          class="button button--icon"
-          v-if="screenWidth <= 768"
-        >
-          <span
-            class="i-material-symbols:arrow-back-rounded"
-            aria-hidden="true"
-            translate="no"
-            inert
-          ></span>
-        </AnchorLink>
-        <span v-if="chat">{{ chat.name }}</span>
-      </h3>
-      <Chat :config="config"></Chat>
-    </section>
+
+    <router-view />
   </main>
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useChatsStore } from "../store/useChatsStore";
-import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import useRovingIndex from "core/src/vue/composables/useRovingIndex.js";
+import { useRoute } from "vue-router";
+
+import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Fuse from "fuse.js";
-import Chat from "@/components/Chat.vue";
 import Add from "@/components/Add.vue";
 import DarkMode from "core/src/vue/components/DarkMode.vue";
 
 const route = useRoute();
-const id = computed(() => route.params.id);
+const key = computed(() => route.params.key);
 const chatsStore = useChatsStore();
-const chats = computed(() => [
-  ...chatsStore.globalChats,
-  ...chatsStore.savedChats,
-]);
-const chat = computed(() => chats.value.find((chat) => chat.id === id.value));
+
+console.log(chatsStore.allChats);
+
+const chat = computed(() =>
+  chatsStore.allChats.find((c) => c.key === key.value),
+);
+
 const screenWidth = ref(window.innerWidth);
 const searchQuery = ref("");
 
-const config = computed(() => ({
-  id: chat.value ? chat.value.id : null,
-  name: chat.value ? chat.value.name : "New chat",
-  adminPassword:
-    "54aeb8a29d48e5c37d39fe9a39c2eb5f190f1cd896b3ca3b24e974c066cbd8f8",
-}));
-
 const filteredChats = computed(() => {
-  if (!searchQuery.value) {
-    return chats.value;
-  }
-  const fuse = new Fuse(chats.value, {
+  if (!searchQuery.value) return chatsStore.allChats;
+  const fuse = new Fuse(chatsStore.allChats, {
     keys: ["name"],
     threshold: 0.5,
   });
-  return fuse.search(searchQuery.value).map((result) => result.item);
+  return fuse.search(searchQuery.value).map((r) => r.item);
 });
 
 const { tabAnchors, focusedIndex, onKeydown } = useRovingIndex(
   filteredChats,
-  id,
+  key,
 );
 
-watch([filteredChats, id], async () => {
-  if (chat.value) {
-    document.title = chat.value.name;
-  }
+function setTabAnchor(index, el) {
+  if (!tabAnchors || !tabAnchors.value) return;
+  tabAnchors.value[index] = el;
+}
+
+watch([filteredChats, key], () => {
+  if (chat.value) document.title = chat.value.name;
 });
 
-window.addEventListener("resize", () => {
+function handleResize() {
   screenWidth.value = window.innerWidth;
-});
+}
 
 onMounted(async () => {
+  window.addEventListener("resize", handleResize);
   await chatsStore.initializeDB();
-  if (chat.value === undefined && id.value !== undefined) {
-    window.location.hash = "#/c";
-  }
+  if (key.value && !chat.value) window.location.hash = "#/c";
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
 });
 </script>

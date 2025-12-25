@@ -1,12 +1,11 @@
 <template>
-  <section class="chat-panel" v-if="key">
-    <h3
-      class="chat-name"
+  <section class="chat-panel" v-if="chat">
+    <div
       style="
         display: flex;
         align-items: center;
+        padding: var(--spacing--C);
         gap: var(--spacing--B);
-        line-height: normal;
       "
     >
       <AnchorLink
@@ -21,19 +20,10 @@
           inert
         ></span>
       </AnchorLink>
-
-      <button
-        style="
-          width: 100%;
-          padding-block: 0;
-          text-align: left;
-          justify-content: start;
-        "
-        v-if="chat"
-      >
+      <h3 class="chat-name" style="line-height: normal">
         {{ chat.name }}
-      </button>
-    </h3>
+      </h3>
+    </div>
 
     <Chat :config="config" />
   </section>

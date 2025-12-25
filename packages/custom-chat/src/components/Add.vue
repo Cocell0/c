@@ -10,28 +10,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
 import { useChatsStore } from "../store/useChatsStore";
-
 const chatsStore = useChatsStore();
-
-const chats = computed(() => [
-  ...chatsStore.globalChats,
-  ...chatsStore.savedChats,
-]);
 
 function generateName() {
   let name;
   do {
     name = `#${Math.floor(1000 + Math.random() * 9000)}`;
-  } while (chats.value.some((c) => c.name === name));
+  } while (chatsStore.allChats.some((c) => c.name === name));
   return name;
 }
 
 function add() {
-  chatsStore.addChat({
-    id: crypto.randomUUID(),
-    name: generateName(),
-  });
+  chatsStore.addChat(generateName());
 }
 </script>

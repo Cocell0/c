@@ -20,7 +20,16 @@
           inert
         ></span>
       </AnchorLink>
-      <h3 class="chat-name" style="line-height: normal">
+      <h3
+        class="chat-name"
+        style="
+          line-height: normal;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          flex: 1;
+        "
+      >
         {{ chat.name }}
       </h3>
     </div>

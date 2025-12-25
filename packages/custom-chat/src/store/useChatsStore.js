@@ -23,11 +23,17 @@ export const useChatsStore = defineStore("chats", {
   }),
 
   getters: {
-    allChats: (state) =>
-      [
-        ...state.systemChats.map((chat) => ({ ...chat })),
-        ...state.userChats,
-      ].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)),
+    allChats: (state) => {
+      const lastActiveMap =
+        state.lastActive?.reduce((acc, entry) => {
+          acc[entry.key] = entry.timestamp;
+          return acc;
+        }, {}) || {};
+
+      return [...state.systemChats, ...state.userChats].sort(
+        (a, b) => (lastActiveMap[b.key] || 0) - (lastActiveMap[a.key] || 0),
+      );
+    },
   },
 
   actions: {

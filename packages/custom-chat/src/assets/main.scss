@@ -9,8 +9,8 @@ main {
   section {
     padding: var(--spacing--C);
 
-    > h3 {
-      margin: 0 0 var(--spacing--C) 0;
+    h3 {
+      margin: 0;
     }
   }
 }
@@ -54,7 +54,6 @@ main.chat-view {
 
   section.chat-panel {
     padding: 0;
-    padding-top: var(--spacing--C);
     display: flex;
     flex-direction: column;
 

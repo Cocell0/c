@@ -59,7 +59,11 @@ main.chat-view {
     flex-direction: column;
 
     > h3 {
-      padding-left: var(--spacing--C);
+      padding-inline: var(--spacing--C);
+
+      > input:not(:hover):not(:focus) {
+        background: none;
+      }
     }
   }
 

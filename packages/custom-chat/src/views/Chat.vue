@@ -86,8 +86,6 @@ const route = useRoute();
 const key = computed(() => route.params.key);
 const chatsStore = useChatsStore();
 
-console.log(chatsStore.allChats);
-
 const chat = computed(() =>
   chatsStore.allChats.find((c) => c.key === key.value),
 );

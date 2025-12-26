@@ -38,27 +38,26 @@ export const useChatsStore = defineStore("chats", {
 
   actions: {
     async initializeDB() {
-      const tempDB = new Dexie("CustomChatDB");
-      await tempDB.open();
-      const oldChats = await tempDB.table("chats").toArray();
-      tempDB.close();
-
-      await Dexie.delete("CustomChatDB");
-
       this.db = new Dexie("CustomChatDB");
-      this.db.version(2).stores({
-        chats: "&key,name,channel",
-        lastActive: "&key,timestamp",
-      });
+
+      this.db
+        .version(2)
+        .stores({
+          chats: "&key,name,channel",
+          lastActive: "&key,timestamp",
+        })
+        .upgrade(async (trans) => {
+          const oldChats = await trans.table("chats").toArray();
+          await trans.table("chats").clear();
+          for (const chat of oldChats) {
+            const { name, key, channel } = chat;
+            if (name && key && channel) {
+              await trans.table("chats").put({ name, key, channel });
+            }
+          }
+        });
+
       await this.db.open();
-
-      for (const chat of oldChats) {
-        const { name, key, channel } = chat;
-        if (name && key && channel) {
-          await this.db.table("chats").put({ name, key, channel });
-        }
-      }
-
       await this.loadUserChats();
     },
 

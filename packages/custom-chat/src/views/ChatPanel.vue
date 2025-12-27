@@ -29,6 +29,7 @@
           white-space: nowrap;
           flex: 1;
         "
+        v-if="chat"
       >
         {{ chat.name }}
       </h3>
@@ -70,8 +71,8 @@ onUnmounted(() => {
 });
 
 const config = computed(() => ({
-  channel: chat.value ? chat.value.channel : null,
-  name: chat.value ? chat.value.name : "New chat",
+  channel: chat.value.channel,
+  channelLabel: chat.value.name,
   adminPassword:
     "54aeb8a29d48e5c37d39fe9a39c2eb5f190f1cd896b3ca3b24e974c066cbd8f8",
 }));

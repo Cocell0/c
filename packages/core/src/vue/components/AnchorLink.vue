@@ -36,32 +36,29 @@ function onKeydown(event) {
 
   event.preventDefault();
 
-  const isModifier = event.ctrlKey || event.metaKey;
-
   const url =
     window.location.pathname + window.location.search + "#" + href.value;
 
-  if (isModifier) {
+  if (event.ctrlKey) {
     // This is to ensure that the link opens in a new tab or window
     // It had to be done because the default behavior no longer works properly in Perchance
     window.open(url, "_blank");
   } else {
-    if (anchor.value) anchor.value.click();
+    window.location.hash = href.value;
   }
 }
 
 function onClick(event) {
-  const isModifier = event.ctrlKey || event.metaKey;
   event.preventDefault();
 
   const url =
     window.location.pathname + window.location.search + "#" + href.value;
 
-  if (isModifier) {
+  if (event.ctrlKey) {
     // The same reason as before
     window.open(url, "_blank");
   } else {
-    if (anchor.value) anchor.value.click();
+    window.location.hash = href.value;
   }
 }
 </script>

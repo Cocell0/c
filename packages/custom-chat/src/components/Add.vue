@@ -21,7 +21,8 @@ function generateName() {
   return name;
 }
 
-function add() {
-  chatsStore.addChat(generateName());
+async function add() {
+  const { key } = await chatsStore.addChat(generateName());
+  window.location.href = `#/c/${key}`;
 }
 </script>

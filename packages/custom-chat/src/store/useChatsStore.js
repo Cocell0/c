@@ -47,6 +47,13 @@ export const useChatsStore = defineStore("chats", {
      */
     async initializeDB() {
       this.db = new Dexie("CustomChatDB");
+      this.channel = new BroadcastChannel("custom-chat");
+
+      this.channel.onmessage = (event) => {
+        if (event?.data?.type === "sync") {
+          this.loadUserChats();
+        }
+      };
 
       this.db
         .version(2)
@@ -90,6 +97,8 @@ export const useChatsStore = defineStore("chats", {
       };
       await this.db.chats.put({ ...chat });
       await this.loadUserChats();
+
+      this.channel.postMessage({ type: "sync" });
       return chat;
     },
 
@@ -100,6 +109,8 @@ export const useChatsStore = defineStore("chats", {
      */
     async deleteChat(key) {
       await this.db.chats.delete(key);
+
+      this.channel.postMessage({ type: "sync" });
       await this.loadUserChats();
     },
 
@@ -120,6 +131,8 @@ export const useChatsStore = defineStore("chats", {
       if (Object.keys(validChanges).length === 0) return;
 
       await this.db.chats.update(key, validChanges);
+
+      this.channel.postMessage({ type: "sync" });
       await this.loadUserChats();
     },
   },

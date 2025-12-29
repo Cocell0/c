@@ -79,7 +79,7 @@ export const useChatsStore = defineStore("chats", {
 
     /**
      * Adds a new chat to the database.
-     * @param {string} `name` The name of the chat.
+     * @param {string} name The name of the chat.
      * @returns {Promise<Object>} A promise that resolves with the newly added chat object.
      */
     async addChat(name) {
@@ -91,6 +91,36 @@ export const useChatsStore = defineStore("chats", {
       await this.db.chats.put({ ...chat });
       await this.loadUserChats();
       return chat;
+    },
+
+    /**
+     * Deletes a chat from the database.
+     * @param {string} key The key of the chat to delete.
+     * @returns {Promise<void>} A promise that resolves when the chat is deleted.
+     */
+    async deleteChat(key) {
+      await this.db.chats.delete(key);
+      await this.loadUserChats();
+    },
+
+    /**
+     * Updates a chat in the database. Unsupported fields will be ignored.
+     * @param {string} key The key of the chat to update.
+     * @param {{ name?: string }} changes The new changes to apply to the chat.
+     * @returns {Promise<void>} A promise that resolves when the chat is updated.
+     */
+    async updateChat(key, changes) {
+      const allowedFields = ["name"];
+      const validChanges = {};
+
+      for (const field of allowedFields) {
+        if (field in changes) validChanges[field] = changes[field];
+      }
+
+      if (Object.keys(validChanges).length === 0) return;
+
+      await this.db.chats.update(key, validChanges);
+      await this.loadUserChats();
     },
   },
 });

@@ -23,6 +23,10 @@ export const useChatsStore = defineStore("chats", {
   }),
 
   getters: {
+    /**
+     * Returns all chats sorted by last active time.
+     * @returns {Array} An array of chats sorted by last active time.
+     */
     allChats: (state) => {
       const lastActiveMap =
         state.lastActive?.reduce((acc, entry) => {
@@ -37,6 +41,10 @@ export const useChatsStore = defineStore("chats", {
   },
 
   actions: {
+    /**
+     * Initializes the database.
+     * @returns {Promise<void>} A promise that resolves when the database is initialized.
+     */
     async initializeDB() {
       this.db = new Dexie("CustomChatDB");
 
@@ -61,10 +69,19 @@ export const useChatsStore = defineStore("chats", {
       await this.loadUserChats();
     },
 
+    /**
+     * Loads the user's chats from the database.
+     * @returns {Promise<void>} A promise that resolves when the chats are loaded.
+     */
     async loadUserChats() {
       this.userChats = await this.db.chats.toArray();
     },
 
+    /**
+     * Adds a new chat to the database.
+     * @param {string} `name` The name of the chat.
+     * @returns {Promise<Object>} A promise that resolves with the newly added chat object.
+     */
     async addChat(name) {
       const chat = {
         name: name,
@@ -73,16 +90,7 @@ export const useChatsStore = defineStore("chats", {
       };
       await this.db.chats.put({ ...chat });
       await this.loadUserChats();
+      return chat;
     },
-
-    // async updateChat(chat) {
-    //   await this.db.chats.put({ ...chat });
-    //   await this.loadUserChats();
-    // },
-
-    // async deleteChat(key) {
-    //   await this.db.chats.delete(key);
-    //   await this.loadUserChats();
-    // },
   },
 });

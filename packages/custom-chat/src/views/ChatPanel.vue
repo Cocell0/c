@@ -33,14 +33,22 @@
       >
         {{ chat.name }}
       </h3>
+      <button class="button button--icon" aria-label="Edit chat's details">
+        <span
+          class="i-material-symbols:edit-rounded"
+          aria-hidden="true"
+          translate="no"
+          inert
+        ></span>
+      </button>
     </div>
 
-    <Chat :config="config" />
+    <!-- <Chat :config="config" /> -->
   </section>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted, watch } from "vue";
 import Chat from "@/components/Chat.vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import { useRoute } from "vue-router";
@@ -50,11 +58,13 @@ const route = useRoute();
 const key = computed(() => route.params.key);
 const chatsStore = useChatsStore();
 
-const chat = computed(() =>
-  chatsStore.userChats
+function getChat(key) {
+  return chatsStore.userChats
     .concat(chatsStore.systemChats)
-    .find((c) => c.key === key.value),
-);
+    .find((c) => c.key === key.value);
+}
+
+const chat = computed(() => getChat(key));
 
 const screenWidth = ref(window.innerWidth);
 

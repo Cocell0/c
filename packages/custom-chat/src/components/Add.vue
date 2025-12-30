@@ -23,6 +23,6 @@ function generateName() {
 
 async function add() {
   const { key } = await chatsStore.addChat(generateName());
-  window.location.href = `#/c/${key}`;
+  window.location.hash = `#/c/${key}`;
 }
 </script>

@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Chat from "@/views/Chat.vue";
-import ChatPanel from "@/views/ChatPanel.vue";
 import Home from "@/views/Home.vue";
 
 const routes = [
@@ -18,15 +17,8 @@ const routes = [
     meta: { title: "Chat" },
   },
   {
-    path: "/c",
+    path: "/c/:key",
     component: Chat,
-    children: [
-      {
-        path: ":key",
-        name: "Chat",
-        component: ChatPanel,
-      },
-    ],
   },
 ];
 

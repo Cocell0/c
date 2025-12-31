@@ -1,5 +1,5 @@
 <template>
-  <button class="button--icon" @click="add()">
+  <button class="button--icon" @click="add()" title="Add a new chat">
     <span
       class="i-material-symbols:add-2-rounded"
       aria-hidden="true"

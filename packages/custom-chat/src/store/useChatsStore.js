@@ -28,14 +28,18 @@ export const useChatsStore = defineStore("chats", {
      * @returns {Array} An array of chats sorted by last active time.
      */
     allChats: (state) => {
-      const lastActiveMap =
-        state.lastActive?.reduce((acc, entry) => {
-          acc[entry.key] = entry.timestamp;
-          return acc;
-        }, {}) || {};
+      const lastActiveMap = (state.lastActive || []).reduce(
+        (accumulator, entry) => {
+          accumulator[entry.key] = entry.timestamp;
+          return accumulator;
+        },
+        {},
+      );
 
       return [...state.systemChats, ...state.userChats].sort(
-        (a, b) => (lastActiveMap[b.key] || 0) - (lastActiveMap[a.key] || 0),
+        (firstChat, secondChat) =>
+          (lastActiveMap[secondChat.key] || 0) -
+          (lastActiveMap[firstChat.key] || 0),
       );
     },
   },
@@ -47,13 +51,6 @@ export const useChatsStore = defineStore("chats", {
      */
     async initializeDB() {
       this.db = new Dexie("CustomChatDB");
-      this.channel = new BroadcastChannel("custom-chat");
-
-      this.channel.onmessage = (event) => {
-        if (event?.data?.type === "sync") {
-          this.loadUserChats();
-        }
-      };
 
       this.db
         .version(2)
@@ -74,6 +71,14 @@ export const useChatsStore = defineStore("chats", {
 
       await this.db.open();
       await this.loadUserChats();
+
+      this.channel = new BroadcastChannel("custom-chat");
+
+      this.channel.onmessage = (event) => {
+        if (event?.data?.type === "sync") {
+          this.loadUserChats();
+        }
+      };
     },
 
     /**
@@ -130,10 +135,19 @@ export const useChatsStore = defineStore("chats", {
 
       if (Object.keys(validChanges).length === 0) return;
 
-      await this.db.chats.update(key, validChanges);
+      // Using this verbose method instead of simply using `.update` is because
+      // `.update` throws an error about the transaction already being finished
+      const existingChat = await this.db.chats.get(key);
+      if (!existingChat) return;
+
+      await this.db.chats.put({
+        ...existingChat,
+        ...validChanges,
+      });
+
+      await this.loadUserChats();
 
       this.channel.postMessage({ type: "sync" });
-      await this.loadUserChats();
     },
   },
 });

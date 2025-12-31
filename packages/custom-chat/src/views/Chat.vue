@@ -34,6 +34,9 @@
         <input
           type="text"
           placeholder="Search chats"
+          aria-label="Search chats"
+          title="Search chats"
+          autocomplete="off"
           v-model="searchQuery"
           name="Query"
         />
@@ -66,13 +69,7 @@
         <DarkMode />
       </div>
     </section>
-
-    <!-- <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view> -->
-    <router-view />
+    <ChatPanel :chatKey="key || ''" />
   </main>
 </template>
 
@@ -85,6 +82,7 @@ import { useRoute } from "vue-router";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Fuse from "fuse.js";
 import Add from "@/components/Add.vue";
+import ChatPanel from "@/components/ChatPanel.vue";
 import DarkMode from "core/src/vue/components/DarkMode.vue";
 
 const route = useRoute();

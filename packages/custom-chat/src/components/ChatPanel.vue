@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Chat from "@/components/Chat.vue";
 import { useChatsStore } from "../store/useChatsStore";
@@ -82,36 +82,30 @@ function getChat(key) {
 const chats = ref([]);
 const currentChat = ref(null);
 
-const chatConfigs = computed(() =>
-  chats.value.map((chat) => ({
-    chatKey: chat.key,
-    config: {
-      channel: chat.channel,
-      channelLabel: chat.name,
-      adminPassword:
-        "54aeb8a29d48e5c37d39fe9a39c2eb5f190f1cd896b3ca3b24e974c066cbd8f8",
-    },
-  })),
-);
+function addChat() {
+  if (!props.chatKey) {
+    currentChat.value = null;
+    return;
+  }
+
+  const chat = getChat(props.chatKey);
+  if (!chat) return;
+
+  if (!chats.value.find((newChat) => newChat.key === chat.key)) {
+    chats.value.push(chat);
+  }
+
+  if (!currentChat.value || props.chatKey !== currentChat.value.key) {
+    currentChat.value = chat;
+  }
+}
+
+onMounted(() => {
+  addChat();
+});
 
 watch(
   () => props.chatKey,
-  () => {
-    if (!props.chatKey) {
-      currentChat.value = null;
-      return;
-    }
-
-    const chat = getChat(props.chatKey);
-    if (!chat) return;
-
-    if (!chats.value.find((newChat) => newChat.key === chat.key)) {
-      chats.value.push(chat);
-    }
-
-    if (!currentChat.value || props.chatKey !== currentChat.value.key) {
-      currentChat.value = chat;
-    }
-  },
+  () => addChat(),
 );
 </script>

@@ -93,6 +93,10 @@ main.chat-view {
       margin-bottom: 0;
     }
   }
+
+  .chat-back-button {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -105,6 +109,12 @@ main.chat-view {
     section.panel {
       max-width: 100%;
       border: none;
+    }
+
+    @media (max-width: 768px) {
+      .chat-back-button {
+        display: inline-flex;
+      }
     }
   }
 }

@@ -11,6 +11,8 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
+import { useChatsStore } from "@/store/useChatsStore";
+
 router.afterEach((route) => {
   const title = route.meta?.title;
   if (title) document.title = title;
@@ -51,4 +53,8 @@ const app = createApp(App);
 app.use(router);
 app.use(createPinia());
 app.use(VueVirtualScroller);
+
+const chatsStore = useChatsStore();
+await chatsStore.initializeDB();
+
 app.mount("#app");

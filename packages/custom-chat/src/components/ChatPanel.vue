@@ -14,7 +14,12 @@
         gap: var(--spacing--B);
       "
     >
-      <AnchorLink href="/c" class="button button--icon">
+      <AnchorLink
+        href="/c"
+        class="button button--icon chat-back-button"
+        aria-label="Go back"
+        title="Go back"
+      >
         <span
           class="i-material-symbols:arrow-back-rounded"
           aria-hidden="true"
@@ -34,18 +39,7 @@
       >
         {{ chat.name }}
       </h3>
-      <button
-        class="button--icon"
-        aria-label="Edit chat's properties"
-        title="Edit chat's properties"
-      >
-        <span
-          class="i-material-symbols:edit-rounded"
-          aria-hidden="true"
-          translate="no"
-          inert
-        ></span>
-      </button>
+      <!-- <Edit v-if="!chat.system" :chat="chat" @update:edited="handleEdit" /> -->
     </div>
     <Chat
       :config="{
@@ -62,6 +56,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Chat from "@/components/Chat.vue";
+import Edit from "@/components/Edit.vue";
 import { useChatsStore } from "../store/useChatsStore";
 
 const props = defineProps({
@@ -72,40 +67,48 @@ const props = defineProps({
 });
 
 const chatsStore = useChatsStore();
+const allChats = computed(() => chatsStore.allChats);
 
 function getChat(key) {
-  const chat = chatsStore.allChats.find((chat) => chat.key === key);
-
-  return chat;
+  return allChats.value.find((chat) => chat.key === key);
 }
 
 const chats = ref([]);
 const currentChat = ref(null);
 
-function addChat() {
-  if (!props.chatKey) {
+function addChat(key) {
+  if (!key) {
     currentChat.value = null;
     return;
   }
 
-  const chat = getChat(props.chatKey);
+  const chat = getChat(key);
   if (!chat) return;
 
   if (!chats.value.find((newChat) => newChat.key === chat.key)) {
     chats.value.push(chat);
   }
 
-  if (!currentChat.value || props.chatKey !== currentChat.value.key) {
+  if (!currentChat.value || key !== currentChat.value.key) {
     currentChat.value = chat;
   }
 }
+function handleEdit(key) {
+  console.log("Editing chat:", key);
 
-onMounted(() => {
-  addChat();
+  const editedChat = getChat(key);
+  if (!editedChat) return;
+}
+
+onMounted(async () => {
+  await chatsStore.loadUserChats();
+  addChat(props.chatKey);
 });
-
 watch(
   () => props.chatKey,
-  () => addChat(),
+  async () => {
+    await chatsStore.loadUserChats();
+    addChat(props.chatKey);
+  },
 );
 </script>

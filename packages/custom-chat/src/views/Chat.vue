@@ -66,7 +66,7 @@
       </ul>
 
       <div style="padding: var(--spacing--C)">
-        <DarkMode />
+        <ThemeSwitcher />
       </div>
     </section>
     <ChatPanel :chatKey="key || ''" />
@@ -83,7 +83,7 @@ import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Fuse from "fuse.js";
 import Add from "@/components/Add.vue";
 import ChatPanel from "@/components/ChatPanel.vue";
-import DarkMode from "core/src/vue/components/DarkMode.vue";
+import ThemeSwitcher from "core/src/vue/components/ThemeSwitcher.vue";
 
 const route = useRoute();
 const key = computed(() => route.params.key);

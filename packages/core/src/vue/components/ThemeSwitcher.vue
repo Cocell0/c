@@ -3,14 +3,14 @@
     @click="toggle"
     class="button--icon"
     :aria-label="
-      theme === 0 // Showing next theme instead of the current theme
+      theme === 0
         ? 'Switch to light mode'
         : theme === 1
           ? 'Switch to dark mode'
           : 'Let the system decide'
     "
     :title="
-      theme === 0 // Same reason as above
+      theme === 0
         ? 'Switch to light mode'
         : theme === 1
           ? 'Switch to dark mode'
@@ -19,7 +19,7 @@
   >
     <span
       :class="
-        theme === 0 // And the same reason
+        theme === 0
           ? 'i-material-symbols:sunny-rounded'
           : theme === 1
             ? 'i-material-symbols:dark-mode-rounded'
@@ -40,30 +40,122 @@ const themeChannel = new BroadcastChannel("theme-switcher-channel");
  */
 const theme = ref(Number(localStorage.getItem("themeSwitcherTheme")) || 0);
 
-function toggle() {
-  theme.value = (theme.value + 1) % 3;
+function shouldSkipTransition() {
+  return (
+    !document.startViewTransition ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 }
 
-onMounted(() => {
-  document.documentElement.style.colorScheme =
-    theme.value === 0 ? "" : theme.value === 1 ? "light" : "dark";
-});
+function getTransitionCoordinates(event) {
+  const hasPointerCoordinates =
+    typeof event?.clientX === "number" &&
+    typeof event?.clientY === "number" &&
+    (event.clientX !== 0 || event.clientY !== 0);
 
-watch(theme, () => {
-  localStorage.setItem("themeSwitcherTheme", theme.value);
-  themeChannel.postMessage(theme.value);
+  const x = hasPointerCoordinates ? event.clientX : innerWidth / 2;
+  const y = hasPointerCoordinates ? event.clientY : innerHeight / 2;
 
-  document.documentElement.setAttribute(
-    "data-theme",
-    theme.value === 1 ? "light" : theme.value === 2 ? "dark" : "",
+  const radius = Math.hypot(
+    Math.max(x, innerWidth - x),
+    Math.max(y, innerHeight - y),
   );
 
-  document.documentElement.style.colorScheme =
-    theme.value === 0 ? "" : theme.value === 1 ? "light" : "dark";
+  return { x, y, radius };
+}
+
+/**
+ * Synchronously updates the DOM to match the theme.
+ * Separated from watcher to ensure viewTransition captures the state immediately.
+ */
+function applyTheme(newTheme) {
+  const isDark =
+    newTheme === 2 ||
+    (newTheme === 0 &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  // Apply attributes for CSS selectors
+  document.documentElement.setAttribute(
+    "data-theme",
+    newTheme === 1 ? "light" : newTheme === 2 ? "dark" : "",
+  );
+  document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+
+  return isDark;
+}
+
+function startThemeTransition(nextTheme, x, y, radius) {
+  const transition = document.startViewTransition(() => {
+    theme.value = nextTheme;
+    // Explicitly update DOM here so the 'new' snapshot is correct
+    applyTheme(nextTheme);
+  });
+
+  transition.ready.then(() => {
+    // We calculate isDarkMode based on the *destination* visual state
+    const isDarkMode =
+      nextTheme === 2 ||
+      (nextTheme === 0 &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    const clip = isDarkMode
+      ? [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`]
+      : [
+          `circle(${radius}px at ${x}px ${y}px)`,
+          `circle(0px at ${x}px ${y}px)`,
+        ];
+
+    document.documentElement.animate(
+      { clipPath: clip },
+      {
+        duration: 250,
+        easing: "ease-in-out",
+        fill: "forwards",
+        pseudoElement: isDarkMode
+          ? "::view-transition-new(root)"
+          : "::view-transition-old(root)",
+      },
+    );
+  });
+}
+
+function toggle(event) {
+  const nextTheme = (theme.value + 1) % 3;
+  const isSystemDark = window.matchMedia(
+    "(prefers-color-scheme: dark)",
+  ).matches;
+
+  // Skip if user prefers light mode and current theme is System (0),
+  // or if user prefers dark mode and current theme is Dark (2)
+  // This is done to prevent unnecessary transitions.
+  const explicitSkip =
+    (!isSystemDark && theme.value === 0) || (isSystemDark && theme.value === 2);
+
+  if (explicitSkip || shouldSkipTransition()) {
+    theme.value = nextTheme;
+    applyTheme(nextTheme);
+    return;
+  }
+
+  const { x, y, radius } = getTransitionCoordinates(event);
+  startThemeTransition(nextTheme, x, y, radius);
+}
+
+// Watcher primarily for persistence and cross-tab synchronization
+watch(theme, (newValue) => {
+  localStorage.setItem("themeSwitcherTheme", newValue);
+  themeChannel.postMessage(newValue);
+  // Redundant safety call, harmless if DOM is already updated by toggle
+  applyTheme(newValue);
+});
+
+onMounted(() => {
+  applyTheme(theme.value);
 });
 
 themeChannel.onmessage = (event) => {
   theme.value = event.data;
+  applyTheme(theme.value);
 };
 </script>
 

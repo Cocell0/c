@@ -17,19 +17,7 @@ function createChat() {
   if (!(import.meta.env.PROD && window.plugins?.commentsPlugin)) {
     chat.value = `${props.config.channelLabel} [Chat plugin not available]`;
   } else {
-    const options = Object.create(
-      Object.getPrototypeOf(props.config),
-      Object.getOwnPropertyDescriptors(props.config),
-    );
-
-    options.containerStyle =
-      "background: transparent; width: 100%; height: 100%;";
-    options.messageFeedStyle =
-      "background: transparent; display: flex; flex-direction: column; padding: 0.4rem;";
-    options.messageBubbleStyle = "padding: 0.6rem; background: transparent;";
-    options.hideFullscreenButton = true;
-
-    chat.value = window.plugins.commentsPlugin(options);
+    chat.value = window.plugins.commentsPlugin(props.config);
   }
 }
 

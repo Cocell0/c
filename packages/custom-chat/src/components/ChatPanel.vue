@@ -39,7 +39,7 @@
       >
         {{ chat.name }}
       </h3>
-      <!-- <Edit v-if="!chat.system" :chat="chat" @update:edited="handleEdit" /> -->
+      <Edit v-if="!chat.system" :chat="chat" @update:edited="handleEdit" />
     </div>
     <Chat
       :config="{
@@ -94,10 +94,13 @@ function addChat(key) {
   }
 }
 function handleEdit(key) {
-  console.log("Editing chat:", key);
-
   const editedChat = getChat(key);
   if (!editedChat) return;
+
+  currentChat.value = editedChat;
+  chats.value = chats.value.map((chat) =>
+    chat.key === editedChat.key ? editedChat : chat,
+  );
 }
 
 onMounted(async () => {

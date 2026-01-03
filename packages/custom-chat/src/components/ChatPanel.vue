@@ -47,6 +47,11 @@
         channelLabel: chat.name,
         adminPassword:
           '54aeb8a29d48e5c37d39fe9a39c2eb5f190f1cd896b3ca3b24e974c066cbd8f8',
+        containerStyle: 'background: transparent; width: 100%; height: 100%;',
+        messageFeedStyle:
+          'background: transparent; display: flex; flex-direction: column; padding: 0.4rem;',
+        messageBubbleStyle: 'padding: 0.6rem; background: transparent;',
+        fullscreenButtonStyle: 'display: none;',
       }"
     />
   </section>

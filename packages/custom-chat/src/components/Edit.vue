@@ -18,7 +18,11 @@
         style="display: flex; flex-direction: column; gap: var(--spacing--B)"
       >
         <label for="chat-name">Chat Name:</label>
-        <input id="chat-name" v-model="changes.name" />
+        <input
+          id="chat-name"
+          v-model="changes.name"
+          @keydown.enter="saveChanges"
+        />
       </div>
       <template #action>
         <button @click="showModal = false">Cancel</button>

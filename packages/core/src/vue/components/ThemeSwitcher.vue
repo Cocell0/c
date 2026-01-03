@@ -4,17 +4,17 @@
     class="button--icon"
     :aria-label="
       theme === 0
-        ? 'Switch to light mode'
+        ? 'Change theme: Switch to light mode'
         : theme === 1
-          ? 'Switch to dark mode'
-          : 'Let the system decide'
+          ? 'Change theme: Switch to dark mode'
+          : 'Change theme: Let the system decide'
     "
     :title="
       theme === 0
-        ? 'Switch to light mode'
+        ? 'Change theme: Switch to light mode'
         : theme === 1
-          ? 'Switch to dark mode'
-          : 'Let the system decide'
+          ? 'Change theme: Switch to dark mode'
+          : 'Change theme: Let the system decide'
     "
   >
     <span

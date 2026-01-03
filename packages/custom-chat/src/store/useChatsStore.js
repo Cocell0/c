@@ -140,12 +140,15 @@ export const useChatsStore = defineStore("chats", {
       const existingChat = await this.db.chats.get(key);
       if (!existingChat) return;
 
-      await this.db.chats.put({
-        ...existingChat,
-        ...validChanges,
-      });
-
-      await this.loadUserChats();
+      try {
+        await this.db.chats.put({
+          ...existingChat,
+          ...validChanges,
+        });
+        await this.loadUserChats();
+      } catch (error) {
+        console.error("Error updating chat:", error);
+      }
 
       this.channel.postMessage({ type: "sync" });
     },

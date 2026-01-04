@@ -5,20 +5,22 @@
  *
  * @returns {import('vite').Plugin}
  */
-export default function perchanceSpecifics(name) {
+export default function perchanceSpecifics() {
   return {
-    name: 'perchance-specifics',
+    name: "perchance-specifics",
     async transformIndexHtml(html) {
-      const fs = await import('node:fs/promises');
-      const path = await import('node:path');
-      const { fileURLToPath } = await import('url');
+      const fs = await import("node:fs/promises");
+      const path = await import("node:path");
+      const { fileURLToPath } = await import("url");
       const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-      const filePath = path.resolve(__dirname, 'perchance-specifics.js');
-      const scriptContent = await fs.readFile(filePath, 'utf-8');
-      const updatedScriptContent = scriptContent.replace('const appName = null', `const appName = '${name}'`);
+      const filePath = path.resolve(__dirname, "perchance-specifics.js");
+      const scriptContent = await fs.readFile(filePath, "utf-8");
 
-      return html.replace(/<\/head>/i, `<script>${updatedScriptContent}</script></head>`)
-    }
-  }
+      return html.replace(
+        /<\/head>/i,
+        `<script>${scriptContent}</script></head>`,
+      );
+    },
+  };
 }

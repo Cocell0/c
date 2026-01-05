@@ -2,7 +2,6 @@
   <a
     @keydown="onKeydown"
     @click="onClick"
-    ref="anchor"
     :href="'#' + href"
     :class="{ active: isActive }"
   >
@@ -21,7 +20,6 @@ const props = defineProps({
   },
 });
 
-const anchor = ref(null);
 const href = toRef(props, "href");
 const activeRoute = useRoute();
 
@@ -43,6 +41,9 @@ function onKeydown(event) {
     // This is to ensure that the link opens in a new tab or window
     // It had to be done because the default behavior no longer works properly in Perchance
     window.open(url, "_blank");
+    // This will prevent Perchance from intercepting the event, and ensure that the link opens
+    // in a new tab without changing the current hash
+    event.stopImmediatePropagation();
   } else {
     window.location.hash = href.value;
   }
@@ -57,6 +58,8 @@ function onClick(event) {
   if (event.ctrlKey) {
     // The same reason as before
     window.open(url, "_blank");
+    // Same reason, same reason
+    event.stopImmediatePropagation();
   } else {
     window.location.hash = href.value;
   }

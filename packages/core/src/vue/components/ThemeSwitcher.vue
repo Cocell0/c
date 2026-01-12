@@ -151,6 +151,12 @@ watch(theme, (newValue) => {
 
 onMounted(() => {
   applyTheme(theme.value);
+
+  const themePreference = window.matchMedia("(prefers-color-scheme: dark)");
+
+  themePreference.addEventListener("change", (event) => {
+    applyTheme(theme.value);
+  });
 });
 
 themeChannel.onmessage = (event) => {

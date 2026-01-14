@@ -65,8 +65,16 @@
         </li>
       </ul>
 
-      <div style="padding: var(--spacing--C)">
+      <div
+        style="
+          padding: var(--spacing--C);
+          display: flex;
+          gap: var(--spacing--A);
+        "
+      >
         <ThemeSwitcher />
+        <Fullscreen />
+        <Settings />
       </div>
     </section>
     <ChatPanel :chatKey="key || ''" />
@@ -84,6 +92,8 @@ import Fuse from "fuse.js";
 import Add from "@/components/Add.vue";
 import ChatPanel from "@/components/ChatPanel.vue";
 import ThemeSwitcher from "core/src/vue/components/ThemeSwitcher.vue";
+import Settings from "@/components/Settings.vue";
+import Fullscreen from "core/src/vue/components/Fullscreen.vue";
 
 const route = useRoute();
 const key = computed(() => route.params.key);

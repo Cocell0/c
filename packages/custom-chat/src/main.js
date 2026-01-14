@@ -11,7 +11,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
-import { useChatsStore } from "@/store/useChatsStore";
+import { useChatsStore } from "@/stores/useChatsStore";
 
 router.afterEach((route) => {
   const title = route.meta?.title;

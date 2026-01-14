@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { useChatsStore } from "../store/useChatsStore";
+import { useChatsStore } from "../stores/useChatsStore";
 const chatsStore = useChatsStore();
 
 function generateName() {

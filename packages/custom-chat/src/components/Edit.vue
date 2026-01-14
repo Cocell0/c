@@ -57,7 +57,7 @@
 <script setup>
 import { ref } from "vue";
 import Modal from "core/src/vue/components/Modal.vue";
-import { useChatsStore } from "../store/useChatsStore";
+import { useChatsStore } from "../stores/useChatsStore";
 
 const emit = defineEmits(["update:edited", "update:deleted"]);
 const chatsStore = useChatsStore();

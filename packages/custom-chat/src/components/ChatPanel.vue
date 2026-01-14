@@ -67,7 +67,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Chat from "@/components/Chat.vue";
 import Edit from "@/components/Edit.vue";
-import { useChatsStore } from "../store/useChatsStore";
+import { useChatsStore } from "../stores/useChatsStore";
 
 const props = defineProps({
   chatKey: {

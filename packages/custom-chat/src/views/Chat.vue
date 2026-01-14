@@ -83,7 +83,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
-import { useChatsStore } from "../store/useChatsStore";
+import { useChatsStore } from "../stores/useChatsStore";
 import useRovingIndex from "core/src/vue/composables/useRovingIndex.js";
 import { useRoute } from "vue-router";
 

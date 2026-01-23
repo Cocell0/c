@@ -12,6 +12,7 @@
         align-items: center;
         padding: var(--spacing--C);
         gap: var(--spacing--B);
+        min-height: 67px;
       "
     >
       <AnchorLink

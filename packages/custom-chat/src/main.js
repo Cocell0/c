@@ -12,6 +12,7 @@ import App from "./App.vue";
 import router from "./router";
 
 import { useChatsStore } from "@/stores/useChatsStore";
+import { useSecretsStore } from "@/stores/useSecretsStore";
 
 router.afterEach((route) => {
   const title = route.meta?.title;
@@ -54,7 +55,19 @@ app.use(router);
 app.use(createPinia());
 app.use(VueVirtualScroller);
 
+const secretsStore = useSecretsStore();
 const chatsStore = useChatsStore();
 await chatsStore.initializeDB();
+
+if (import.meta.env.PROD) {
+  const savedKeys = JSON.parse(localStorage.getItem("userKeys"));
+  let keys = savedKeys;
+  if (!keys) {
+    keys = plugins.secret.generateKeyPair();
+    localStorage.setItem("userKeys", JSON.stringify(keys));
+  }
+  secretsStore.publicKey = keys.public;
+  secretsStore.privateKey = keys.private;
+}
 
 app.mount("#app");

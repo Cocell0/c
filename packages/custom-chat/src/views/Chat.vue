@@ -22,7 +22,7 @@
           "
           >Chats</AnchorLink
         >
-        <Add />
+        <AddChat />
       </h3>
 
       <div class="chat-search" style="padding-inline: var(--spacing--C)">
@@ -70,12 +70,13 @@
         style="
           padding: var(--spacing--C);
           display: flex;
-          gap: var(--spacing--A);
+          gap: var(--spacing--B);
         "
       >
         <ThemeSwitcher />
         <Fullscreen />
         <Settings />
+        <ImportChat />
       </div>
     </section>
     <ChatPanel :chatKey="key || ''" />
@@ -90,10 +91,11 @@ import { useRoute } from "vue-router";
 
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Fuse from "fuse.js";
-import Add from "@/components/Add.vue";
+import AddChat from "@/components/navigation-panel/AddChat.vue";
 import ChatPanel from "@/components/ChatPanel.vue";
 import ThemeSwitcher from "core/src/vue/components/ThemeSwitcher.vue";
-import Settings from "@/components/Settings.vue";
+import Settings from "@/components/navigation-panel/Settings.vue";
+import ImportChat from "@/components/navigation-panel/ImportChat.vue";
 import Fullscreen from "core/src/vue/components/Fullscreen.vue";
 
 const route = useRoute();

@@ -28,19 +28,27 @@ export const useChatsStore = defineStore("chats", {
      * @returns {Array} An array of chats sorted by last active time.
      */
     allChats: (state) => {
-      const lastActiveMap = (state.lastActive || []).reduce(
+      const metadataMap = (state.chatMetadata || []).reduce(
         (accumulator, entry) => {
-          accumulator[entry.key] = entry.timestamp;
+          accumulator[entry.key] = entry.metadata || {};
           return accumulator;
         },
         {},
       );
 
-      return [...state.systemChats, ...state.userChats].sort(
-        (firstChat, secondChat) =>
-          (lastActiveMap[secondChat.key] || 0) -
-          (lastActiveMap[firstChat.key] || 0),
-      );
+      return [...state.systemChats, ...state.userChats]
+        .map((chat) => ({
+          ...chat,
+          ...metadataMap[chat.key],
+        }))
+        .sort((firstChat, secondChat) => {
+          // Sorting chats
+          // Pinned first
+          if (firstChat.pinned && !secondChat.pinned) return -1;
+          if (!firstChat.pinned && secondChat.pinned) return 1;
+          // Then sort by lastActive descending
+          return (secondChat.lastActive || 0) - (firstChat.lastActive || 0);
+        });
     },
   },
 
@@ -50,13 +58,13 @@ export const useChatsStore = defineStore("chats", {
      * @returns {Promise<void>} A promise that resolves when the database is initialized.
      */
     async initializeDB() {
-      this.db = new Dexie("CustomChatDB");
+      this.db = new Dexie("CustomChatDBDevelopment");
 
       this.db
         .version(2)
         .stores({
           chats: "&key,name,channel",
-          lastActive: "&key,timestamp",
+          chatMetadata: "&key,metadata",
         })
         .upgrade(async (trans) => {
           const oldChats = await trans.table("chats").toArray();

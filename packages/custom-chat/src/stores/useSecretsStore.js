@@ -9,7 +9,7 @@ import { defineStore } from "pinia";
  */
 export const useSecretsStore = defineStore("secrets", {
   state: () => ({
-    publicKey: "PUBLIC_1_null_PUBLIC_END",
-    privateKey: "PRIVATE_1_null_PRIVATE_END",
+    publicKey: null,
+    privateKey: null,
   }),
 });

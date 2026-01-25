@@ -9,6 +9,7 @@
           line-height: normal;
           padding: var(--spacing--C);
           margin-bottom: 0;
+          width: unset;
         "
       >
         <AnchorLink

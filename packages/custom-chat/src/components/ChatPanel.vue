@@ -40,12 +40,27 @@
       >
         {{ chat.name }}
       </h3>
-      <Edit
-        v-if="!chat.system"
-        :chat="chat"
-        @update:edited="handleEdit"
-        @update:deleted="handleDelete"
-      />
+      <OverflowMenu :style="'right: -6px'" v-if="!chat.system">
+        <Edit
+          v-if="currentChat === chat"
+          :chat="chat"
+          @update:edited="handleEdit"
+          @update:deleted="handleDelete"
+        />
+        <button>
+          <span class="i-material-symbols:share" aria-hidden inert></span>Share
+          chat
+        </button>
+        <hr style="margin-block: var(--spacing--A)" />
+        <button>
+          <span
+            class="i-material-symbols:delete-rounded"
+            aria-hidden
+            inert
+          ></span
+          >Delete chat
+        </button>
+      </OverflowMenu>
     </div>
     <Chat
       :config="{
@@ -66,6 +81,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
+import OverflowMenu from "core/src/vue/components/OverflowMenu.vue";
 import Chat from "@/components/Chat.vue";
 import Edit from "@/components/Edit.vue";
 import { useChatsStore } from "../stores/useChatsStore";

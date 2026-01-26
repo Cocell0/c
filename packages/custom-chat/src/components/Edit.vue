@@ -1,9 +1,9 @@
 <template>
   <span>
     <button
-      class="button--icon"
       aria-label="Edit chat's properties"
       title="Edit chat's properties"
+      style="width: 100%"
       @click="showModal = true"
     >
       <span
@@ -11,7 +11,8 @@
         aria-hidden="true"
         translate="no"
         inert
-      ></span>
+      ></span
+      >Edit chat
     </button>
     <Modal title="Edit chat" v-model:open="showModal">
       <div

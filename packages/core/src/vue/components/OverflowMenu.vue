@@ -90,7 +90,7 @@ function blur(event) {
     min-height: var(--min-dimension);
     min-width: var(--min-dimension);
     width: max-content;
-    z-index: 0;
+    z-index: 1;
     animation: fade-out 120ms ease-out forwards;
   }
 

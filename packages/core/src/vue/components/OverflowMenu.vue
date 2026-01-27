@@ -59,6 +59,23 @@ function blur(event) {
 </script>
 
 <style scoped lang="scss">
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .overflow-menu-wrapper {
   position: relative;
 
@@ -66,18 +83,21 @@ function blur(event) {
     visibility: hidden;
     position: absolute;
     margin-block: var(--spacing--A);
-    background-color: var(--color__background);
-    box-shadow: 0 0 var(--spacing--B)
-      light-dark(oklch(0.75 0 0), oklch(0.25 0 0));
+    background-color: var(--color__surface--emphasis);
+    /* box-shadow: 0 0 var(--spacing--B)
+      light-dark(oklch(0.75 0 0), oklch(0.25 0 0)); */
     border-radius: calc(var(--rounding--A) * 1.155);
     min-height: var(--min-dimension);
     min-width: var(--min-dimension);
     width: max-content;
+    z-index: 0;
+    animation: fade-out 120ms ease-out forwards;
   }
 
   &:focus-within {
     .overflow-menu-inner-wrapper {
       visibility: visible;
+      animation: fade-in 120ms ease-in forwards;
     }
   }
 }

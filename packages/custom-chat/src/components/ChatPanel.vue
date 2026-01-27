@@ -42,7 +42,7 @@
       </h3>
       <OverflowMenu :style="'right: -6px'" v-if="!chat.system">
         <Edit
-          v-if="currentChat === chat"
+          v-if="currentChat?.key === chat.key"
           :chat="chat"
           @update:edited="handleEdit"
           @update:deleted="handleDelete"

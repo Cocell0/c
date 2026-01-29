@@ -75,7 +75,7 @@
       >
         <ThemeSwitcher />
         <Fullscreen />
-        <Settings />
+        <Keys />
         <ImportChat />
       </div>
     </section>
@@ -94,7 +94,7 @@ import Fuse from "fuse.js";
 import AddChat from "@/components/navigation-panel/AddChat.vue";
 import ChatPanel from "@/components/ChatPanel.vue";
 import ThemeSwitcher from "core/src/vue/components/ThemeSwitcher.vue";
-import Settings from "@/components/navigation-panel/Settings.vue";
+import Keys from "@/components/navigation-panel/Keys.vue";
 import ImportChat from "@/components/navigation-panel/ImportChat.vue";
 import Fullscreen from "core/src/vue/components/Fullscreen.vue";
 

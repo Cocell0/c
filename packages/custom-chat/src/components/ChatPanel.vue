@@ -51,14 +51,18 @@
           <span class="i-material-symbols:share" aria-hidden inert></span>Share
           chat
         </button>
+        <button>
+          <span class="i-material-symbols:keep-rounded" aria-hidden inert></span
+          >Pin
+        </button>
         <hr style="margin-block: var(--spacing--A)" />
         <button>
           <span
-            class="i-material-symbols:delete-rounded"
+            class="i-material-symbols:logout-rounded"
             aria-hidden
             inert
           ></span
-          >Delete chat
+          >Leave chat
         </button>
       </OverflowMenu>
     </div>

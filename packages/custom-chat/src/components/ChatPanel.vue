@@ -41,29 +41,11 @@
         {{ chat.name }}
       </h3>
       <OverflowMenu :style="'right: -6px'" v-if="!chat.system">
-        <Edit
-          v-if="currentChat?.key === chat.key"
-          :chat="chat"
-          @update:edited="handleEdit"
-          @update:deleted="handleDelete"
-        />
-        <button>
-          <span class="i-material-symbols:share" aria-hidden inert></span>Share
-          chat
-        </button>
-        <button>
-          <span class="i-material-symbols:keep-rounded" aria-hidden inert></span
-          >Pin
-        </button>
+        <RenameChat />
+        <ShareChat />
+        <PinChat />
         <hr style="margin-block: var(--spacing--A)" />
-        <button>
-          <span
-            class="i-material-symbols:logout-rounded"
-            aria-hidden
-            inert
-          ></span
-          >Leave chat
-        </button>
+        <LeaveChat />
       </OverflowMenu>
     </div>
     <Chat
@@ -87,6 +69,10 @@ import { computed, onMounted, ref, watch } from "vue";
 import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import OverflowMenu from "core/src/vue/components/OverflowMenu.vue";
 import Chat from "@/components/Chat.vue";
+import RenameChat from "@/components/chat-panel/RenameChat.vue";
+import PinChat from "@/components/chat-panel/PinChat.vue";
+import ShareChat from "@/components/chat-panel/ShareChat.vue";
+import LeaveChat from "@/components/chat-panel/LeaveChat.vue";
 import Edit from "@/components/Edit.vue";
 import { useChatsStore } from "../stores/useChatsStore";
 

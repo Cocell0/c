@@ -17,15 +17,6 @@
         readonly
       />
     </div>
-    <div>
-      <label for="private-key-field">Private key:</label>
-      <input
-        id="private-key-field"
-        v-model="privateKey"
-        placeholder="Private Key"
-        readonly
-      />
-    </div>
   </Modal>
 </template>
 <script setup>
@@ -35,7 +26,7 @@ import { useSecretsStore } from "@/stores/useSecretsStore";
 
 const secretsStore = useSecretsStore();
 
-const { publicKey, privateKey } = secretsStore;
+const { publicKey } = secretsStore;
 const isOpen = ref(false);
 </script>
 <style scoped lang="scss">

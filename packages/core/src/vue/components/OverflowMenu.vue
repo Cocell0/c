@@ -14,7 +14,7 @@
       :aria-expanded="isOpen"
       @click="isOpen = !isOpen"
     >
-      <span v-if="props.label">{{ props.label }}</span>
+      <span class="label" v-if="props.label">{{ props.label }}</span>
       <span
         :class="
           props.label
@@ -70,6 +70,13 @@ function handleFocusOut(event) {
 <style scoped lang="scss">
 .overflow-menu-wrapper {
   position: relative;
+
+  .label {
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
   .overflow-menu-inner-wrapper {
     position: absolute;

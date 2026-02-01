@@ -27,7 +27,7 @@
           inert
         ></span>
       </AnchorLink>
-      <OverflowMenu :style="'right: -6px'" :label="chat.name">
+      <OverflowMenu :label="chat.name">
         <RenameChat v-if="!chat.system" />
         <ShareChat v-if="!chat.system" />
         <PinChat />

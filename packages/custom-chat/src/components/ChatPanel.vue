@@ -11,8 +11,7 @@
         display: flex;
         align-items: center;
         padding: var(--spacing--C);
-        gap: var(--spacing--B);
-        min-height: 67px;
+        justify-content: center;
       "
     >
       <AnchorLink
@@ -28,24 +27,12 @@
           inert
         ></span>
       </AnchorLink>
-      <h3
-        class="chat-name"
-        style="
-          line-height: normal;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          flex: 1;
-        "
-      >
-        {{ chat.name }}
-      </h3>
-      <OverflowMenu :style="'right: -6px'" v-if="!chat.system">
-        <RenameChat />
-        <ShareChat />
+      <OverflowMenu :style="'right: -6px'" :label="chat.name">
+        <RenameChat v-if="!chat.system" />
+        <ShareChat v-if="!chat.system" />
         <PinChat />
-        <hr style="margin-block: var(--spacing--A)" />
-        <LeaveChat />
+        <hr style="margin-block: var(--spacing--A)" v-if="!chat.system" />
+        <LeaveChat v-if="!chat.system" />
       </OverflowMenu>
     </div>
     <Chat

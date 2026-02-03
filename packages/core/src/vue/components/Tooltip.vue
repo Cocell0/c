@@ -51,10 +51,9 @@ const props = defineProps({
     will-change: opacity, transform;
 
     &.top {
-      top: calc(-100% - var(--spacing--B));
+      bottom: calc(100% + var(--spacing--B));
     }
     &.bottom {
-      inset: 0;
       top: calc(100% + var(--spacing--B));
     }
     &.left {

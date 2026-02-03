@@ -1,17 +1,15 @@
 <template>
   <span class="tooltip">
     <slot></slot>
-    <Transition name="fade">
-      <span
-        class="tooltip-text"
-        :class="props.position"
-        :style="props.tooltipStyle"
-        aria-hidden="true"
-        inert
-      >
-        {{ props.text }}
-      </span>
-    </Transition>
+    <span
+      class="tooltip-text"
+      :class="props.position"
+      :style="props.tooltipStyle"
+      aria-hidden="true"
+      inert
+    >
+      {{ props.text }}
+    </span>
   </span>
 </template>
 
@@ -42,6 +40,8 @@ const props = defineProps({
     z-index: var(--z__tooltip);
     width: max-content;
     height: max-content;
+    font-size: 0.8rem;
+    font-weight: normal;
     background-color: var(--color__surface--emphasis);
     border-radius: calc(var(--base__rounding) * 0.72);
     padding: var(--spacing--B) var(--spacing--C);

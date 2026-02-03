@@ -73,8 +73,8 @@
           gap: var(--spacing--B);
         "
       >
-        <ThemeSwitcher />
-        <Fullscreen />
+        <ThemeSwitcher position="top" />
+        <Fullscreen position="top center" />
         <Keys />
         <ImportChat />
       </div>

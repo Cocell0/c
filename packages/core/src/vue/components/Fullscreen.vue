@@ -1,7 +1,8 @@
 <template>
   <Tooltip
     :text="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
-    tooltipStyle="left: 0"
+    :position="props.position"
+    :tooltipStyle="props.tooltipStyle"
   >
     <button
       v-if="supportsFullscreen"
@@ -22,6 +23,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import Tooltip from "./Tooltip.vue";
+
+const props = defineProps({
+  position: {
+    type: String,
+    default: "bottom center",
+  },
+  tooltipStyle: {
+    type: String,
+  },
+});
 
 const supportsFullscreen = ref(
   document.fullscreenEnabled ||

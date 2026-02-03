@@ -1,5 +1,5 @@
 <template>
-  <Tooltip text="Import chat" tooltipStyle="left: 0">
+  <Tooltip text="Import chat" position="top center">
     <button class="button--icon" aria-label="Import chat">
       <span
         class="i-material-symbols:download-rounded"

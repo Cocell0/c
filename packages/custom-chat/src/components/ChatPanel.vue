@@ -10,9 +10,8 @@
       style="display: flex; padding: var(--spacing--C); justify-content: center"
     >
       <Tooltip
-        position="bottom"
+        position="right center"
         text="Go back to chats list"
-        tooltipStyle="left: 0"
       >
         <AnchorLink
           href="/c"

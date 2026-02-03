@@ -52,9 +52,8 @@ const props = defineProps({
     border-radius: calc(var(--base__rounding) * 0.72);
     padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;
-    scale: 0.95;
     transform-origin: center;
-    will-change: opacity, scale, transform;
+    will-change: opacity, transform;
 
     &.top {
       bottom: calc(100% + var(--spacing--B));
@@ -141,22 +140,18 @@ const props = defineProps({
 @keyframes tooltip-in {
   from {
     opacity: 0;
-    scale: 0.95;
   }
   to {
     opacity: 1;
-    scale: 1;
   }
 }
 
 @keyframes tooltip-out {
   from {
     opacity: 1;
-    scale: 1;
   }
   to {
     opacity: 0;
-    scale: 0.95;
   }
 }
 
@@ -174,7 +169,6 @@ const props = defineProps({
     &:focus-within {
       .tooltip-text {
         opacity: 1;
-        scale: 1;
         transition-delay: var(--tooltip-in-delay);
       }
     }
@@ -183,7 +177,6 @@ const props = defineProps({
     &:not(:hover):not(:focus-within) {
       .tooltip-text {
         opacity: 0;
-        scale: 0.95;
         transition-delay: var(--tooltip-out-delay);
       }
     }

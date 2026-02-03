@@ -1,6 +1,7 @@
 <template>
   <Tooltip
-    tooltipStyle="left: 0"
+    :position="props.position"
+    :tooltipStyle="props.tooltipStyle"
     :text="
       theme === 0
         ? 'Change theme: Switch to light mode'
@@ -35,6 +36,16 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import Tooltip from "./Tooltip.vue";
+
+const props = defineProps({
+  position: {
+    type: String,
+    default: "bottom center",
+  },
+  tooltipStyle: {
+    type: String,
+  },
+});
 
 const themeChannel = new BroadcastChannel("theme-switcher-channel");
 

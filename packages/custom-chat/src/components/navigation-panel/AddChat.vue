@@ -1,9 +1,5 @@
 <template>
-  <Tooltip
-    position="left"
-    text="Add a new chat"
-    tooltipStyle="top: 12%; font-size: 1rem; font-weight: normal;"
-  >
+  <Tooltip position="left" text="Add a new chat" tooltipStyle="top: 12%;">
     <button class="button--icon" @click="add()" aria-label="Add a new chat">
       <span
         class="i-material-symbols:add-2-rounded"

@@ -13,6 +13,7 @@
       aria-haspopup="menu"
       :aria-expanded="isOpen"
       @click="isOpen = !isOpen"
+      :disabled="props.disable"
     >
       <span class="label" v-if="props.label">{{ props.label }}</span>
       <span
@@ -54,6 +55,10 @@ const props = defineProps({
   },
   label: {
     type: String,
+  },
+  disable: {
+    type: Boolean,
+    default: false,
   },
 });
 

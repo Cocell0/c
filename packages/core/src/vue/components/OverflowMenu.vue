@@ -9,7 +9,6 @@
       ref="button"
       :class="props.label ? '' : 'button--icon'"
       :aria-label="props.ariaLabel"
-      :title="props.title"
       aria-haspopup="menu"
       :aria-expanded="isOpen"
       @click="isOpen = !isOpen"
@@ -46,10 +45,6 @@ import { ref } from "vue";
 const props = defineProps({
   style: String,
   ariaLabel: {
-    type: String,
-    default: "More options",
-  },
-  title: {
     type: String,
     default: "More options",
   },

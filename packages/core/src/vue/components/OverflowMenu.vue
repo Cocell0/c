@@ -80,6 +80,7 @@ function handleFocusOut(event) {
 
   .overflow-menu-inner-wrapper {
     position: absolute;
+    z-index: var(--z__popup);
     margin-block: var(--spacing--A);
     background-color: var(--color__surface--emphasis);
     border: 2px solid var(--color__border-divider--opaque);
@@ -87,7 +88,6 @@ function handleFocusOut(event) {
     min-height: var(--min-dimension);
     min-width: 100%;
     width: max-content;
-    z-index: 1;
   }
 }
 

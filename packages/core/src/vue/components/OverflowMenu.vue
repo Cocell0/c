@@ -88,7 +88,7 @@ function handleFocusOut(event) {
     margin-block: var(--spacing--A);
     background-color: var(--color__surface--emphasis);
     border: 2px solid var(--color__border-divider--opaque);
-    border-radius: calc(var(--rounding--A) * 1.155);
+    border-radius: calc(var(--rounding--B) * 0.95);
     min-height: var(--min-dimension);
     min-width: 100%;
     width: max-content;
@@ -112,8 +112,14 @@ function handleFocusOut(event) {
   gap: var(--spacing--A);
   padding: var(--spacing--B);
 
-  :deep(> *) {
+  > *:is(hr) {
+    margin-block: var(--spacing--A);
+    border-color: var(--color__border-divider--opaque);
+  }
+
+  > *:is(button, .button) {
     flex: 1;
+    justify-content: start;
   }
 }
 </style>

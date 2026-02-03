@@ -9,6 +9,7 @@ import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
+import Tooltip from "core/src/vue/components/Tooltip.vue";
 import router from "./router";
 
 import { useChatsStore } from "@/stores/useChatsStore";
@@ -70,4 +71,5 @@ if (import.meta.env.PROD) {
   secretsStore.privateKey = keys.private;
 }
 
+app.component("Tooltip", Tooltip);
 app.mount("#app");

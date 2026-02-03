@@ -1,22 +1,27 @@
 <template>
-  <button
-    v-if="supportsFullscreen"
-    class="button--icon"
-    @click="toggleFullscreen"
-    :aria-label="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
-    :title="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
+  <Tooltip
+    :text="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
+    tooltipStyle="left: 0"
   >
-    <span
-      :class="
-        isFullscreen
-          ? `i-material-symbols:close-fullscreen-rounded`
-          : `i-material-symbols:fullscreen-rounded`
-      "
-    ></span>
-  </button>
+    <button
+      v-if="supportsFullscreen"
+      class="button--icon"
+      @click="toggleFullscreen"
+      :aria-label="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
+    >
+      <span
+        :class="
+          isFullscreen
+            ? `i-material-symbols:close-fullscreen-rounded`
+            : `i-material-symbols:fullscreen-rounded`
+        "
+      ></span>
+    </button>
+  </Tooltip>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import Tooltip from "./Tooltip.vue";
 
 const supportsFullscreen = ref(
   document.fullscreenEnabled ||

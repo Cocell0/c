@@ -1,15 +1,7 @@
 <template>
-  <button
-    @click="toggle"
-    class="button--icon"
-    :aria-label="
-      theme === 0
-        ? 'Change theme: Switch to light mode'
-        : theme === 1
-          ? 'Change theme: Switch to dark mode'
-          : 'Change theme: Let the system decide'
-    "
-    :title="
+  <Tooltip
+    tooltipStyle="left: 0"
+    :text="
       theme === 0
         ? 'Change theme: Switch to light mode'
         : theme === 1
@@ -17,20 +9,32 @@
           : 'Change theme: Let the system decide'
     "
   >
-    <span
-      :class="
+    <button
+      @click="toggle"
+      class="button--icon"
+      :aria-label="
         theme === 0
-          ? 'i-material-symbols:sunny-rounded'
+          ? 'Change theme: Switch to light mode'
           : theme === 1
-            ? 'i-material-symbols:dark-mode-rounded'
-            : 'i-material-symbols:sync-rounded'
+            ? 'Change theme: Switch to dark mode'
+            : 'Change theme: Let the system decide'
       "
-    ></span>
-  </button>
+    >
+      <span
+        :class="
+          theme === 0
+            ? 'i-material-symbols:sunny-rounded'
+            : theme === 1
+              ? 'i-material-symbols:dark-mode-rounded'
+              : 'i-material-symbols:sync-rounded'
+        "
+      ></span></button
+  ></Tooltip>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import Tooltip from "./Tooltip.vue";
 
 const themeChannel = new BroadcastChannel("theme-switcher-channel");
 

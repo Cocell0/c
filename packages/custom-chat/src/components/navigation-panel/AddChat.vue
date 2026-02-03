@@ -1,12 +1,17 @@
 <template>
-  <button class="button--icon" @click="add()" title="Add a new chat">
-    <span
-      class="i-material-symbols:add-2-rounded"
-      aria-hidden="true"
-      translate="no"
-      inert
-    ></span>
-  </button>
+  <Tooltip
+    position="left"
+    text="Add a new chat"
+    tooltipStyle="top: 12%; font-size: 1rem; font-weight: normal;"
+  >
+    <button class="button--icon" @click="add()" aria-label="Add a new chat">
+      <span
+        class="i-material-symbols:add-2-rounded"
+        aria-hidden="true"
+        translate="no"
+        inert
+      ></span></button
+  ></Tooltip>
 </template>
 
 <script setup>

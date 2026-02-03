@@ -7,33 +7,47 @@
     :aria-label="`Chat ${chat.name}`"
   >
     <div
-      style="
-        display: flex;
-        align-items: center;
-        padding: var(--spacing--C);
-        justify-content: center;
-      "
+      style="display: flex; padding: var(--spacing--C); justify-content: center"
     >
-      <AnchorLink
-        href="/c"
-        class="button button--icon chat-back-button"
-        aria-label="Go back"
-        title="Go back"
+      <Tooltip
+        position="bottom"
+        text="Go back to chats list"
+        tooltipStyle="left: 0"
       >
-        <span
-          class="i-material-symbols:arrow-back-rounded"
-          aria-hidden="true"
-          translate="no"
-          inert
-        ></span>
-      </AnchorLink>
-      <OverflowMenu :label="chat.name">
-        <RenameChat v-if="!chat.system" />
-        <ShareChat v-if="!chat.system" />
-        <PinChat />
-        <hr style="margin-block: var(--spacing--A)" v-if="!chat.system" />
-        <LeaveChat v-if="!chat.system" />
-      </OverflowMenu>
+        <AnchorLink
+          href="/c"
+          class="button button--icon chat-back-button"
+          aria-label="Go back to chats list"
+        >
+          <span
+            class="i-material-symbols:arrow-back-rounded"
+            aria-hidden="true"
+            translate="no"
+            inert
+          ></span>
+        </AnchorLink>
+      </Tooltip>
+
+      <div
+        style="
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: var(--min-dimension);
+        "
+      >
+        <OverflowMenu v-if="!chat.system" :label="chat.name">
+          <RenameChat />
+          <ShareChat />
+          <PinChat />
+          <hr />
+          <LeaveChat />
+        </OverflowMenu>
+        <OverflowMenu v-else :label="chat.name">
+          <PinChat />
+        </OverflowMenu>
+      </div>
     </div>
     <Chat
       :config="{

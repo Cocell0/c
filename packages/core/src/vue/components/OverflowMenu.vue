@@ -82,6 +82,7 @@ function handleFocusOut(event) {
     position: absolute;
     margin-block: var(--spacing--A);
     background-color: var(--color__surface--emphasis);
+    border: 2px solid var(--color__border-divider--opaque);
     border-radius: calc(var(--rounding--A) * 1.155);
     min-height: var(--min-dimension);
     min-width: 100%;

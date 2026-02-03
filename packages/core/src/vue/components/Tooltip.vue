@@ -43,8 +43,8 @@ const props = defineProps({
     width: max-content;
     height: max-content;
     background-color: var(--color__surface--emphasis);
-    border-radius: var(--rounding--A);
-    padding: var(--spacing--B);
+    border-radius: calc(var(--base__rounding) * 0.72);
+    padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;
     transform: scale(0.95);
     transform-origin: center;

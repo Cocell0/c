@@ -43,6 +43,7 @@ const props = defineProps({
     font-size: 0.8rem;
     font-weight: normal;
     background-color: var(--color__surface--emphasis);
+    border: 2px solid var(--color__border-divider--opaque);
     border-radius: calc(var(--base__rounding) * 0.72);
     padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;

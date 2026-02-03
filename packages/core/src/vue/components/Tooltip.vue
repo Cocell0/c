@@ -2,6 +2,7 @@
   <span class="tooltip">
     <slot></slot>
     <span
+      v-if="!props.disable"
       class="tooltip-text"
       :class="props.position"
       :style="props.tooltipStyle"
@@ -24,6 +25,10 @@ const props = defineProps({
   tooltipStyle: {
     type: String,
   },
+  disable: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -39,6 +44,7 @@ const props = defineProps({
     position: absolute;
     z-index: var(--z__tooltip);
     width: max-content;
+    max-width: 200px;
     height: max-content;
     font-size: 0.8rem;
     font-weight: normal;

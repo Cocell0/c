@@ -37,16 +37,18 @@
           min-height: var(--min-dimension);
         "
       >
-        <OverflowMenu v-if="!chat.system" :label="chat.name">
-          <RenameChat />
-          <ShareChat />
-          <PinChat />
-          <hr />
-          <LeaveChat />
-        </OverflowMenu>
-        <OverflowMenu v-else :label="chat.name">
-          <PinChat />
-        </OverflowMenu>
+        <Tooltip position="bottom center" :text="chat.name">
+          <OverflowMenu v-if="!chat.system" :label="chat.name">
+            <RenameChat :chat="chat" />
+            <ShareChat :chat="chat" />
+            <PinChat :chat="chat" />
+            <hr />
+            <LeaveChat :chat="chat" />
+          </OverflowMenu>
+          <OverflowMenu v-else :label="chat.name">
+            <PinChat />
+          </OverflowMenu>
+        </Tooltip>
       </div>
     </div>
     <Chat
@@ -74,7 +76,6 @@ import RenameChat from "@/components/chat-panel/RenameChat.vue";
 import PinChat from "@/components/chat-panel/PinChat.vue";
 import ShareChat from "@/components/chat-panel/ShareChat.vue";
 import LeaveChat from "@/components/chat-panel/LeaveChat.vue";
-import Edit from "@/components/Edit.vue";
 import { useChatsStore } from "../stores/useChatsStore";
 
 const props = defineProps({

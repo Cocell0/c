@@ -19,8 +19,7 @@ const props = defineProps({
   text: String,
   position: {
     type: String,
-    default: "top",
-    validator: (value) => ["top", "bottom", "left", "right"].includes(value),
+    default: "top center",
   },
   tooltipStyle: {
     type: String,
@@ -53,21 +52,65 @@ const props = defineProps({
     border-radius: calc(var(--base__rounding) * 0.72);
     padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;
-    transform: scale(0.95);
+    scale: 0.95;
     transform-origin: center;
-    will-change: opacity, transform;
+    will-change: opacity, scale, transform;
 
     &.top {
       bottom: calc(100% + var(--spacing--B));
+      transform-origin: center bottom;
+      left: 0;
+      right: 0;
+      transform: translateX(0);
+
+      &.center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        transform-origin: center bottom;
+      }
     }
     &.bottom {
       top: calc(100% + var(--spacing--B));
+      transform-origin: center top;
+      left: 0;
+      right: 0;
+      transform: translateX(0);
+
+      &.center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        transform-origin: center top;
+      }
     }
     &.left {
       right: calc(100% + var(--spacing--B));
+      transform-origin: left center;
+      top: 0;
+      bottom: 0;
+      transform: translateY(0);
+
+      &.center {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        transform-origin: left center;
+      }
     }
     &.right {
       left: calc(100% + var(--spacing--B));
+      transform-origin: right center;
+      top: 0;
+      bottom: 0;
+      transform: translateY(0);
+
+      &.center {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        transform-origin: right center;
+      }
     }
   }
 
@@ -98,22 +141,22 @@ const props = defineProps({
 @keyframes tooltip-in {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    scale: 0.95;
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    scale: 1;
   }
 }
 
 @keyframes tooltip-out {
   from {
     opacity: 1;
-    transform: scale(1);
+    scale: 1;
   }
   to {
     opacity: 0;
-    transform: scale(0.95);
+    scale: 0.95;
   }
 }
 
@@ -131,7 +174,7 @@ const props = defineProps({
     &:focus-within {
       .tooltip-text {
         opacity: 1;
-        transform: scale(1);
+        scale: 1;
         transition-delay: var(--tooltip-in-delay);
       }
     }
@@ -140,7 +183,7 @@ const props = defineProps({
     &:not(:hover):not(:focus-within) {
       .tooltip-text {
         opacity: 0;
-        transform: scale(0.95);
+        scale: 0.95;
         transition-delay: var(--tooltip-out-delay);
       }
     }

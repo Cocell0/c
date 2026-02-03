@@ -29,7 +29,8 @@
       <div
         v-if="isOpen && $slots.default"
         class="overflow-menu-inner-wrapper"
-        :style="props.style"
+        :class="props.position"
+        :style="props.menuStyle"
       >
         <div class="overflow-menu" role="menu" @click="isOpen = false">
           <slot></slot>
@@ -43,7 +44,9 @@
 import { ref } from "vue";
 
 const props = defineProps({
-  style: String,
+  menuStyle: {
+    type: String,
+  },
   ariaLabel: {
     type: String,
     default: "More options",
@@ -54,6 +57,10 @@ const props = defineProps({
   disable: {
     type: Boolean,
     default: false,
+  },
+  position: {
+    type: String,
+    default: "bottom center",
   },
 });
 
@@ -70,6 +77,7 @@ function handleFocusOut(event) {
 <style scoped lang="scss">
 .overflow-menu-wrapper {
   position: relative;
+  display: inline-block;
 
   .label {
     max-width: 200px;
@@ -81,13 +89,70 @@ function handleFocusOut(event) {
   .overflow-menu-inner-wrapper {
     position: absolute;
     z-index: var(--z__popup);
-    margin-block: var(--spacing--A);
     background-color: var(--color__surface--emphasis);
     border: 2px solid var(--color__border-divider--opaque);
     border-radius: calc(var(--rounding--B) * 0.95);
     min-height: var(--min-dimension);
     min-width: 100%;
     width: max-content;
+    height: max-content;
+
+    &.top {
+      bottom: calc(100% + var(--spacing--B));
+      transform-origin: center bottom;
+      left: 0;
+      right: 0;
+      transform: translateX(0);
+
+      &.center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        transform-origin: center bottom;
+      }
+    }
+    &.bottom {
+      top: calc(100% + var(--spacing--B));
+      transform-origin: center top;
+      left: 0;
+      right: 0;
+      transform: translateX(0);
+
+      &.center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        transform-origin: center top;
+      }
+    }
+    &.left {
+      right: calc(100% + var(--spacing--B));
+      transform-origin: left center;
+      top: 0;
+      bottom: 0;
+      transform: translateY(0);
+
+      &.center {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        transform-origin: left center;
+      }
+    }
+    &.right {
+      left: calc(100% + var(--spacing--B));
+      transform-origin: right center;
+      top: 0;
+      bottom: 0;
+      transform: translateY(0);
+
+      &.center {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        transform-origin: right center;
+      }
+    }
   }
 }
 

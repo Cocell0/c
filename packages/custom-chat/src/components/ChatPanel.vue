@@ -35,7 +35,7 @@
       >
         <Tooltip position="bottom" :text="chat.name">
           <OverflowMenu v-if="!chat.system" :label="chat.name">
-            <RenameChat :chat="chat" />
+            <RenameChat :chat="chat" @rename="handleRename" />
             <ShareChat :chat="chat" />
             <PinChat :chat="chat" />
             <hr />
@@ -108,19 +108,14 @@ function addChat(key) {
     currentChat.value = chat;
   }
 }
-function handleEdit(key) {
-  const editedChat = getChat(key);
-  if (!editedChat) return;
+function handleRename(key) {
+  const renamedChat = getChat(key);
+  if (!renamedChat) return;
 
-  currentChat.value = editedChat;
+  currentChat.value = renamedChat;
   chats.value = chats.value.map((chat) =>
-    chat.key === editedChat.key ? editedChat : chat,
+    chat.key === renamedChat.key ? renamedChat : chat,
   );
-}
-
-async function handleDelete(key) {
-  chats.value = chats.value.filter((chat) => chat.key !== key);
-  currentChat.value = null;
 }
 
 onMounted(async () => {

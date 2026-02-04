@@ -28,7 +28,7 @@
 
       <Transition name="fade">
         <div
-          v-if="isOpen && $slots.default"
+          v-show="isOpen && $slots.default"
           class="overflow-menu-inner-wrapper"
           :class="props.position"
           :style="props.menuStyle"

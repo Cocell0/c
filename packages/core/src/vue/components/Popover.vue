@@ -1,9 +1,13 @@
 <template>
-  <span class="popover__container">
-    <span class="popover__anchor">
+  <span class="popover__container" v-bind="props.containerAttributes">
+    <span class="popover__anchor" v-bind="props.anchorAttributes">
       <component :is="children[0]"></component>
     </span>
-    <span class="popover__content" :data-position="props.position">
+    <span
+      class="popover__content"
+      :data-position="props.position"
+      v-bind="props.contentAttributes"
+    >
       <component :is="children[1]"></component>
     </span>
   </span>
@@ -22,6 +26,18 @@ const props = defineProps({
   position: {
     type: String,
     default: "top",
+  },
+  containerAttributes: {
+    type: Object,
+    default: () => ({}),
+  },
+  anchorAttributes: {
+    type: Object,
+    default: () => ({}),
+  },
+  contentAttributes: {
+    type: Object,
+    default: () => ({}),
   },
 });
 </script>
@@ -122,6 +138,6 @@ const props = defineProps({
       transform-origin: right bottom;
       transform: translateY(0);
     }
-    }
+  }
 }
 </style>

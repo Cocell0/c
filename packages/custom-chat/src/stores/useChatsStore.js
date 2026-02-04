@@ -128,13 +128,28 @@ export const useChatsStore = defineStore("chats", {
     },
 
     /**
-     * Updates a chat in the database. Unsupported fields will be ignored.
-     * @param {string} key The key of the chat to update.
-     * @param {{ name?: string }} changes The new changes to apply to the chat.
-     * @returns {Promise<void>} A promise that resolves when the chat is updated.
+     * Renames a chat in the database.
+     * @param {string} key The key of the chat to rename.
+     * @param {string} name The new name of the chat.
+     * @returns {Promise<void>} A promise that resolves when the chat is renamed.
+     */
+    async renameChat(key, name) {
+      const existingChat = await this.db.chats.get(key);
+      if (!existingChat) return;
+
+      await this.db.chats.put({ ...existingChat, name });
+      await this.loadUserChats();
+      this.channel.postMessage({ type: "sync" });
+    },
+
+    /**
+     * Updates a chat's metadata in the database. Unsupported fields will be ignored.
+     * @param {string} key The key of the chat's metadata to update.
+     * @param {{ pinned?: boolean, lastActive?: number }} changes The new changes to apply to the chat's metadata.
+     * @returns {Promise<void>} A promise that resolves when the chat's metadata is updated.
      */
     async updateChat(key, changes) {
-      const allowedFields = ["name"];
+      const allowedFields = ["pinned", "lastActive"];
       const validChanges = {};
 
       for (const field of allowedFields) {
@@ -145,13 +160,18 @@ export const useChatsStore = defineStore("chats", {
 
       // Using this verbose method instead of simply using `.update` is because
       // `.update` throws an error about the transaction already being finished
-      const existingChat = await this.db.chats.get(key);
-      if (!existingChat) return;
+      const existingMetadata = (await this.db.chatMetadata.get(key)) || {
+        key,
+        metadata: {},
+      };
 
       try {
-        await this.db.chats.put({
-          ...existingChat,
-          ...validChanges,
+        await this.db.chatMetadata.put({
+          ...existingMetadata,
+          metadata: {
+            ...existingMetadata.metadata,
+            ...validChanges,
+          },
         });
         await this.loadUserChats();
       } catch (error) {

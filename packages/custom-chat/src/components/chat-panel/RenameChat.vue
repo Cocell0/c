@@ -14,6 +14,7 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["rename"]);
 const chatsStore = useChatsStore();
 
 async function renameChat() {
@@ -22,8 +23,12 @@ async function renameChat() {
 
   try {
     await chatsStore.renameChat(props.chat.key, newName);
+    emit("rename", props.chat.key);
   } catch (error) {
-    alert(error instanceof Error ? error.message : String(error));
+    alert(
+      "Error renaming:\n" +
+        (error instanceof Error ? error.message : String(error)),
+    );
     return;
   }
 }

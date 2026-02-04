@@ -9,7 +9,7 @@
     <div
       style="display: flex; padding: var(--spacing--C); justify-content: center"
     >
-      <Tooltip position="right center" text="Go back to chats list">
+      <Tooltip position="right" text="Go back to chats list">
         <AnchorLink
           href="/c"
           class="button button--icon chat-back-button"

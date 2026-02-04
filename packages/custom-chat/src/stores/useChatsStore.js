@@ -148,7 +148,7 @@ export const useChatsStore = defineStore("chats", {
      * @param {{ pinned?: boolean, lastActive?: number }} changes The new changes to apply to the chat's metadata.
      * @returns {Promise<void>} A promise that resolves when the chat's metadata is updated.
      */
-    async updateChat(key, changes) {
+    async updateMetadata(key, changes) {
       const allowedFields = ["pinned", "lastActive"];
       const validChanges = {};
 

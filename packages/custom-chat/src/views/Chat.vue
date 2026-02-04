@@ -1,29 +1,39 @@
 <template>
   <main class="chat-view">
     <section class="panel" v-if="!(screenWidth <= 768 && key)">
-      <h3
+      <div
         style="
           display: flex;
-          align-items: center;
           gap: var(--spacing--B);
           line-height: normal;
           padding: var(--spacing--C);
-          margin-bottom: 0;
-          width: unset;
         "
       >
-        <AnchorLink
-          href="/c"
-          style="
-            flex: auto;
-            text-decoration: none;
-            color: inherit;
-            padding-left: var(--spacing--A);
-          "
-          >Chats</AnchorLink
-        >
+        <h3 style="width: unset; flex-grow: 1">
+          <AnchorLink
+            href="/c"
+            style="
+              flex: auto;
+              text-decoration: none;
+              color: inherit;
+              padding-left: var(--spacing--A);
+            "
+            >Chats</AnchorLink
+          >
+        </h3>
+
         <AddChat />
-      </h3>
+        <Tooltip text="Options" position="bottom right">
+          <OverflowMenu position="bottom right">
+            <Keys />
+            <ImportChat />
+            <hr />
+            <button>
+              <span class="i-material-symbols:help-rounded"></span>Guide
+            </button>
+          </OverflowMenu>
+        </Tooltip>
+      </div>
 
       <div class="chat-search" style="padding-inline: var(--spacing--C)">
         <span
@@ -36,8 +46,6 @@
           type="text"
           placeholder="Search chats"
           aria-label="Search chats"
-          title="Search chats"
-          autocomplete="off"
           v-model="searchQuery"
           name="Query"
         />
@@ -75,8 +83,6 @@
       >
         <ThemeSwitcher position="top left" />
         <Fullscreen position="top" />
-        <Keys />
-        <ImportChat />
       </div>
     </section>
     <ChatPanel :chatKey="key || ''" />
@@ -93,6 +99,7 @@ import AnchorLink from "core/src/vue/components/AnchorLink.vue";
 import Fuse from "fuse.js";
 import AddChat from "@/components/navigation-panel/AddChat.vue";
 import ChatPanel from "@/components/ChatPanel.vue";
+import OverflowMenu from "core/src/vue/components/OverflowMenu.vue";
 import ThemeSwitcher from "core/src/vue/components/ThemeSwitcher.vue";
 import Keys from "@/components/navigation-panel/Keys.vue";
 import ImportChat from "@/components/navigation-panel/ImportChat.vue";

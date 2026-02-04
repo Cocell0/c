@@ -20,6 +20,7 @@ export const useChatsStore = defineStore("chats", {
       { name: "Garden", channel: "garden", system: true, key: "garden" },
     ],
     userChats: [],
+    chatMetadata: [],
   }),
 
   getters: {
@@ -95,6 +96,7 @@ export const useChatsStore = defineStore("chats", {
      */
     async loadUserChats() {
       this.userChats = await this.db.chats.toArray();
+      this.chatMetadata = await this.db.chatMetadata.toArray();
     },
 
     /**

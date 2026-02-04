@@ -1,24 +1,18 @@
 <template>
-  <Tooltip text="Open keys modal" position="top">
-    <button
-      class="button--icon"
-      @click="isOpen = true"
-      aria-label="Open keys modal"
-    >
-      <span class="i-material-symbols:key-rounded"></span>
-    </button>
-    <Modal v-model:open="isOpen" title="Keys">
-      <div>
-        <label for="public-key-field">Public key:</label>
-        <input
-          id="public-key-field"
-          v-model="publicKey"
-          placeholder="Public Key"
-          readonly
-        />
-      </div>
-    </Modal>
-  </Tooltip>
+  <button @click="isOpen = true">
+    <span class="i-material-symbols:key-rounded"></span> Keys
+  </button>
+  <Modal v-model:open="isOpen" title="Keys">
+    <div>
+      <label for="public-key-field">Public key:</label>
+      <input
+        id="public-key-field"
+        v-model="publicKey"
+        placeholder="Public Key"
+        readonly
+      />
+    </div>
+  </Modal>
 </template>
 <script setup>
 import { ref } from "vue";

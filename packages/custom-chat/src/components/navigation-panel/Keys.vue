@@ -1,5 +1,5 @@
 <template>
-  <Tooltip text="Open keys modal" position="top center">
+  <Tooltip text="Open keys modal" position="top">
     <button
       class="button--icon"
       @click="isOpen = true"

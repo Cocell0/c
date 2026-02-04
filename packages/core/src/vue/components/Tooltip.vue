@@ -1,20 +1,24 @@
 <template>
-  <span class="tooltip">
-    <slot></slot>
-    <span
-      v-if="!props.disable"
-      class="tooltip-text"
-      :class="props.position"
-      :style="props.tooltipStyle"
-      aria-hidden="true"
-      inert
+  <div class="tooltip">
+    <Popover
+      :position="props.position"
+      :contentAttributes="{ inert: true, 'aria-hidden': 'true' }"
     >
-      {{ props.text }}
-    </span>
-  </span>
+      <slot />
+      <div
+        class="tooltip-text"
+        :style="props.tooltipStyle"
+        v-if="!props.disable && props.text"
+      >
+        {{ props.text }}
+      </div>
+    </Popover>
+  </div>
 </template>
 
 <script setup>
+import Popover from "./Popover.vue";
+
 const props = defineProps({
   text: String,
   position: {
@@ -37,11 +41,12 @@ const props = defineProps({
   --tooltip-out-duration: 100ms;
   --tooltip-in-delay: 320ms;
   --tooltip-out-delay: 60ms;
-  position: relative;
+
+  .popover__container {
+    --z-index: var(--z__tooltip);
+  }
 
   .tooltip-text {
-    position: absolute;
-    z-index: var(--z__tooltip);
     width: max-content;
     max-width: 200px;
     height: max-content;
@@ -52,65 +57,7 @@ const props = defineProps({
     border-radius: calc(var(--base__rounding) * 0.72);
     padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;
-    transform-origin: center;
     will-change: opacity, transform;
-
-    &.top {
-      bottom: calc(100% + var(--spacing--B));
-      transform-origin: center bottom;
-      left: 0;
-      right: 0;
-      transform: translateX(0);
-
-      &.center {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        transform-origin: center bottom;
-      }
-    }
-    &.bottom {
-      top: calc(100% + var(--spacing--B));
-      transform-origin: center top;
-      left: 0;
-      right: 0;
-      transform: translateX(0);
-
-      &.center {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        transform-origin: center top;
-      }
-    }
-    &.left {
-      right: calc(100% + var(--spacing--B));
-      transform-origin: left center;
-      top: 0;
-      bottom: 0;
-      transform: translateY(0);
-
-      &.center {
-        top: 50%;
-        bottom: auto;
-        transform: translateY(-50%);
-        transform-origin: left center;
-      }
-    }
-    &.right {
-      left: calc(100% + var(--spacing--B));
-      transform-origin: right center;
-      top: 0;
-      bottom: 0;
-      transform: translateY(0);
-
-      &.center {
-        top: 50%;
-        bottom: auto;
-        transform: translateY(-50%);
-        transform-origin: right center;
-      }
-    }
   }
 
   /* Outro */

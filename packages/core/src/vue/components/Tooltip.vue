@@ -58,75 +58,36 @@ const props = defineProps({
     padding: var(--spacing--B) var(--spacing--C);
     opacity: 0;
     will-change: opacity, transform;
-  }
+    transition: opacity var(--tooltip-out-duration) cubic-bezier(0.2, 0, 0.2, 1);
 
-  /* Outro */
-  &:not(:hover):not(:focus-within) {
-    .tooltip-text {
-      animation-name: tooltip-out;
-      animation-duration: var(--tooltip-out-duration);
-      animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-      animation-fill-mode: both;
-      animation-delay: var(--tooltip-out-delay);
-    }
+    /* Outro */
+    transition-delay: var(--tooltip-out-delay);
   }
 
   /* Intro */
   &:hover,
   &:focus-within {
     .tooltip-text {
-      animation-name: tooltip-in;
-      animation-duration: var(--tooltip-in-duration);
-      animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-      animation-fill-mode: both;
-      animation-delay: var(--tooltip-in-delay);
+      opacity: 1;
+      transition: opacity var(--tooltip-in-duration)
+        cubic-bezier(0.2, 0, 0.2, 1);
+      transition-delay: var(--tooltip-in-delay);
     }
-  }
-}
-
-@keyframes tooltip-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes tooltip-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tooltip {
-    .tooltip-text {
-      animation: none !important;
-      transition:
-        opacity 0ms linear,
-        transform 0ms linear;
-    }
+  .tooltip .tooltip-text {
+    transition: none !important;
+  }
 
-    /* Intro */
-    &:hover,
-    &:focus-within {
-      .tooltip-text {
-        opacity: 1;
-        transition-delay: var(--tooltip-in-delay);
-      }
-    }
+  .tooltip:hover .tooltip-text,
+  .tooltip:focus-within .tooltip-text {
+    transition-delay: var(--tooltip-in-delay) !important;
+  }
 
-    /* Outro */
-    &:not(:hover):not(:focus-within) {
-      .tooltip-text {
-        opacity: 0;
-        transition-delay: var(--tooltip-out-delay);
-      }
-    }
+  .tooltip:not(:hover):not(:focus-within) .tooltip-text {
+    transition-delay: var(--tooltip-out-delay) !important;
   }
 }
 </style>

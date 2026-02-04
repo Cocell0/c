@@ -33,7 +33,7 @@
           :class="props.position"
           :style="props.menuStyle"
         >
-          <div class="overflow-menu" role="menu" @click="isOpen = false">
+          <div class="overflow-menu" role="menu">
             <slot></slot>
           </div>
         </div>

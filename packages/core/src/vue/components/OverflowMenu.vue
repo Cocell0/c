@@ -5,43 +5,46 @@
     @keydown.esc="isOpen = false"
     @focusout="handleFocusOut"
   >
-    <button
-      ref="button"
-      :class="props.label ? '' : 'button--icon'"
-      :aria-label="props.ariaLabel"
-      aria-haspopup="menu"
-      :aria-expanded="isOpen"
-      @click="isOpen = !isOpen"
-      :disabled="props.disable"
-    >
-      <span class="label" v-if="props.label">{{ props.label }}</span>
-      <span
-        :class="
-          props.label
-            ? 'i-material-symbols:keyboard-arrow-down-rounded'
-            : 'i-material-symbols:more-vert'
-        "
-        aria-hidden="true"
-      ></span>
-    </button>
-
-    <Transition name="fade">
-      <div
-        v-if="isOpen && $slots.default"
-        class="overflow-menu-inner-wrapper"
-        :class="props.position"
-        :style="props.menuStyle"
+    <Popover :position="props.position">
+      <button
+        ref="button"
+        :class="props.label ? '' : 'button--icon'"
+        :aria-label="props.ariaLabel"
+        aria-haspopup="menu"
+        :aria-expanded="isOpen"
+        @click="isOpen = !isOpen"
+        :disabled="props.disable"
       >
-        <div class="overflow-menu" role="menu" @click="isOpen = false">
-          <slot></slot>
+        <span class="label" v-if="props.label">{{ props.label }}</span>
+        <span
+          :class="
+            props.label
+              ? 'i-material-symbols:keyboard-arrow-down-rounded'
+              : 'i-material-symbols:more-vert'
+          "
+          aria-hidden="true"
+        ></span>
+      </button>
+
+      <Transition name="fade">
+        <div
+          v-if="isOpen && $slots.default"
+          class="overflow-menu-inner-wrapper"
+          :class="props.position"
+          :style="props.menuStyle"
+        >
+          <div class="overflow-menu" role="menu" @click="isOpen = false">
+            <slot></slot>
+          </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </Popover>
   </span>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import Popover from "./Popover.vue";
 
 const props = defineProps({
   menuStyle: {
@@ -60,7 +63,7 @@ const props = defineProps({
   },
   position: {
     type: String,
-    default: "bottom center",
+    default: "bottom",
   },
 });
 
@@ -79,6 +82,10 @@ function handleFocusOut(event) {
   position: relative;
   display: inline-block;
 
+  .popover__container {
+    --z-index: var(--z__popup);
+  }
+
   .label {
     max-width: 200px;
     overflow: hidden;
@@ -87,8 +94,6 @@ function handleFocusOut(event) {
   }
 
   .overflow-menu-inner-wrapper {
-    position: absolute;
-    z-index: var(--z__popup);
     background-color: var(--color__surface--emphasis);
     border: 2px solid var(--color__border-divider--opaque);
     border-radius: calc(var(--rounding--B) * 0.95);
@@ -96,63 +101,6 @@ function handleFocusOut(event) {
     min-width: 100%;
     width: max-content;
     height: max-content;
-
-    &.top {
-      bottom: calc(100% + var(--spacing--B));
-      transform-origin: center bottom;
-      left: 0;
-      right: 0;
-      transform: translateX(0);
-
-      &.center {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        transform-origin: center bottom;
-      }
-    }
-    &.bottom {
-      top: calc(100% + var(--spacing--B));
-      transform-origin: center top;
-      left: 0;
-      right: 0;
-      transform: translateX(0);
-
-      &.center {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        transform-origin: center top;
-      }
-    }
-    &.left {
-      right: calc(100% + var(--spacing--B));
-      transform-origin: left center;
-      top: 0;
-      bottom: 0;
-      transform: translateY(0);
-
-      &.center {
-        top: 50%;
-        bottom: auto;
-        transform: translateY(-50%);
-        transform-origin: left center;
-      }
-    }
-    &.right {
-      left: calc(100% + var(--spacing--B));
-      transform-origin: right center;
-      top: 0;
-      bottom: 0;
-      transform: translateY(0);
-
-      &.center {
-        top: 50%;
-        bottom: auto;
-        transform: translateY(-50%);
-        transform-origin: right center;
-      }
-    }
   }
 }
 

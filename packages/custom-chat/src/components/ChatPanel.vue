@@ -42,7 +42,7 @@
             <LeaveChat :chat="chat" />
           </OverflowMenu>
           <OverflowMenu v-else :label="chat.name">
-            <PinChat />
+            <PinChat :chat="chat" />
           </OverflowMenu>
         </Tooltip>
       </div>

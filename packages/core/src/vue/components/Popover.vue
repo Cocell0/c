@@ -4,8 +4,9 @@
       <component :is="children[0]"></component>
     </span>
     <span
+      ref="content"
       class="popover__content"
-      :data-position="props.position"
+      :data-position="position"
       v-bind="props.contentAttributes"
     >
       <component :is="children[1]"></component>
@@ -14,8 +15,10 @@
 </template>
 
 <script setup>
-import { useSlots, computed } from "vue";
+import { ref, useSlots, computed, onMounted } from "vue";
 
+const contentElement = ref(null);
+const position = ref(null);
 const slots = useSlots();
 const children = computed(() => {
   const nodes = slots.default ? slots.default() : [];
@@ -39,6 +42,27 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+});
+function getPosition(position) {
+  const validPositions = [
+    "top",
+    "top left",
+    "top right",
+    "bottom",
+    "bottom left",
+    "bottom right",
+    "left",
+    "left top",
+    "left bottom",
+    "right",
+    "right top",
+    "right bottom",
+  ];
+  if (!position.startsWith("auto"))
+    return validPositions.includes(position) ? position : "top";
+}
+onMounted(() => {
+  position.value = getPosition(props.position);
 });
 </script>
 

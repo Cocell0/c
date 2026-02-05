@@ -687,15 +687,15 @@ button,
 .button {
   --hue: var(--base__hue);
   --chroma: var(--base__chroma);
-  --l__action-suggested--light: 82%;
-  --l__action-suggested--dark: 32%;
+  --l__suggested-action--light: 82%;
+  --l__suggested-action--dark: 32%;
   --l__hover--light: 76%;
   --l__hover--dark: 36%;
   --l__active--light: 70%;
   --l__active--dark: 40%;
-  --color__action-suggested: #{light-dark-oklch(
-      var(--l__action-suggested--light),
-      var(--l__action-suggested--dark)
+  --color__suggested-action: #{light-dark-oklch(
+      var(--l__suggested-action--light),
+      var(--l__suggested-action--dark)
     )};
   --color__hover: #{light-dark-oklch(
       var(--l__hover--light),
@@ -705,6 +705,22 @@ button,
       var(--l__active--light),
       var(--l__active--dark)
     )};
+  --color__destructive-action--text: light-dark(
+    oklch(55% 0.18 30),
+    oklch(70% 0.18 30)
+  );
+  --color__destructive-action--outline: light-dark(
+    oklch(65% 0.1 30),
+    oklch(45% 0.1 30)
+  );
+  --color__destructive-action--hover: light-dark(
+    oklch(80% 0.06 30),
+    oklch(36% 0.03 30)
+  );
+  --color__destructive-action--active: light-dark(
+    oklch(75% 0.08 30),
+    oklch(40% 0.06 30)
+  );
   color: var(--button-text, inherit);
   display: inline-flex;
   min-width: var(--min-dimension, 44px);
@@ -734,7 +750,7 @@ button,
     position: absolute;
     inset: 0;
     /* This is to ensure buttons are clickable at the edges even
-    if their corners are hidden due to the border-radius */
+    if their corners are clipped due to the root border-radius */
   }
 
   &,
@@ -743,7 +759,14 @@ button,
   }
 
   &.button--suggested-action {
-    background-color: var(--color__action-suggested);
+    background-color: var(--color__suggested-action);
+  }
+
+  &.button--destructive-action {
+    color: var(--color__destructive-action--text);
+    --color__focus-outline: var(--color__destructive-action--outline);
+    --color__hover: var(--color__destructive-action--hover);
+    --color__active: var(--color__destructive-action--active);
   }
 
   @media (hover: hover) {

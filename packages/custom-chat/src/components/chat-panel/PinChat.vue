@@ -21,11 +21,14 @@ const props = defineProps({
 });
 const emit = defineEmits(["pin"]);
 const chatsStore = useChatsStore();
-const isPinned = ref(props.chat.pinned);
+const isPinned = ref(props.chat.metadata.pinned);
 
 async function pinChat(value) {
   try {
-    await chatsStore.updateMetadata(props.chat.key, { pinned: value });
+    await chatsStore.updateMetadata(props.chat.key, {
+      pinned: value,
+      pinnedAt: value == true ? Date.now() : 0,
+    });
     isPinned.value = value;
   } catch (error) {
     alert(

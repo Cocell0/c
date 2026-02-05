@@ -1,5 +1,5 @@
 <template>
-  <button @click="deleteChat">
+  <button class="button--destructive-action" @click="deleteChat">
     <span class="i-material-symbols:logout-rounded" aria-hidden inert></span>
     Leave chat
   </button>

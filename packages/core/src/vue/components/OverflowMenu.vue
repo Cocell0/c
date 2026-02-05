@@ -129,13 +129,16 @@ function handleFocusOut(event) {
     flex: 1;
     justify-content: start;
     --rn: calc(var(--rounding--A) * 0.5); // Nested rounding
-    border-radius: var(--rn) var(--rn);
 
-    &:first-child {
-      border-radius: var(--rounding--A) var(--rounding--A) var(--rn) var(--rn);
-    }
-    &:last-child {
-      border-radius: var(--rn) var(--rn) var(--rounding--A) var(--rounding--A);
+    &:not(:only-child) {
+      border-radius: var(--rn) var(--rn);
+
+      &:first-child {
+        border-radius: var(--rounding--A) var(--rounding--A) var(--rn) var(--rn);
+      }
+      &:last-child {
+        border-radius: var(--rn) var(--rn) var(--rounding--A) var(--rounding--A);
+      }
     }
   }
 }

@@ -21,7 +21,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["pin"]);
 const chatsStore = useChatsStore();
-const isPinned = ref(props.chat.metadata.pinned);
+const isPinned = ref(props.chat.metadata?.pinned || false);
 
 async function pinChat(value) {
   try {

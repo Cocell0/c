@@ -40,15 +40,20 @@ export const useChatsStore = defineStore("chats", {
       return [...state.systemChats, ...state.userChats]
         .map((chat) => ({
           ...chat,
-          ...metadataMap[chat.key],
+          metadata: metadataMap[chat.key],
         }))
         .sort((firstChat, secondChat) => {
-          // Sorting chats
-          // Pinned first
-          if (firstChat.pinned && !secondChat.pinned) return -1;
-          if (!firstChat.pinned && secondChat.pinned) return 1;
-          // Then sort by lastActive descending
-          return (secondChat.lastActive || 0) - (firstChat.lastActive || 0);
+          const firstMeta = firstChat.metadata || {};
+          const secondMeta = secondChat.metadata || {};
+
+          if (firstMeta.pinned && !secondMeta.pinned) return -1;
+          if (!firstMeta.pinned && secondMeta.pinned) return 1;
+
+          if (firstMeta.pinned && secondMeta.pinned) {
+            return (secondMeta.pinnedAt || 0) - (firstMeta.pinnedAt || 0);
+          }
+
+          return (secondMeta.lastActive || 0) - (firstMeta.lastActive || 0);
         });
     },
   },
@@ -151,7 +156,7 @@ export const useChatsStore = defineStore("chats", {
      * @returns {Promise<void>} A promise that resolves when the chat's metadata is updated.
      */
     async updateMetadata(key, changes) {
-      const allowedFields = ["pinned", "lastActive"];
+      const allowedFields = ["pinned", "pinnedAt", "lastActive"];
       const validChanges = {};
 
       for (const field of allowedFields) {

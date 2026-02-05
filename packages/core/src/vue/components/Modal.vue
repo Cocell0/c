@@ -1,25 +1,28 @@
 <template>
-  <dialog ref="modal" @click="closeOnBackdrop" class="modal">
-    <div class="head">
-      <div class="title-container">
-        <h3>{{ props.title }}</h3>
+  <teleport to="body">
+    <dialog ref="modal" @click="closeOnBackdrop" class="modal">
+      <div class="head">
+        <div class="title-container">
+          <h3>{{ props.title }}</h3>
+        </div>
+        <div class="close-button-container">
+          <button
+            @click="closeModal"
+            :aria-label="`Close ${props.title}`"
+            class="button--icon"
+          >
+            <span class="i-material-symbols-close"></span>
+          </button>
+        </div>
       </div>
-      <div class="close-button-container">
-        <button
-          @click="closeModal"
-          :aria-label="`Close ${props.title}`"
-          class="button--icon">
-          <span class="i-material-symbols-close"></span>
-        </button>
+      <div class="body">
+        <slot />
       </div>
-    </div>
-    <div class="body">
-      <slot />
-    </div>
-    <div class="action" v-if="$slots.action">
-      <slot name="action" />
-    </div>
-  </dialog>
+      <div class="action" v-if="$slots.action">
+        <slot name="action" />
+      </div>
+    </dialog>
+  </teleport>
 </template>
 
 <script setup>
@@ -59,7 +62,7 @@ watch(
   (value) => {
     if (value) openModal();
     else closeModal();
-  }
+  },
 );
 
 onMounted(() => {

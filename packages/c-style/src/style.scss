@@ -6,44 +6,69 @@
     $dark: map-get($argument-1, dark);
 
     $light-l: map-get($light, l);
-    $light-c: if(
-      map-has-key($light, c),
-      map-get($light, c),
-      var(--base__chroma)
-    );
-    $light-h: if(map-has-key($light, h), map-get($light, h), var(--base__hue));
-    $light-a: if(
-      $alpha != null,
-      $alpha,
-      if(map-has-key($light, a), map-get($light, a), 1)
-    );
+
+    @if map-has-key($light, c) {
+      $light-c: map-get($light, c);
+    } @else {
+      $light-c: var(--base__chroma);
+    }
+
+    @if map-has-key($light, h) {
+      $light-h: map-get($light, h);
+    } @else {
+      $light-h: var(--base__hue);
+    }
+
+    @if $alpha != null {
+      $light-a: $alpha;
+    } @else if map-has-key($light, a) {
+      $light-a: map-get($light, a);
+    } @else {
+      $light-a: 1;
+    }
 
     $dark-l: map-get($dark, l);
-    $dark-c: if(map-has-key($dark, c), map-get($dark, c), var(--base__chroma));
-    $dark-h: if(map-has-key($dark, h), map-get($dark, h), var(--base__hue));
-    $dark-a: if(
-      $alpha != null,
-      $alpha,
-      if(map-has-key($dark, a), map-get($dark, a), 1)
-    );
+
+    @if map-has-key($dark, c) {
+      $dark-c: map-get($dark, c);
+    } @else {
+      $dark-c: var(--base__chroma);
+    }
+
+    @if map-has-key($dark, h) {
+      $dark-h: map-get($dark, h);
+    } @else {
+      $dark-h: var(--base__hue);
+    }
+
+    @if $alpha != null {
+      $dark-a: $alpha;
+    } @else if map-has-key($dark, a) {
+      $dark-a: map-get($dark, a);
+    } @else {
+      $dark-a: 1;
+    }
 
     $light-color: oklch($light-l $light-c $light-h / $light-a);
     $dark-color: oklch($dark-l $dark-c $dark-h / $dark-a);
 
     @return light-dark($light-color, $dark-color);
   } @else if $argument-2 != null {
+    $resolved-alpha: null;
+
+    @if $alpha != null {
+      $resolved-alpha: $alpha;
+    } @else {
+      $resolved-alpha: 1;
+    }
+
     $light-color: oklch(
-      $argument-1
-        var(--base__chroma)
-        var(--base__hue) /
-        if($alpha != null, $alpha, 1)
+      $argument-1 var(--base__chroma) var(--base__hue) / $resolved-alpha
     );
     $dark-color: oklch(
-      $argument-2
-        var(--base__chroma)
-        var(--base__hue) /
-        if($alpha != null, $alpha, 1)
+      $argument-2 var(--base__chroma) var(--base__hue) / $resolved-alpha
     );
+
     @return light-dark($light-color, $dark-color);
   } @else {
     @error "Invalid arguments for light-dark-oklch";

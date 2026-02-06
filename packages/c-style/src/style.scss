@@ -81,9 +81,12 @@
   // BEM-inspired convention for C̀-style
 
   --hue: 36;
-  --hue__suggested: 36;
+  --hue__suggested: 298;
+  --hue__success: 118;
   --hue__danger: 30;
   --chroma: 0.018;
+  --chroma__suggested: 0.18;
+  --chroma__danger: 0.18;
 
   --color__background: #{ldo(96%, 20%)};
   --color__text: #{ldo(28%, 90%)};
@@ -708,24 +711,23 @@ select {
 
 button,
 .button {
-  --color__suggested-action: #{ldo(82%, 32%)};
   --color__hover: #{ldo(76%, 36%)};
   --color__active: #{ldo(70%, 40%)};
-  --color__destructive-action--text: light-dark(
-    oklch(55% 0.18 30),
-    oklch(70% 0.18 30)
+  --color__intentful-action--text: light-dark(
+    oklch(55% var(--chroma__intent) var(--hue__intent)),
+    oklch(70% var(--chroma__intent) var(--hue__intent))
   );
-  --color__destructive-action--outline: light-dark(
-    oklch(65% 0.1 30),
-    oklch(45% 0.1 30)
+  --color__intentful-action--outline: light-dark(
+    oklch(65% calc(var(--chroma__intent) * 0.45) var(--hue__intent)),
+    oklch(45% calc(var(--chroma__intent) * 0.45) var(--hue__intent))
   );
-  --color__destructive-action--hover: light-dark(
-    oklch(80% 0.06 30),
-    oklch(36% 0.03 30)
+  --color__intentful-action--hover: light-dark(
+    oklch(80% calc(var(--chroma__intent) * 0.35) var(--hue__intent)),
+    oklch(36% calc(var(--chroma__intent) * 0.35) var(--hue__intent))
   );
-  --color__destructive-action--active: light-dark(
-    oklch(75% 0.08 30),
-    oklch(40% 0.06 30)
+  --color__intentful-action--active: light-dark(
+    oklch(75% calc(var(--chroma__intent) * 0.45) var(--hue__intent)),
+    oklch(40% calc(var(--chroma__intent) * 0.45) var(--hue__intent))
   );
   color: var(--button-text, inherit);
   display: inline-flex;
@@ -765,14 +767,20 @@ button,
   }
 
   &.button--suggested-action {
-    background-color: var(--color__suggested-action);
+    --chroma__intent: var(--chroma__suggested);
+    --hue__intent: var(--hue__suggested);
+    color: var(--color__intentful-action--text);
+    --color__focus-outline: var(--color__intentful-action--outline);
+    --color__hover: var(--color__intentful-action--hover);
+    --color__active: var(--color__intentful-action--active);
   }
-
   &.button--destructive-action {
-    color: var(--color__destructive-action--text);
-    --color__focus-outline: var(--color__destructive-action--outline);
-    --color__hover: var(--color__destructive-action--hover);
-    --color__active: var(--color__destructive-action--active);
+    --chroma__intent: var(--chroma__danger);
+    --hue__intent: var(--hue__danger);
+    color: var(--color__intentful-action--text);
+    --color__focus-outline: var(--color__intentful-action--outline);
+    --color__hover: var(--color__intentful-action--hover);
+    --color__active: var(--color__intentful-action--active);
   }
 
   @media (hover: hover) {
@@ -903,13 +911,4 @@ input:disabled {
 input:disabled::placeholder,
 select:disabled::picker-icon {
   color: var(--color__text-disabled);
-}
-
-// C̀ components
-
-.c-surface {
-  background-color: var(--color__surface);
-}
-.c-surface--emphasis {
-  background-color: var(--color__surface--emphasis);
 }

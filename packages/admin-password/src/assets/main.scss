@@ -38,8 +38,8 @@ body {
   border-radius: var(--spacing--D);
   box-shadow: 0 0 8px
     light-dark(
-      hsl(var(--base__hue), var(--base__saturation), 0%, 0.4),
-      hsl(var(--base__hue), var(--base__saturation), 0%, 0)
+      hsl(var(--hue), var(--base__saturation), 0%, 0.4),
+      hsl(var(--hue), var(--base__saturation), 0%, 0)
     );
   background: var(--color__surface);
 }

@@ -119,8 +119,8 @@ onMounted(() => {
   > *:not(:last-child) {
     border-bottom: 1px solid
       light-dark(
-        oklch(54% var(--base__chroma) var(--base__hue) / 0.3),
-        oklch(68% var(--base__chroma) var(--base__hue) / 0.3)
+        oklch(54% var(--chroma) var(--hue) / 0.3),
+        oklch(68% var(--chroma) var(--hue) / 0.3)
       );
   }
 

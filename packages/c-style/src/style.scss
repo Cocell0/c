@@ -10,13 +10,13 @@
     @if map-has-key($light, c) {
       $light-c: map-get($light, c);
     } @else {
-      $light-c: var(--base__chroma);
+      $light-c: var(--chroma);
     }
 
     @if map-has-key($light, h) {
       $light-h: map-get($light, h);
     } @else {
-      $light-h: var(--base__hue);
+      $light-h: var(--hue);
     }
 
     @if $alpha != null {
@@ -32,13 +32,13 @@
     @if map-has-key($dark, c) {
       $dark-c: map-get($dark, c);
     } @else {
-      $dark-c: var(--base__chroma);
+      $dark-c: var(--chroma);
     }
 
     @if map-has-key($dark, h) {
       $dark-h: map-get($dark, h);
     } @else {
-      $dark-h: var(--base__hue);
+      $dark-h: var(--hue);
     }
 
     @if $alpha != null {
@@ -62,12 +62,8 @@
       $resolved-alpha: 1;
     }
 
-    $light-color: oklch(
-      $argument-1 var(--base__chroma) var(--base__hue) / $resolved-alpha
-    );
-    $dark-color: oklch(
-      $argument-2 var(--base__chroma) var(--base__hue) / $resolved-alpha
-    );
+    $light-color: oklch($argument-1 var(--chroma) var(--hue) / $resolved-alpha);
+    $dark-color: oklch($argument-2 var(--chroma) var(--hue) / $resolved-alpha);
 
     @return light-dark($light-color, $dark-color);
   } @else {
@@ -84,14 +80,14 @@
   // Variables follow CEM naming: Category__Element--Modifier
   // BEM-inspired convention for C̀-style
 
-  --base__hue: 36;
-  --base__chroma: 0.018;
+  --hue: 36;
+  --chroma: 0.018;
 
   --color__background: #{ldo(96%, 20%)};
   --color__text: #{ldo(28%, 90%)};
   --color__text-link: light-dark(
-    oklch(28% 0.15 var(--base__hue)),
-    oklch(90% 0.15 var(--base__hue))
+    oklch(28% 0.15 var(--hue)),
+    oklch(90% 0.15 var(--hue))
   );
   --color__text-disabled: #{ldo(28%, 90%, 0.5)};
   --color__text-placeholder: #{ldo(28%, 90%, 0.5)};
@@ -710,8 +706,8 @@ select {
 
 button,
 .button {
-  --hue: var(--base__hue);
-  --chroma: var(--base__chroma);
+  --hue: var(--hue);
+  --chroma: var(--chroma);
   --l__suggested-action--light: 82%;
   --l__suggested-action--dark: 32%;
   --l__hover--light: 76%;

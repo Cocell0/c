@@ -81,6 +81,8 @@
   // BEM-inspired convention for C̀-style
 
   --hue: 36;
+  --hue__suggested: 36;
+  --hue__danger: 30;
   --chroma: 0.018;
 
   --color__background: #{ldo(96%, 20%)};
@@ -706,8 +708,6 @@ select {
 
 button,
 .button {
-  --hue: var(--hue);
-  --chroma: var(--chroma);
   --l__suggested-action--light: 82%;
   --l__suggested-action--dark: 32%;
   --l__hover--light: 76%;

@@ -1,6 +1,6 @@
 @use "sass:meta";
 
-@function light-dark-oklch($argument-1, $argument-2: null, $alpha: null) {
+@function ldo($argument-1, $argument-2: null, $alpha: null) {
   @if meta.type-of($argument-1) == "map" {
     $light: map-get($argument-1, light);
     $dark: map-get($argument-1, dark);
@@ -87,35 +87,35 @@
   --base__hue: 36;
   --base__chroma: 0.018;
 
-  --color__background: #{light-dark-oklch(96%, 20%)};
-  --color__text: #{light-dark-oklch(28%, 90%)};
+  --color__background: #{ldo(96%, 20%)};
+  --color__text: #{ldo(28%, 90%)};
   --color__text-link: light-dark(
     oklch(28% 0.15 var(--base__hue)),
     oklch(90% 0.15 var(--base__hue))
   );
-  --color__text-disabled: #{light-dark-oklch(28%, 90%, 0.5)};
-  --color__text-placeholder: #{light-dark-oklch(28%, 90%, 0.5)};
+  --color__text-disabled: #{ldo(28%, 90%, 0.5)};
+  --color__text-placeholder: #{ldo(28%, 90%, 0.5)};
 
-  --color__focus-outline: #{light-dark-oklch(60%, 75%)};
+  --color__focus-outline: #{ldo(60%, 75%)};
 
-  --color__control-surface: #{light-dark-oklch(90%, 24%)};
-  --color__control-surface-emphasis: #{light-dark-oklch(86%, 26%)};
-  --color__control--hover: #{light-dark-oklch(80%, 32%)};
-  --color__control--active: #{light-dark-oklch(74%, 36%)};
-  --color__control--disabled: #{light-dark-oklch(90%, 30%)};
+  --color__control-surface: #{ldo(90%, 24%)};
+  --color__control-surface-emphasis: #{ldo(86%, 26%)};
+  --color__control--hover: #{ldo(80%, 32%)};
+  --color__control--active: #{ldo(74%, 36%)};
+  --color__control--disabled: #{ldo(90%, 30%)};
 
-  --color__scrollbar-surface: #{light-dark-oklch(80%, 28%)};
-  --color__scrollbar-surface--hover: #{light-dark-oklch(64%, 34%)};
-  --color__scrollbar-surface--active: #{light-dark-oklch(60%, 36%)};
+  --color__scrollbar-surface: #{ldo(80%, 28%)};
+  --color__scrollbar-surface--hover: #{ldo(64%, 34%)};
+  --color__scrollbar-surface--active: #{ldo(60%, 36%)};
 
-  --color__selection-background: #{light-dark-oklch(25%, 85%)};
-  --color__selection-text: #{light-dark-oklch(100%, 16%)};
+  --color__selection-background: #{ldo(25%, 85%)};
+  --color__selection-text: #{ldo(100%, 16%)};
 
-  --color__border-divider: #{light-dark-oklch(54%, 68%)};
-  --color__border-divider--opaque: #{light-dark-oklch(64%, 34%, 0.5)};
+  --color__border-divider: #{ldo(54%, 68%)};
+  --color__border-divider--opaque: #{ldo(64%, 34%, 0.5)};
 
-  --color__surface: #{light-dark-oklch(95%, 15%)};
-  --color__surface--emphasis: #{light-dark-oklch(88%, 26%)};
+  --color__surface: #{ldo(95%, 15%)};
+  --color__surface--emphasis: #{ldo(88%, 26%)};
 
   // ---
 
@@ -718,18 +718,12 @@ button,
   --l__hover--dark: 36%;
   --l__active--light: 70%;
   --l__active--dark: 40%;
-  --color__suggested-action: #{light-dark-oklch(
+  --color__suggested-action: #{ldo(
       var(--l__suggested-action--light),
       var(--l__suggested-action--dark)
     )};
-  --color__hover: #{light-dark-oklch(
-      var(--l__hover--light),
-      var(--l__hover--dark)
-    )};
-  --color__active: #{light-dark-oklch(
-      var(--l__active--light),
-      var(--l__active--dark)
-    )};
+  --color__hover: #{ldo(var(--l__hover--light), var(--l__hover--dark))};
+  --color__active: #{ldo(var(--l__active--light), var(--l__active--dark))};
   --color__destructive-action--text: light-dark(
     oklch(55% 0.18 30),
     oklch(70% 0.18 30)

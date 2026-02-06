@@ -766,21 +766,21 @@ button,
     background-color: transparent;
   }
 
-  &.button--suggested-action {
-    --chroma__intent: var(--chroma__suggested);
-    --hue__intent: var(--hue__suggested);
+  @mixin intentful-button {
     color: var(--color__intentful-action--text);
     --color__focus-outline: var(--color__intentful-action--outline);
     --color__hover: var(--color__intentful-action--hover);
     --color__active: var(--color__intentful-action--active);
   }
+  &.button--suggested-action {
+    @include intentful-button;
+    --chroma__intent: var(--chroma__suggested);
+    --hue__intent: var(--hue__suggested);
+  }
   &.button--destructive-action {
+    @include intentful-button;
     --chroma__intent: var(--chroma__danger);
     --hue__intent: var(--hue__danger);
-    color: var(--color__intentful-action--text);
-    --color__focus-outline: var(--color__intentful-action--outline);
-    --color__hover: var(--color__intentful-action--hover);
-    --color__active: var(--color__intentful-action--active);
   }
 
   @media (hover: hover) {

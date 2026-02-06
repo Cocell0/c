@@ -708,18 +708,9 @@ select {
 
 button,
 .button {
-  --l__suggested-action--light: 82%;
-  --l__suggested-action--dark: 32%;
-  --l__hover--light: 76%;
-  --l__hover--dark: 36%;
-  --l__active--light: 70%;
-  --l__active--dark: 40%;
-  --color__suggested-action: #{ldo(
-      var(--l__suggested-action--light),
-      var(--l__suggested-action--dark)
-    )};
-  --color__hover: #{ldo(var(--l__hover--light), var(--l__hover--dark))};
-  --color__active: #{ldo(var(--l__active--light), var(--l__active--dark))};
+  --color__suggested-action: #{ldo(82%, 32%)};
+  --color__hover: #{ldo(76%, 36%)};
+  --color__active: #{ldo(70%, 40%)};
   --color__destructive-action--text: light-dark(
     oklch(55% 0.18 30),
     oklch(70% 0.18 30)

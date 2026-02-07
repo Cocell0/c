@@ -148,14 +148,13 @@
   --seconds-M: 1.2s;
   --seconds-L: 2.6s;
 
-  --min-dimension: 2.44rem;
-  --min-icon-dimension: 1.66rem;
+  --size__control--min: 2.44rem;
+  --size__icon--min: 1.66rem;
 
   --width-small: 312px;
   --width-ample: 448px;
   --width-medium: 640px;
 
-  --shadow-subtle: 0 0 20px hsl(0, 0%, 0%, 0.07);
   --cb-smooth: cubic-bezier(0.5, 0.5, 0, 1);
 
   // ---
@@ -167,7 +166,7 @@
 
   // ---
 
-  --base__rounding: calc(var(--min-dimension) * 0.4);
+  --base__rounding: calc(var(--size__control--min) * 0.4);
   --rounding--A: var(--base__rounding);
   --rounding--B: calc(var(--base__rounding) * 1.4);
   --rounding--C: calc(var(--base__rounding) * 2);
@@ -461,13 +460,13 @@ c-accordian .head {
 span[class^="i-"] {
   font-weight: normal;
   font-style: normal;
-  font-size: var(--min-icon-dimension);
+  font-size: var(--size__icon--min);
   line-height: 1.5;
   letter-spacing: normal;
   text-transform: none;
   display: inline-flex;
-  width: var(--min-icon-dimension);
-  height: var(--min-icon-dimension);
+  width: var(--size__icon--min);
+  height: var(--size__icon--min);
   overflow: hidden;
   white-space: nowrap;
   word-wrap: normal;
@@ -660,8 +659,8 @@ button,
 input,
 select,
 textarea {
-  min-width: var(--min-dimension);
-  min-height: var(--min-dimension);
+  min-width: var(--size__control--min);
+  min-height: var(--size__control--min);
 }
 
 ::placeholder {
@@ -724,8 +723,8 @@ button,
   );
   color: var(--button-text, inherit);
   display: inline-flex;
-  min-width: var(--min-dimension);
-  min-height: var(--min-dimension);
+  min-width: var(--size__control--min);
+  min-height: var(--size__control--min);
   border-radius: var(--rounding--A);
   justify-content: center;
   position: relative;
@@ -738,12 +737,12 @@ button,
 
   &.button--icon {
     padding: 0;
-    min-width: var(--min-dimension);
-    min-height: var(--min-dimension);
-    width: var(--min-dimension);
-    height: var(--min-dimension);
-    max-width: var(--min-dimension);
-    max-height: var(--min-dimension);
+    min-width: var(--size__control--min);
+    min-height: var(--size__control--min);
+    width: var(--size__control--min);
+    height: var(--size__control--min);
+    max-width: var(--size__control--min);
+    max-height: var(--size__control--min);
   }
 
   &::before {
@@ -845,8 +844,8 @@ select option {
   border-radius: var(--spacing--B);
   /* background-color: var(--color__surface); */
   cursor: pointer;
-  min-width: var(--min-dimension);
-  min-height: var(--min-dimension);
+  min-width: var(--size__control--min);
+  min-height: var(--size__control--min);
 }
 
 select option::checkmark {

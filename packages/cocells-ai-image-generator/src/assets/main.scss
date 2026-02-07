@@ -22,7 +22,7 @@ main {
   display: flex;
   flex-direction: column;
   --option-container-height: calc(
-    var(--spacing--C) + var(--min-dimension) + var(--spacing--C)
+    var(--spacing--C) + var(--size__control--min) + var(--spacing--C)
   );
   overflow-y: auto;
 
@@ -67,12 +67,12 @@ main {
         left: 0;
         visibility: hidden;
       }
-      
+
       #prompt {
         background-color: transparent;
         width: 100%;
         height: var(--option-container-height);
-        max-height: calc(var(--min-dimension) * 6);
+        max-height: calc(var(--size__control--min) * 6);
         resize: none;
         overflow-x: hidden;
         overflow-y: auto;
@@ -88,7 +88,7 @@ main {
 
     .prompt-area:has(#prompt:focus-visible) {
       #prompt {
-        height: calc(var(--min-dimension) * 3);
+        height: calc(var(--size__control--min) * 3);
       }
     }
   }

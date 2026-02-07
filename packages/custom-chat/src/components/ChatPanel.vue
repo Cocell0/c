@@ -30,7 +30,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          min-height: var(--min-dimension);
+          min-height: var(--size__control--min);
         "
       >
         <Tooltip position="bottom" :text="chat.name">

@@ -129,7 +129,7 @@ onMounted(() => {
     padding: var(--spacing--C);
 
     .title-container {
-      padding-left: calc(var(--spacing--C) * 2 + var(--min-dimension));
+      padding-left: calc(var(--spacing--C) * 2 + var(--size__control--min));
       flex: 1;
       overflow: hidden;
 

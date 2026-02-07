@@ -97,7 +97,7 @@ function handleFocusOut(event) {
     background-color: var(--color__surface--emphasis);
     border: 2px solid var(--color__border-divider--opaque);
     border-radius: calc(var(--rounding--B) * 0.95);
-    min-height: var(--min-dimension);
+    min-height: var(--size__control--min);
     min-width: 100%;
     width: max-content;
     height: max-content;

@@ -18,8 +18,8 @@
       <div class="body">
         <slot />
       </div>
-      <div class="action" v-if="$slots.action">
-        <slot name="action" />
+      <div class="action" v-if="$slots.actions">
+        <slot name="actions" />
       </div>
     </dialog>
   </teleport>

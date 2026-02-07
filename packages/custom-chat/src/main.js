@@ -18,11 +18,6 @@ import { useSecretsStore } from "@/stores/useSecretsStore";
 router.afterEach((route) => {
   const title = route.meta?.title;
   if (title) document.title = title;
-
-  if (import.meta.env.PROD) {
-    if (window.gtag)
-      gtag("config", "G-QCJD60XX2F", { page_path: route.fullPath });
-  }
 });
 
 // For environments that do not support crypto.randomUUID

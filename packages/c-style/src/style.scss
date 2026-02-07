@@ -562,13 +562,6 @@ span[class^="i-"] {
   }
 }
 
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 1;
-  }
-}
-
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -667,8 +660,8 @@ button,
 input,
 select,
 textarea {
-  min-width: var(--min-dimension, 44px);
-  min-height: var(--min-dimension, 44px);
+  min-width: var(--min-dimension);
+  min-height: var(--min-dimension);
 }
 
 ::placeholder {
@@ -731,8 +724,8 @@ button,
   );
   color: var(--button-text, inherit);
   display: inline-flex;
-  min-width: var(--min-dimension, 44px);
-  min-height: var(--min-dimension, 44px);
+  min-width: var(--min-dimension);
+  min-height: var(--min-dimension);
   border-radius: var(--rounding--A);
   justify-content: center;
   position: relative;
@@ -745,12 +738,12 @@ button,
 
   &.button--icon {
     padding: 0;
-    min-width: var(--min-dimension, 44px);
-    min-height: var(--min-dimension, 44px);
-    width: var(--min-dimension, 44px);
-    height: var(--min-dimension, 44px);
-    max-width: var(--min-dimension, 44px);
-    max-height: var(--min-dimension, 44px);
+    min-width: var(--min-dimension);
+    min-height: var(--min-dimension);
+    width: var(--min-dimension);
+    height: var(--min-dimension);
+    max-width: var(--min-dimension);
+    max-height: var(--min-dimension);
   }
 
   &::before {
@@ -852,8 +845,8 @@ select option {
   border-radius: var(--spacing--B);
   /* background-color: var(--color__surface); */
   cursor: pointer;
-  min-width: var(--min-dimension, 44px);
-  min-height: var(--min-dimension, 44px);
+  min-width: var(--min-dimension);
+  min-height: var(--min-dimension);
 }
 
 select option::checkmark {

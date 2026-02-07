@@ -1,11 +1,12 @@
 <template>
-  <span
+  <Popover
+    :position="props.position"
     class="overflow-menu-wrapper"
     ref="wrapper"
     @keydown.esc="isOpen = false"
     @focusout="handleFocusOut"
   >
-    <Popover :position="props.position">
+    <PopoverAnchor>
       <button
         ref="button"
         :class="props.label ? '' : 'button--icon'"
@@ -23,28 +24,29 @@
               : 'i-material-symbols:more-vert'
           "
           aria-hidden="true"
-        ></span>
-      </button>
+        ></span></button
+    ></PopoverAnchor>
 
-      <Transition name="fade">
-        <div
-          v-show="isOpen && $slots.default"
-          class="overflow-menu-inner-wrapper"
-          :class="props.position"
-          :style="props.menuStyle"
-        >
-          <div class="overflow-menu" role="menu">
-            <slot></slot>
-          </div>
+    <Transition name="fade">
+      <PopoverContent
+        v-show="isOpen && $slots.default"
+        class="overflow-menu-inner-wrapper"
+        :class="props.position"
+        :style="props.menuStyle"
+      >
+        <div class="overflow-menu" role="menu">
+          <slot></slot>
         </div>
-      </Transition>
-    </Popover>
-  </span>
+      </PopoverContent>
+    </Transition>
+  </Popover>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import Popover from "./Popover.vue";
+import Popover from "./Popover/Popover.vue";
+import PopoverAnchor from "./Popover/PopoverAnchor.vue";
+import PopoverContent from "./Popover/PopoverContent.vue";
 
 const props = defineProps({
   menuStyle: {
@@ -71,7 +73,7 @@ const isOpen = ref(false);
 const wrapper = ref(null);
 
 function handleFocusOut(event) {
-  if (!wrapper.value.contains(event.relatedTarget)) {
+  if (!wrapper.value.$el.contains(event.relatedTarget)) {
     isOpen.value = false;
   }
 }
@@ -81,10 +83,7 @@ function handleFocusOut(event) {
 .overflow-menu-wrapper {
   position: relative;
   display: inline-block;
-
-  .popover__container {
-    --z-index: var(--z__popup);
-  }
+  --z-index: var(--z__popup);
 
   .label {
     max-width: 200px;

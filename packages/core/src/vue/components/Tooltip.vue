@@ -1,23 +1,22 @@
 <template>
-  <div class="tooltip">
-    <Popover
-      :position="props.position"
-      :contentAttributes="{ inert: true, 'aria-hidden': 'true' }"
+  <Popover class="tooltip" :position="props.position">
+    <PopoverAnchor><slot /></PopoverAnchor>
+    <PopoverContent
+      class="tooltip-text"
+      inert
+      aria-hidden="true"
+      :style="props.tooltipStyle"
+      v-if="!props.disable && props.text"
     >
-      <slot />
-      <div
-        class="tooltip-text"
-        :style="props.tooltipStyle"
-        v-if="!props.disable && props.text"
-      >
-        {{ props.text }}
-      </div>
-    </Popover>
-  </div>
+      {{ props.text }}
+    </PopoverContent>
+  </Popover>
 </template>
 
 <script setup>
-import Popover from "./Popover.vue";
+import Popover from "./Popover/Popover.vue";
+import PopoverAnchor from "./Popover/PopoverAnchor.vue";
+import PopoverContent from "./Popover/PopoverContent.vue";
 
 const props = defineProps({
   text: String,
@@ -41,10 +40,7 @@ const props = defineProps({
   --tooltip-out-duration: 100ms;
   --tooltip-in-delay: 320ms;
   --tooltip-out-delay: 60ms;
-
-  .popover__container {
-    --z-index: var(--z__tooltip);
-  }
+  --z-index: var(--z__tooltip);
 
   .tooltip-text {
     width: max-content;
@@ -79,15 +75,6 @@ const props = defineProps({
 @media (prefers-reduced-motion: reduce) {
   .tooltip .tooltip-text {
     transition: none !important;
-  }
-
-  .tooltip:hover .tooltip-text,
-  .tooltip:focus-within .tooltip-text {
-    transition-delay: var(--tooltip-in-delay) !important;
-  }
-
-  .tooltip:not(:hover):not(:focus-within) .tooltip-text {
-    transition-delay: var(--tooltip-out-delay) !important;
   }
 }
 </style>

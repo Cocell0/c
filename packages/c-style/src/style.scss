@@ -88,7 +88,10 @@
   --chroma__suggested: 0.18;
   --chroma__danger: 0.18;
 
-  --color__background: #{ldo(96%, 20%)};
+  --color__background: light-dark(
+    oklch(96% var(--chroma) var(--hue)),
+    oklch(20% calc(var(--chroma) * 0.735) var(--hue))
+  );
   --color__text: #{ldo(28%, 90%)};
   --color__text-link: light-dark(
     oklch(28% 0.15 var(--hue)),

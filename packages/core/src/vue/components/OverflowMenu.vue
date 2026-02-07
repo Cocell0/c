@@ -27,7 +27,7 @@
         ></span></button
     ></PopoverAnchor>
 
-    <Transition name="fade">
+    <Transition name="overflow-menu">
       <PopoverContent
         v-show="isOpen && $slots.default"
         class="overflow-menu-inner-wrapper"
@@ -103,16 +103,6 @@ function handleFocusOut(event) {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 120ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .overflow-menu {
   display: flex;
   flex-direction: column;
@@ -140,5 +130,17 @@ function handleFocusOut(event) {
       }
     }
   }
+}
+
+.overflow-menu-enter-active,
+.overflow-menu-leave-active {
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.overflow-menu-enter-from,
+.overflow-menu-leave-to {
+  opacity: 0;
 }
 </style>

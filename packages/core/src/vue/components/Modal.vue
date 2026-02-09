@@ -1,11 +1,6 @@
 <template>
   <teleport to="body">
-    <dialog
-      ref="modal"
-      @click="closeOnBackdrop"
-      class="share-chat-modal"
-      v-bind="$attrs"
-    >
+    <dialog ref="modal" @click="closeOnBackdrop" class="modal" v-bind="$attrs">
       <div class="head">
         <div class="title-container">
           <h3>{{ props.title }}</h3>

@@ -2,10 +2,20 @@
   <button @click="isOpen = !isOpen">
     <span class="i-material-symbols:share" aria-hidden inert></span>Share chat
   </button>
-  <Modal v-model:open="isOpen" title="Share chat" class="modal">
+  <Modal v-model:open="isOpen" title="Share chat" class="share-chat-modal">
     <div class="row">
       <label for="recipent-public-key">Recipent's public key:</label>
-      <input type="text" id="recipent-public-key" placeholder="Public key" />
+      <div class="column">
+        <input type="text" id="recipent-public-key" placeholder="Public key" />
+        <button class="button--icon">
+          <span
+            class="i-material-symbols:content-paste-rounded"
+            aria-hidden
+            inert
+          >
+          </span>
+        </button>
+      </div>
     </div>
 
     <p class="status">status</p>
@@ -43,6 +53,16 @@ function getId(url) {
   label {
     font-weight: bold;
   }
+
+  .column {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing--A);
+
+    input {
+      flex: 1;
+    }
+  }
 }
 
 p.status {
@@ -50,7 +70,7 @@ p.status {
   text-align: center;
 }
 
-:deep(.modal) {
+:global(.modal.share-chat-modal) {
   height: max-content;
 }
 </style>

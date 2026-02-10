@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import Popover from "./Popover/Popover.vue";
 import PopoverAnchor from "./Popover/PopoverAnchor.vue";
 import PopoverContent from "./Popover/PopoverContent.vue";
@@ -72,11 +72,29 @@ const props = defineProps({
 const isOpen = ref(false);
 const wrapper = ref(null);
 
+function closeMenu(event) {
+  if (event.target.closest(".overflow-menu")) {
+    return;
+  }
+  isOpen.value = false;
+}
 function handleFocusOut(event) {
   if (!wrapper.value.$el.contains(event.relatedTarget)) {
     isOpen.value = false;
   }
 }
+
+watch(isOpen, (value) => {
+  if (value) {
+    window.addEventListener("scroll", closeMenu, true);
+  } else {
+    window.removeEventListener("scroll", closeMenu, true);
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", closeMenu, true);
+});
 </script>
 
 <style scoped lang="scss">
@@ -100,6 +118,7 @@ function handleFocusOut(event) {
     min-width: 100%;
     width: max-content;
     height: max-content;
+    overflow: hidden;
   }
 }
 
@@ -108,6 +127,10 @@ function handleFocusOut(event) {
   flex-direction: column;
   gap: var(--spacing--A);
   padding: var(--spacing--B);
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 80vh;
+  max-height: 80dvh;
 
   > *:is(hr) {
     margin-block: var(--spacing--A);

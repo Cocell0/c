@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { ref, provide, onMounted } from "vue";
+import { ref, provide, watch, onMounted, onUnmounted } from "vue";
 
 const anchorElement = ref(null);
 const contentElement = ref(null);
@@ -158,8 +158,20 @@ function getPosition(position) {
     ? preferredPosition
     : "top";
 }
-onMounted(() => {
+function updatePosition() {
   position.value = getPosition(props.position);
+}
+onMounted(() => {
+  window.addEventListener("resize", updatePosition);
+  const resizeObserver = new ResizeObserver(updatePosition);
+
+  if (anchorElement.value) resizeObserver.observe(anchorElement.value);
+  if (contentElement.value) resizeObserver.observe(contentElement.value);
+
+  onUnmounted(() => {
+    window.removeEventListener("resize", updatePosition);
+    resizeObserver.disconnect();
+  });
 });
 </script>
 

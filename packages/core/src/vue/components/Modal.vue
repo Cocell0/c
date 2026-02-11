@@ -1,6 +1,11 @@
 <template>
   <teleport to="body">
-    <dialog ref="modal" @click="closeOnBackdrop" class="modal" v-bind="$attrs">
+    <dialog
+      ref="modal"
+      @pointerup="closeOnBackdrop"
+      class="modal"
+      v-bind="$attrs"
+    >
       <div class="head">
         <div class="title-container">
           <h3>{{ props.title }}</h3>
@@ -52,8 +57,7 @@ function closeModal() {
 }
 
 function closeOnBackdrop(event) {
-  const isBackdrop =
-    event.target === modal.value && !modal.value.querySelector(":hover");
+  const isBackdrop = event.target === modal.value;
   if (isBackdrop) closeModal();
 }
 
@@ -108,7 +112,7 @@ onMounted(() => {
 
   &::backdrop {
     background-color: hsl(0 0% 0% / 70%);
-    backdrop-filter: blur(var(--blur-A));
+    backdrop-filter: blur(var(--blur__A));
   }
 
   > * {

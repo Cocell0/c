@@ -147,10 +147,6 @@
 
   --spacing--full: 999999px;
 
-  --seconds-S: 1s;
-  --seconds-M: 1.2s;
-  --seconds-L: 2.6s;
-
   --size__control--min: 44px;
   --size__icon--min: 32px;
 
@@ -158,14 +154,17 @@
   --width-ample: 448px;
   --width-medium: 640px;
 
-  --cb-smooth: cubic-bezier(0.5, 0.5, 0, 1);
+  --bezier__smooth: cubic-bezier(0.5, 0.5, 0, 1);
+  --bezier__normal: cubic-bezier(0.2, 0, 0, 1);
+  --bezier__decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --bezier__accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
 
   // ---
 
-  --base-blur: 0.2rem;
-  --blur-A: var(--base-blur);
-  --blur-B: calc(var(--base-blur) * 2);
-  --blur-C: calc(var(--base-blur) * 4);
+  --blur: 0.15rem;
+  --blur__A: var(--blur);
+  --blur__B: calc(var(--blur) * 2);
+  --blur__C: calc(var(--blur) * 4);
 
   // ---
 
@@ -176,7 +175,7 @@
 }
 
 :root[data-config-disable-blur] {
-  --base-blur: 0;
+  --blur: 0;
 }
 
 :root {
@@ -311,11 +310,6 @@ small {
   font-size: 0.64rem;
 }
 
-:root:has(body#output-container) {
-  --ptop: calc(var(--spacing--C) + var(--spacing--C) - var(--spacing--A));
-  /* A value to account for Perchance's UI's toolbar */
-}
-
 :is(button, .button, select, option, input, a):focus-visible {
   @include outline-animation();
 }
@@ -422,21 +416,12 @@ legend {
   font-weight: bold;
 }
 
-c-accordian {
-  display: flex;
-  flex-direction: column;
-}
-
-c-accordian .head {
-  min-height: 54px;
-}
-
 .backdrop {
   opacity: 0;
   visibility: hidden;
   z-index: var(--z__backdrop);
   background-color: hsl(0 0% 0% / 70%);
-  backdrop-filter: var(--blur-B);
+  backdrop-filter: var(--blur__B);
   position: fixed;
   top: 0;
   left: 0;
@@ -450,14 +435,6 @@ c-accordian .head {
 .backdrop--show {
   opacity: 1;
   visibility: visible;
-}
-
-.fade-close {
-  animation: fade-close var(--seconds-S) var(--cb-smooth) forwards;
-}
-
-.fade-open {
-  animation: fade-open var(--seconds-S) var(--cb-smooth) forwards;
 }
 
 span[class^="i-"] {
@@ -475,23 +452,6 @@ span[class^="i-"] {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  dialog {
-    position: fixed !important;
-    opacity: 0;
-    animation: fade-out 0.2s forwards;
-    transition-behavior: allow-discrete;
-
-    &[open] {
-      animation: fade-in 0.2s forwards;
-
-      @starting-style {
-        opacity: 0;
-      }
-    }
-  }
 }
 
 :root:not(.dev-mode) #perchance-error-indicator {
@@ -653,8 +613,12 @@ span[class^="i-"] {
       font-feature-settings, font-variation-settings, filter, backdrop-filter,
       box-shadow, opacity !important;
     transition-duration: 0.2s !important;
-    transition-timing-function: var(--cb-smooth) !important;
+    transition-timing-function: var(--bezier__smooth) !important;
   }
+}
+
+dialog {
+  user-select: none;
 }
 
 button,

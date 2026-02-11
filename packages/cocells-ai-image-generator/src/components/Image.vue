@@ -87,7 +87,7 @@ onUnmounted(() => {
       oklch(84% var(--chroma) var(--hue) / 0.5),
       oklch(22% var(--chroma) var(--hue) / 0.6)
     );
-    backdrop-filter: blur(var(--blur-A));
+    backdrop-filter: blur(var(--blur__A));
     border-radius: var(--rounding);
     text-align: center;
   }

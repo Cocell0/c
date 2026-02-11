@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
   }
   to {
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(-30px);
   }
 }
 @keyframes backdrop-in {
@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
     height: 100%;
   }
   to {
-    height: 35%;
+    height: 70%;
   }
 }
 
@@ -166,6 +166,24 @@ dialog {
       border-radius: var(--rounding--B);
     }
   }
+
+  &.alert .container {
+    min-width: 560px;
+    min-height: 208px;
+  }
+  &.confirm .container {
+    min-width: 320px;
+    min-height: 248px;
+  }
+  &.choice .container {
+    min-width: 308px;
+    min-height: 312px;
+  }
+  &.sheet .container {
+    min-width: 560px;
+    min-height: 172px;
+  }
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -185,14 +203,14 @@ dialog {
       }
     }
     &.closing {
-      animation: dialog-out 500ms var(--bezier__normal) forwards;
+      animation: dialog-out 250ms var(--bezier__normal) forwards;
 
       &::backdrop {
-        animation: backdrop-out 500ms var(--bezier__normal) forwards;
+        animation: backdrop-out 250ms var(--bezier__normal) forwards;
       }
 
       .container::before {
-        animation: container-out 500ms var(--bezier__normal) forwards;
+        animation: container-out 250ms var(--bezier__normal) forwards;
       }
     }
   }
